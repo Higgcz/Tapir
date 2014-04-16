@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC87FC7F18FEB8BB006722AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC87FC7D18FEB8BB006722AC /* InfoPlist.strings */; };
+		FC87FCA018FEB936006722AC /* TGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FC87FC9F18FEB936006722AC /* TGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC87FCA818FEBA09006722AC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC87FCA718FEBA09006722AC /* OpenGL.framework */; };
+		FC87FCAA18FEBA1A006722AC /* libglfw3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC87FCA918FEBA1A006722AC /* libglfw3.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC87FC7118FEB8BB006722AC /* TGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC87FC7C18FEB8BB006722AC /* TGL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TGL-Info.plist"; sourceTree = "<group>"; };
+		FC87FC7E18FEB8BB006722AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC87FC9F18FEB936006722AC /* TGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGL.h; sourceTree = "<group>"; };
+		FC87FCA718FEBA09006722AC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		FC87FCA918FEBA1A006722AC /* libglfw3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.dylib; path = ../../../../../../../usr/local/Cellar/glfw3/3.0.4/lib/libglfw3.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC87FC6D18FEB8BB006722AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FCAA18FEBA1A006722AC /* libglfw3.dylib in Frameworks */,
+				FC87FCA818FEBA09006722AC /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC87FC6718FEB8BB006722AC = {
+			isa = PBXGroup;
+			children = (
+				FC87FC7A18FEB8BB006722AC /* TGL */,
+				FC87FC7318FEB8BB006722AC /* Frameworks */,
+				FC87FC7218FEB8BB006722AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC87FC7218FEB8BB006722AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FC7118FEB8BB006722AC /* TGL.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC87FC7318FEB8BB006722AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FCA918FEBA1A006722AC /* libglfw3.dylib */,
+				FC87FCA718FEBA09006722AC /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC87FC7A18FEB8BB006722AC /* TGL */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FC7B18FEB8BB006722AC /* Supporting Files */,
+				FC87FC9F18FEB936006722AC /* TGL.h */,
+			);
+			path = TGL;
+			sourceTree = "<group>";
+		};
+		FC87FC7B18FEB8BB006722AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FC7C18FEB8BB006722AC /* TGL-Info.plist */,
+				FC87FC7D18FEB8BB006722AC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FC87FC6E18FEB8BB006722AC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FCA018FEB936006722AC /* TGL.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FC87FC7018FEB8BB006722AC /* TGL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC87FC9918FEB8BC006722AC /* Build configuration list for PBXNativeTarget "TGL" */;
+			buildPhases = (
+				FC87FC6C18FEB8BB006722AC /* Sources */,
+				FC87FC6D18FEB8BB006722AC /* Frameworks */,
+				FC87FC6E18FEB8BB006722AC /* Headers */,
+				FC87FC6F18FEB8BB006722AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TGL;
+			productName = TGL;
+			productReference = FC87FC7118FEB8BB006722AC /* TGL.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC87FC6818FEB8BB006722AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Vojtech Micka";
+			};
+			buildConfigurationList = FC87FC6B18FEB8BB006722AC /* Build configuration list for PBXProject "TGL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC87FC6718FEB8BB006722AC;
+			productRefGroup = FC87FC7218FEB8BB006722AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC87FC7018FEB8BB006722AC /* TGL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC87FC6F18FEB8BB006722AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FC7F18FEB8BB006722AC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC87FC6C18FEB8BB006722AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC87FC7D18FEB8BB006722AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC87FC7E18FEB8BB006722AC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC87FC9718FEB8BC006722AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FC87FC9818FEB8BC006722AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FC87FC9A18FEB8BC006722AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/Cellar/glm/0.9.5.3/include/,
+					/usr/local/Cellar/glfw3/3.0.4/include/,
+				);
+				INFOPLIST_FILE = "TGL/TGL-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/usr/local/Cellar/glfw3/3.0.4/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		FC87FC9B18FEB8BC006722AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/Cellar/glm/0.9.5.3/include/,
+					/usr/local/Cellar/glfw3/3.0.4/include/,
+				);
+				INFOPLIST_FILE = "TGL/TGL-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/usr/local/Cellar/glfw3/3.0.4/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC87FC6B18FEB8BB006722AC /* Build configuration list for PBXProject "TGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC87FC9718FEB8BC006722AC /* Debug */,
+				FC87FC9818FEB8BC006722AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC87FC9918FEB8BC006722AC /* Build configuration list for PBXNativeTarget "TGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC87FC9A18FEB8BC006722AC /* Debug */,
+				FC87FC9B18FEB8BC006722AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC87FC6818FEB8BB006722AC /* Project object */;
+}

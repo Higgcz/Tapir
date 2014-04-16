@@ -1,0 +1,295 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC87FC0218FEB724006722AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC87FC0018FEB724006722AC /* InfoPlist.strings */; };
+		FC87FC0418FEB724006722AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC87FC0318FEB724006722AC /* main.cpp */; };
+		FC87FC1018FEB724006722AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC87FC0F18FEB724006722AC /* Images.xcassets */; };
+		FC87FCA218FEB949006722AC /* TGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC87FCA118FEB949006722AC /* TGL.framework */; };
+		FC87FD5F18FEBB08006722AC /* TSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC87FD5E18FEBB08006722AC /* TSL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC87FBF418FEB724006722AC /* Sample Tapir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample Tapir.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC87FBFF18FEB724006722AC /* Sample Tapir-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Sample Tapir-Info.plist"; sourceTree = "<group>"; };
+		FC87FC0118FEB724006722AC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC87FC0318FEB724006722AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FC87FC0F18FEB724006722AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FC87FCA118FEB949006722AC /* TGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGL.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir_Workspace-fsiwpahfzjswgiemlqmqzbsbodgz/Build/Products/Debug/TGL.framework"; sourceTree = "<group>"; };
+		FC87FD5E18FEBB08006722AC /* TSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSL.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir_Workspace-fsiwpahfzjswgiemlqmqzbsbodgz/Build/Products/Debug/TSL.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC87FBF118FEB724006722AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FD5F18FEBB08006722AC /* TSL.framework in Frameworks */,
+				FC87FCA218FEB949006722AC /* TGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC87FBEB18FEB724006722AC = {
+			isa = PBXGroup;
+			children = (
+				FC87FBFD18FEB724006722AC /* Sample Tapir */,
+				FC87FBF618FEB724006722AC /* Frameworks */,
+				FC87FBF518FEB724006722AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC87FBF518FEB724006722AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FBF418FEB724006722AC /* Sample Tapir.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC87FBF618FEB724006722AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FD5E18FEBB08006722AC /* TSL.framework */,
+				FC87FCA118FEB949006722AC /* TGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC87FBFD18FEB724006722AC /* Sample Tapir */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FC0318FEB724006722AC /* main.cpp */,
+				FC87FC0F18FEB724006722AC /* Images.xcassets */,
+				FC87FBFE18FEB724006722AC /* Supporting Files */,
+			);
+			path = "Sample Tapir";
+			sourceTree = "<group>";
+		};
+		FC87FBFE18FEB724006722AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC87FBFF18FEB724006722AC /* Sample Tapir-Info.plist */,
+				FC87FC0018FEB724006722AC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC87FBF318FEB724006722AC /* Sample Tapir */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC87FC2518FEB724006722AC /* Build configuration list for PBXNativeTarget "Sample Tapir" */;
+			buildPhases = (
+				FC87FBF018FEB724006722AC /* Sources */,
+				FC87FBF118FEB724006722AC /* Frameworks */,
+				FC87FBF218FEB724006722AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Sample Tapir";
+			productName = "Sample Tapir";
+			productReference = FC87FBF418FEB724006722AC /* Sample Tapir.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC87FBEC18FEB724006722AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Vojtech Micka";
+			};
+			buildConfigurationList = FC87FBEF18FEB724006722AC /* Build configuration list for PBXProject "Sample Tapir" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC87FBEB18FEB724006722AC;
+			productRefGroup = FC87FBF518FEB724006722AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC87FBF318FEB724006722AC /* Sample Tapir */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC87FBF218FEB724006722AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FC0218FEB724006722AC /* InfoPlist.strings in Resources */,
+				FC87FC1018FEB724006722AC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC87FBF018FEB724006722AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC87FC0418FEB724006722AC /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC87FC0018FEB724006722AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC87FC0118FEB724006722AC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC87FC2318FEB724006722AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FC87FC2418FEB724006722AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FC87FC2618FEB724006722AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Tapir_Workspace-fsiwpahfzjswgiemlqmqzbsbodgz/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = "Sample Tapir/Sample Tapir-Info.plist";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC87FC2718FEB724006722AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Tapir_Workspace-fsiwpahfzjswgiemlqmqzbsbodgz/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				INFOPLIST_FILE = "Sample Tapir/Sample Tapir-Info.plist";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC87FBEF18FEB724006722AC /* Build configuration list for PBXProject "Sample Tapir" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC87FC2318FEB724006722AC /* Debug */,
+				FC87FC2418FEB724006722AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC87FC2518FEB724006722AC /* Build configuration list for PBXNativeTarget "Sample Tapir" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC87FC2618FEB724006722AC /* Debug */,
+				FC87FC2718FEB724006722AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC87FBEC18FEB724006722AC /* Project object */;
+}
