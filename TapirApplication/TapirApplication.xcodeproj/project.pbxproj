@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
+		FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637705190C1FEC0081C914 /* SpriteKit.framework */; };
+		FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC63770E190C1FED0081C914 /* InfoPlist.strings */; };
+		FC637712190C1FED0081C914 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637711190C1FED0081C914 /* main.m */; };
+		FC637716190C1FED0081C914 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC637714190C1FED0081C914 /* Credits.rtf */; };
+		FC637718190C1FED0081C914 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC637717190C1FED0081C914 /* MainMenu.xib */; };
+		FC63771A190C1FED0081C914 /* TAMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637719190C1FED0081C914 /* TAMyScene.m */; };
+		FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63771C190C1FED0081C914 /* TAAppDelegate.m */; };
+		FC637720190C1FED0081C914 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = FC63771F190C1FED0081C914 /* Spaceship.png */; };
+		FC637722190C1FED0081C914 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC637721190C1FED0081C914 /* Images.xcassets */; };
+		FC637729190C1FED0081C914 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637728190C1FED0081C914 /* XCTest.framework */; };
+		FC63772A190C1FED0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
+		FC637732190C1FED0081C914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC637730190C1FED0081C914 /* InfoPlist.strings */; };
+		FC637734190C1FED0081C914 /* TapirApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637733190C1FED0081C914 /* TapirApplicationTests.m */; };
+		FC637835190C20910081C914 /* OBox2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637834190C20910081C914 /* OBox2D.framework */; };
+		FC637840190C20C30081C914 /* TSLCar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637838190C20C30081C914 /* TSLCar.m */; };
+		FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783A190C20C30081C914 /* TSLConfiguration.m */; };
+		FC637842190C20C30081C914 /* TSLEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783C190C20C30081C914 /* TSLEnvironment.m */; };
+		FC637843190C20C30081C914 /* TSLUniverse.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783E190C20C30081C914 /* TSLUniverse.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FC63772B190C1FED0081C914 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC6376F8190C1FEC0081C914 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC6376FF190C1FEC0081C914;
+			remoteInfo = TapirApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FC637700190C1FEC0081C914 /* TapirApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapirApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC637703190C1FEC0081C914 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FC637705190C1FEC0081C914 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		FC637708190C1FED0081C914 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FC637709190C1FED0081C914 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FC63770A190C1FED0081C914 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC63770D190C1FED0081C914 /* TapirApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapirApplication-Info.plist"; sourceTree = "<group>"; };
+		FC63770F190C1FED0081C914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC637711190C1FED0081C914 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC637713190C1FED0081C914 /* TapirApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapirApplication-Prefix.pch"; sourceTree = "<group>"; };
+		FC637715190C1FED0081C914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		FC637717190C1FED0081C914 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		FC637719190C1FED0081C914 /* TAMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAMyScene.m; sourceTree = "<group>"; };
+		FC63771B190C1FED0081C914 /* TAMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TAMyScene.h; sourceTree = "<group>"; };
+		FC63771C190C1FED0081C914 /* TAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAAppDelegate.m; sourceTree = "<group>"; };
+		FC63771E190C1FED0081C914 /* TAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TAAppDelegate.h; sourceTree = "<group>"; };
+		FC63771F190C1FED0081C914 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		FC637721190C1FED0081C914 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FC637727190C1FED0081C914 /* TapirApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapirApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC637728190C1FED0081C914 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FC63772F190C1FED0081C914 /* TapirApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapirApplicationTests-Info.plist"; sourceTree = "<group>"; };
+		FC637731190C1FED0081C914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC637733190C1FED0081C914 /* TapirApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapirApplicationTests.m; sourceTree = "<group>"; };
+		FC637834190C20910081C914 /* OBox2D.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBox2D.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug/OBox2D.framework"; sourceTree = "<group>"; };
+		FC637837190C20C30081C914 /* TSLCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLCar.h; sourceTree = "<group>"; };
+		FC637838190C20C30081C914 /* TSLCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLCar.m; sourceTree = "<group>"; };
+		FC637839190C20C30081C914 /* TSLConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLConfiguration.h; sourceTree = "<group>"; };
+		FC63783A190C20C30081C914 /* TSLConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLConfiguration.m; sourceTree = "<group>"; };
+		FC63783B190C20C30081C914 /* TSLEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLEnvironment.h; sourceTree = "<group>"; };
+		FC63783C190C20C30081C914 /* TSLEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLEnvironment.m; sourceTree = "<group>"; };
+		FC63783D190C20C30081C914 /* TSLUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLUniverse.h; sourceTree = "<group>"; };
+		FC63783E190C20C30081C914 /* TSLUniverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLUniverse.m; sourceTree = "<group>"; };
+		FC63783F190C20C30081C914 /* TSLUniverseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLUniverseDelegate.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC6376FD190C1FEC0081C914 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC637835190C20910081C914 /* OBox2D.framework in Frameworks */,
+				FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */,
+				FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC637724190C1FED0081C914 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC63772A190C1FED0081C914 /* Cocoa.framework in Frameworks */,
+				FC637729190C1FED0081C914 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC6376F7190C1FEC0081C914 = {
+			isa = PBXGroup;
+			children = (
+				FC637836190C20C30081C914 /* TSL */,
+				FC63770B190C1FED0081C914 /* TapirApplication */,
+				FC63772D190C1FED0081C914 /* TapirApplicationTests */,
+				FC637702190C1FEC0081C914 /* Frameworks */,
+				FC637701190C1FEC0081C914 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC637701190C1FEC0081C914 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC637700190C1FEC0081C914 /* TapirApplication.app */,
+				FC637727190C1FED0081C914 /* TapirApplicationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC637702190C1FEC0081C914 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC637834190C20910081C914 /* OBox2D.framework */,
+				FC637703190C1FEC0081C914 /* Cocoa.framework */,
+				FC637705190C1FEC0081C914 /* SpriteKit.framework */,
+				FC637728190C1FED0081C914 /* XCTest.framework */,
+				FC637707190C1FED0081C914 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC637707190C1FED0081C914 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC637708190C1FED0081C914 /* AppKit.framework */,
+				FC637709190C1FED0081C914 /* CoreData.framework */,
+				FC63770A190C1FED0081C914 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FC63770B190C1FED0081C914 /* TapirApplication */ = {
+			isa = PBXGroup;
+			children = (
+				FC637717190C1FED0081C914 /* MainMenu.xib */,
+				FC637719190C1FED0081C914 /* TAMyScene.m */,
+				FC63771B190C1FED0081C914 /* TAMyScene.h */,
+				FC63771C190C1FED0081C914 /* TAAppDelegate.m */,
+				FC63771E190C1FED0081C914 /* TAAppDelegate.h */,
+				FC63771F190C1FED0081C914 /* Spaceship.png */,
+				FC637721190C1FED0081C914 /* Images.xcassets */,
+				FC63770C190C1FED0081C914 /* Supporting Files */,
+			);
+			path = TapirApplication;
+			sourceTree = "<group>";
+		};
+		FC63770C190C1FED0081C914 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC63770D190C1FED0081C914 /* TapirApplication-Info.plist */,
+				FC63770E190C1FED0081C914 /* InfoPlist.strings */,
+				FC637711190C1FED0081C914 /* main.m */,
+				FC637713190C1FED0081C914 /* TapirApplication-Prefix.pch */,
+				FC637714190C1FED0081C914 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC63772D190C1FED0081C914 /* TapirApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC637733190C1FED0081C914 /* TapirApplicationTests.m */,
+				FC63772E190C1FED0081C914 /* Supporting Files */,
+			);
+			path = TapirApplicationTests;
+			sourceTree = "<group>";
+		};
+		FC63772E190C1FED0081C914 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC63772F190C1FED0081C914 /* TapirApplicationTests-Info.plist */,
+				FC637730190C1FED0081C914 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC637836190C20C30081C914 /* TSL */ = {
+			isa = PBXGroup;
+			children = (
+				FC637837190C20C30081C914 /* TSLCar.h */,
+				FC637838190C20C30081C914 /* TSLCar.m */,
+				FC637839190C20C30081C914 /* TSLConfiguration.h */,
+				FC63783A190C20C30081C914 /* TSLConfiguration.m */,
+				FC63783B190C20C30081C914 /* TSLEnvironment.h */,
+				FC63783C190C20C30081C914 /* TSLEnvironment.m */,
+				FC63783D190C20C30081C914 /* TSLUniverse.h */,
+				FC63783E190C20C30081C914 /* TSLUniverse.m */,
+				FC63783F190C20C30081C914 /* TSLUniverseDelegate.h */,
+			);
+			path = TSL;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC6376FF190C1FEC0081C914 /* TapirApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC637737190C1FED0081C914 /* Build configuration list for PBXNativeTarget "TapirApplication" */;
+			buildPhases = (
+				FC6376FC190C1FEC0081C914 /* Sources */,
+				FC6376FD190C1FEC0081C914 /* Frameworks */,
+				FC6376FE190C1FEC0081C914 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TapirApplication;
+			productName = TapirApplication;
+			productReference = FC637700190C1FEC0081C914 /* TapirApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FC637726190C1FED0081C914 /* TapirApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC63773A190C1FED0081C914 /* Build configuration list for PBXNativeTarget "TapirApplicationTests" */;
+			buildPhases = (
+				FC637723190C1FED0081C914 /* Sources */,
+				FC637724190C1FED0081C914 /* Frameworks */,
+				FC637725190C1FED0081C914 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FC63772C190C1FED0081C914 /* PBXTargetDependency */,
+			);
+			name = TapirApplicationTests;
+			productName = TapirApplicationTests;
+			productReference = FC637727190C1FED0081C914 /* TapirApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC6376F8190C1FEC0081C914 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TA;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Vojtech Micka";
+				TargetAttributes = {
+					FC637726190C1FED0081C914 = {
+						TestTargetID = FC6376FF190C1FEC0081C914;
+					};
+				};
+			};
+			buildConfigurationList = FC6376FB190C1FEC0081C914 /* Build configuration list for PBXProject "TapirApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC6376F7190C1FEC0081C914;
+			productRefGroup = FC637701190C1FEC0081C914 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC6376FF190C1FEC0081C914 /* TapirApplication */,
+				FC637726190C1FED0081C914 /* TapirApplicationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC6376FE190C1FEC0081C914 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC637720190C1FED0081C914 /* Spaceship.png in Resources */,
+				FC637722190C1FED0081C914 /* Images.xcassets in Resources */,
+				FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */,
+				FC637716190C1FED0081C914 /* Credits.rtf in Resources */,
+				FC637718190C1FED0081C914 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC637725190C1FED0081C914 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC637732190C1FED0081C914 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC6376FC190C1FEC0081C914 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC637840190C20C30081C914 /* TSLCar.m in Sources */,
+				FC637843190C20C30081C914 /* TSLUniverse.m in Sources */,
+				FC637712190C1FED0081C914 /* main.m in Sources */,
+				FC63771A190C1FED0081C914 /* TAMyScene.m in Sources */,
+				FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */,
+				FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */,
+				FC637842190C20C30081C914 /* TSLEnvironment.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC637723190C1FED0081C914 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC637734190C1FED0081C914 /* TapirApplicationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FC63772C190C1FED0081C914 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC6376FF190C1FEC0081C914 /* TapirApplication */;
+			targetProxy = FC63772B190C1FED0081C914 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FC63770E190C1FED0081C914 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63770F190C1FED0081C914 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC637714190C1FED0081C914 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC637715190C1FED0081C914 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		FC637730190C1FED0081C914 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC637731190C1FED0081C914 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC637735190C1FED0081C914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FC637736190C1FED0081C914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FC637738190C1FED0081C914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
+				INFOPLIST_FILE = "TapirApplication/TapirApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC637739190C1FED0081C914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
+				INFOPLIST_FILE = "TapirApplication/TapirApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FC63773B190C1FED0081C914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapirApplication.app/Contents/MacOS/TapirApplication";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TapirApplicationTests/TapirApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FC63773C190C1FED0081C914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TapirApplication.app/Contents/MacOS/TapirApplication";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
+				INFOPLIST_FILE = "TapirApplicationTests/TapirApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC6376FB190C1FEC0081C914 /* Build configuration list for PBXProject "TapirApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC637735190C1FED0081C914 /* Debug */,
+				FC637736190C1FED0081C914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC637737190C1FED0081C914 /* Build configuration list for PBXNativeTarget "TapirApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC637738190C1FED0081C914 /* Debug */,
+				FC637739190C1FED0081C914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FC63773A190C1FED0081C914 /* Build configuration list for PBXNativeTarget "TapirApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC63773B190C1FED0081C914 /* Debug */,
+				FC63773C190C1FED0081C914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC6376F8190C1FEC0081C914 /* Project object */;
+}
