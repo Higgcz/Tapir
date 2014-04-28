@@ -9,11 +9,13 @@
 #import "TSLUniverse.h"
 
 #import "TSLConfiguration.h"
-#import "TSLEnvironment.h"
+#import "TSLEntity.h"
 
 @interface TSLUniverse ()
 
 - (void) setup;
+
+@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;    // The previous update: loop time interval
 
 @end
 
@@ -39,21 +41,27 @@
 {
     self = [super init];
     if (self) {
-        self.configuration = [TSLConfiguration createWithConfigurationDict:configuration];
+        self.configuration = [TSLConfiguration configurationWithConfigurationDict:configuration];
         [self setup];
     }
     return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-+ (TSLUniverse *) createWithConfiguration:(TSLConfiguration *)configuration
++ (TSLUniverse *) universe////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return [[TSLUniverse alloc] initWithConfiguration:[TSLConfiguration configuration]];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration *)configuration
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return [[TSLUniverse alloc] initWithConfiguration:configuration];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-+ (TSLUniverse *) createWithConfigurationDict:(NSDictionary *)configuration
++ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary *)configuration
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return [[TSLUniverse alloc] initWithConfigurationDict:configuration];
@@ -66,20 +74,99 @@
     // Setting self as delegate
     self.delegate = self;
     
-    // create environment
-    self.enviroment = [TSLEnvironment createInUniverse:self];
+    // Set configuration
+    self.storage = [NSMutableArray array];
+}
+
+#pragma mark - Objects handling
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addObject:(TSLEntity *) anObject
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.storage addObject:anObject];
+    [anObject didCreatedAtUniverse:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeObject:(TSLEntity *) anObject
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.storage removeObject:anObject];
+    [anObject didDeleted];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeAllObjects
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (![obj isKindOfClass:[TSLEntity class]]) {
+            NSLog(@"WARNING: There is wrong type of object in storage!");
+            return;
+        }
+        
+        TSLEntity *object = (TSLEntity *) obj;
+        [object didDeleted];
+    }];
+    
+    [self.storage removeAllObjects];
 }
 
 #pragma mark - Updating
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) interval
+- (void) start
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [self.enviroment updateWithTimeSinceLastUpdate:interval];
+    if (!self.isLiving) return;
+    
+    [self update:[NSDate timeIntervalSinceReferenceDate]];
+    
+    [self performSelector:@selector(start) withObject:nil afterDelay:0.0f];
 }
 
-#pragma mark - Delegation methods
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) bang
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    // Just an ester-egg
+    [self start];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) update:(NSTimeInterval) currentTime
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    CFTimeInterval deltaTime = currentTime - self.lastUpdateTimeInterval;
+    self.lastUpdateTimeInterval = currentTime;
+    if (deltaTime > 1) { // More than a second since last update
+        deltaTime = kMinTimeInterval;
+        self.lastUpdateTimeInterval = currentTime;
+    }
+    [self updateWithTimeSinceLastUpdate:deltaTime];
+}
+
+#pragma mark - TGLSceneUpdateDelegate - delegation method
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (![obj isKindOfClass:[TSLEntity class]]) {
+            NSLog(@"WARNING: There is wrong type of object in storage!");
+            return;
+        }
+        
+        TSLEntity *object = (TSLEntity *) obj;
+        [object updateWithTimeSinceLastUpdate:deltaTime];
+    }];
+    
+    [self.delegate didEvaluateUpdate];
+}
+
+#pragma mark - TSLUniverseDelegate - delegation methods
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didEvaluateUpdate

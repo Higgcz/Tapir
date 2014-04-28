@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2F083C190DC7CA008C247E /* TGLScene.m */; };
 		FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
 		FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637705190C1FEC0081C914 /* SpriteKit.framework */; };
 		FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC63770E190C1FED0081C914 /* InfoPlist.strings */; };
@@ -21,11 +22,17 @@
 		FC63772A190C1FED0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
 		FC637732190C1FED0081C914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC637730190C1FED0081C914 /* InfoPlist.strings */; };
 		FC637734190C1FED0081C914 /* TapirApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637733190C1FED0081C914 /* TapirApplicationTests.m */; };
-		FC637835190C20910081C914 /* OBox2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637834190C20910081C914 /* OBox2D.framework */; };
-		FC637840190C20C30081C914 /* TSLCar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637838190C20C30081C914 /* TSLCar.m */; };
+		FC637840190C20C30081C914 /* TSLCarAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637838190C20C30081C914 /* TSLCarAgent.m */; };
 		FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783A190C20C30081C914 /* TSLConfiguration.m */; };
-		FC637842190C20C30081C914 /* TSLEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783C190C20C30081C914 /* TSLEnvironment.m */; };
 		FC637843190C20C30081C914 /* TSLUniverse.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63783E190C20C30081C914 /* TSLUniverse.m */; };
+		FC637850190C592E0081C914 /* TSLAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63784F190C592E0081C914 /* TSLAgent.m */; };
+		FC637859190D2C860081C914 /* TSLBody.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637858190D2C860081C914 /* TSLBody.m */; };
+		FC63785E190D52740081C914 /* TSLPhysicsCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63785D190D52740081C914 /* TSLPhysicsCore.m */; };
+		FC637861190D56390081C914 /* TSLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637860190D56390081C914 /* TSLEntity.m */; };
+		FC637866190D9A160081C914 /* TGLSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637865190D9A160081C914 /* TGLSceneManager.m */; };
+		FC637876190DAFD50081C914 /* TGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637875190DAFD50081C914 /* TGLLayer.m */; };
+		FC63787B190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */; };
+		FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63787A190DAFF60081C914 /* TGLShapeNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC2F083B190DC7CA008C247E /* TGLScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLScene.h; path = TGL/Utilities/TGLScene.h; sourceTree = "<group>"; };
+		FC2F083C190DC7CA008C247E /* TGLScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLScene.m; path = TGL/Utilities/TGLScene.m; sourceTree = "<group>"; };
 		FC637700190C1FEC0081C914 /* TapirApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapirApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC637703190C1FEC0081C914 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC637705190C1FEC0081C914 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -62,16 +71,33 @@
 		FC63772F190C1FED0081C914 /* TapirApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TapirApplicationTests-Info.plist"; sourceTree = "<group>"; };
 		FC637731190C1FED0081C914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FC637733190C1FED0081C914 /* TapirApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapirApplicationTests.m; sourceTree = "<group>"; };
-		FC637834190C20910081C914 /* OBox2D.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBox2D.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug/OBox2D.framework"; sourceTree = "<group>"; };
-		FC637837190C20C30081C914 /* TSLCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLCar.h; sourceTree = "<group>"; };
-		FC637838190C20C30081C914 /* TSLCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLCar.m; sourceTree = "<group>"; };
+		FC637837190C20C30081C914 /* TSLCarAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLCarAgent.h; sourceTree = "<group>"; };
+		FC637838190C20C30081C914 /* TSLCarAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLCarAgent.m; sourceTree = "<group>"; };
 		FC637839190C20C30081C914 /* TSLConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLConfiguration.h; sourceTree = "<group>"; };
 		FC63783A190C20C30081C914 /* TSLConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLConfiguration.m; sourceTree = "<group>"; };
-		FC63783B190C20C30081C914 /* TSLEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLEnvironment.h; sourceTree = "<group>"; };
-		FC63783C190C20C30081C914 /* TSLEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLEnvironment.m; sourceTree = "<group>"; };
 		FC63783D190C20C30081C914 /* TSLUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLUniverse.h; sourceTree = "<group>"; };
 		FC63783E190C20C30081C914 /* TSLUniverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLUniverse.m; sourceTree = "<group>"; };
 		FC63783F190C20C30081C914 /* TSLUniverseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLUniverseDelegate.h; sourceTree = "<group>"; };
+		FC63784E190C592E0081C914 /* TSLAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLAgent.h; sourceTree = "<group>"; };
+		FC63784F190C592E0081C914 /* TSLAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLAgent.m; sourceTree = "<group>"; };
+		FC637855190C69E80081C914 /* TSLBodyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLBodyConstants.h; sourceTree = "<group>"; };
+		FC637857190D2C860081C914 /* TSLBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLBody.h; sourceTree = "<group>"; };
+		FC637858190D2C860081C914 /* TSLBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLBody.m; sourceTree = "<group>"; };
+		FC63785C190D52740081C914 /* TSLPhysicsCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLPhysicsCore.h; sourceTree = "<group>"; };
+		FC63785D190D52740081C914 /* TSLPhysicsCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPhysicsCore.m; sourceTree = "<group>"; };
+		FC63785F190D56390081C914 /* TSLEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLEntity.h; sourceTree = "<group>"; };
+		FC637860190D56390081C914 /* TSLEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLEntity.m; sourceTree = "<group>"; };
+		FC637862190D5B1D0081C914 /* TSLColisionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLColisionDelegate.h; sourceTree = "<group>"; };
+		FC637864190D9A160081C914 /* TGLSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLSceneManager.h; path = TGL/TGLSceneManager.h; sourceTree = "<group>"; };
+		FC637865190D9A160081C914 /* TGLSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLSceneManager.m; path = TGL/TGLSceneManager.m; sourceTree = "<group>"; };
+		FC637874190DAFD50081C914 /* TGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLLayer.h; path = TGL/TGLLayer.h; sourceTree = "<group>"; };
+		FC637875190DAFD50081C914 /* TGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLLayer.m; path = TGL/TGLLayer.m; sourceTree = "<group>"; };
+		FC637877190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+BezierPathQuartzUtilities.h"; path = "TGL/Utilities/NSBezierPath+BezierPathQuartzUtilities.h"; sourceTree = "<group>"; };
+		FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+BezierPathQuartzUtilities.m"; path = "TGL/Utilities/NSBezierPath+BezierPathQuartzUtilities.m"; sourceTree = "<group>"; };
+		FC637879190DAFF60081C914 /* TGLShapeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLShapeNode.h; path = TGL/Utilities/TGLShapeNode.h; sourceTree = "<group>"; };
+		FC63787A190DAFF60081C914 /* TGLShapeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLShapeNode.m; path = TGL/Utilities/TGLShapeNode.m; sourceTree = "<group>"; };
+		FC684709190E629A00167BC5 /* TGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGL.h; path = TGL/TGL.h; sourceTree = "<group>"; };
+		FC68470A190E6CA800167BC5 /* TGLSceneUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGLSceneUpdateDelegate.h; path = TGL/TGLSceneUpdateDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC637835190C20910081C914 /* OBox2D.framework in Frameworks */,
 				FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */,
 				FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */,
 			);
@@ -100,6 +125,7 @@
 		FC6376F7190C1FEC0081C914 = {
 			isa = PBXGroup;
 			children = (
+				FC637863190D99FA0081C914 /* TGL */,
 				FC637836190C20C30081C914 /* TSL */,
 				FC63770B190C1FED0081C914 /* TapirApplication */,
 				FC63772D190C1FED0081C914 /* TapirApplicationTests */,
@@ -120,7 +146,6 @@
 		FC637702190C1FEC0081C914 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC637834190C20910081C914 /* OBox2D.framework */,
 				FC637703190C1FEC0081C914 /* Cocoa.framework */,
 				FC637705190C1FEC0081C914 /* SpriteKit.framework */,
 				FC637728190C1FED0081C914 /* XCTest.framework */,
@@ -187,17 +212,68 @@
 		FC637836190C20C30081C914 /* TSL */ = {
 			isa = PBXGroup;
 			children = (
-				FC637837190C20C30081C914 /* TSLCar.h */,
-				FC637838190C20C30081C914 /* TSLCar.m */,
+				FC637854190C69950081C914 /* Agents */,
 				FC637839190C20C30081C914 /* TSLConfiguration.h */,
 				FC63783A190C20C30081C914 /* TSLConfiguration.m */,
-				FC63783B190C20C30081C914 /* TSLEnvironment.h */,
-				FC63783C190C20C30081C914 /* TSLEnvironment.m */,
+				FC63785C190D52740081C914 /* TSLPhysicsCore.h */,
+				FC63785D190D52740081C914 /* TSLPhysicsCore.m */,
 				FC63783D190C20C30081C914 /* TSLUniverse.h */,
 				FC63783E190C20C30081C914 /* TSLUniverse.m */,
 				FC63783F190C20C30081C914 /* TSLUniverseDelegate.h */,
 			);
 			path = TSL;
+			sourceTree = "<group>";
+		};
+		FC637854190C69950081C914 /* Agents */ = {
+			isa = PBXGroup;
+			children = (
+				FC637837190C20C30081C914 /* TSLCarAgent.h */,
+				FC637838190C20C30081C914 /* TSLCarAgent.m */,
+				FC63784E190C592E0081C914 /* TSLAgent.h */,
+				FC63784F190C592E0081C914 /* TSLAgent.m */,
+				FC63785F190D56390081C914 /* TSLEntity.h */,
+				FC637860190D56390081C914 /* TSLEntity.m */,
+				FC637855190C69E80081C914 /* TSLBodyConstants.h */,
+				FC637857190D2C860081C914 /* TSLBody.h */,
+				FC637858190D2C860081C914 /* TSLBody.m */,
+				FC637862190D5B1D0081C914 /* TSLColisionDelegate.h */,
+			);
+			name = Agents;
+			sourceTree = "<group>";
+		};
+		FC637863190D99FA0081C914 /* TGL */ = {
+			isa = PBXGroup;
+			children = (
+				FC637867190D9E190081C914 /* Utilities */,
+				FC637864190D9A160081C914 /* TGLSceneManager.h */,
+				FC637865190D9A160081C914 /* TGLSceneManager.m */,
+				FC63787D190DB06F0081C914 /* Layers */,
+				FC684709190E629A00167BC5 /* TGL.h */,
+				FC68470A190E6CA800167BC5 /* TGLSceneUpdateDelegate.h */,
+			);
+			name = TGL;
+			sourceTree = "<group>";
+		};
+		FC637867190D9E190081C914 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FC637877190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.h */,
+				FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */,
+				FC637879190DAFF60081C914 /* TGLShapeNode.h */,
+				FC63787A190DAFF60081C914 /* TGLShapeNode.m */,
+				FC2F083B190DC7CA008C247E /* TGLScene.h */,
+				FC2F083C190DC7CA008C247E /* TGLScene.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		FC63787D190DB06F0081C914 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				FC637874190DAFD50081C914 /* TGLLayer.h */,
+				FC637875190DAFD50081C914 /* TGLLayer.m */,
+			);
+			name = Layers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,7 +320,7 @@
 		FC6376F8190C1FEC0081C914 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = TA;
+				CLASSPREFIX = TGL;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Vojtech Micka";
 				TargetAttributes = {
@@ -299,13 +375,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC637840190C20C30081C914 /* TSLCar.m in Sources */,
+				FC63785E190D52740081C914 /* TSLPhysicsCore.m in Sources */,
+				FC63787B190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */,
+				FC637859190D2C860081C914 /* TSLBody.m in Sources */,
+				FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */,
+				FC637840190C20C30081C914 /* TSLCarAgent.m in Sources */,
 				FC637843190C20C30081C914 /* TSLUniverse.m in Sources */,
 				FC637712190C1FED0081C914 /* main.m in Sources */,
+				FC637861190D56390081C914 /* TSLEntity.m in Sources */,
 				FC63771A190C1FED0081C914 /* TAMyScene.m in Sources */,
+				FC637876190DAFD50081C914 /* TGLLayer.m in Sources */,
+				FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */,
 				FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */,
+				FC637866190D9A160081C914 /* TGLSceneManager.m in Sources */,
 				FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */,
-				FC637842190C20C30081C914 /* TSLEnvironment.m in Sources */,
+				FC637850190C592E0081C914 /* TSLAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +604,7 @@
 				FC637739190C1FED0081C914 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FC63773A190C1FED0081C914 /* Build configuration list for PBXNativeTarget "TapirApplicationTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +613,7 @@
 				FC63773C190C1FED0081C914 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
