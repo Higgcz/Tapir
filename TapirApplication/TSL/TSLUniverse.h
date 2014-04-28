@@ -8,33 +8,43 @@
 
 #import <Foundation/Foundation.h>
 
+#import "../TGL/TGLSceneUpdateDelegate.h"
 #import "TSLUniverseDelegate.h"
 
-@class TSLConfiguration, TSLEnvironment;
+#define kMinTimeInterval (1.0f / 60.0f)
 
-@interface TSLUniverse : NSObject <TSLUniverseDelegate>
+@class TSLConfiguration, TSLEntity, TSLPhysicsCore;
+
+@interface TSLUniverse : NSObject <TSLUniverseDelegate, TGLSceneUpdateDelegate>
 
 // Main properties
-@property (nonatomic, strong) TSLEnvironment   *enviroment;
+@property (nonatomic, strong) NSMutableArray   *storage;
 @property (nonatomic, strong) TSLConfiguration *configuration;
+@property (nonatomic, strong) TSLPhysicsCore   *physicsCore;
 
 // Initialization & creation of universe
-- (instancetype) initWithConfiguration:(TSLConfiguration*)configuration;
-- (instancetype) initWithConfigurationDict:(NSDictionary*)configuration;
+- (instancetype) initWithConfiguration:(TSLConfiguration*) configuration;
+- (instancetype) initWithConfigurationDict:(NSDictionary*) configuration;
 
-+ (TSLUniverse*) createWithConfiguration:(TSLConfiguration*)configuration;
-+ (TSLUniverse*) createWithConfigurationDict:(NSDictionary*)configuration;
++ (TSLUniverse *) universe;
++ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration*) configuration;
++ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary*) configuration;
 
 // Universe running properties
-@property (nonatomic, getter = isPaused) BOOL paused;
+@property (nonatomic, getter = isLiving) BOOL living;
 
 // Start of universe
-- (void) start;
+- (void) start; // how to start with graphical output ?
 - (void) bang;
 
-// Control the universe
-- (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) interval;
+// Objects handling
+- (void) addObject:(TSLEntity *) anObject;
+- (void) removeObject:(TSLEntity *) anObject;
+- (void) removeAllObjects;
 
-@property (nonatomic, strong) id<TSLUniverseDelegate> delegate;
+// Control the universe
+- (void) update:(NSTimeInterval) currentTime;
+
+@property (nonatomic, weak) id<TSLUniverseDelegate> delegate;
 
 @end

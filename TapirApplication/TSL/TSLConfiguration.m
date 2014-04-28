@@ -10,5 +10,39 @@
 
 @implementation TSLConfiguration
 
+- (instancetype) initFromFileNamed:(NSString *) fileName
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (instancetype) initWithConfigurationDict:(NSDictionary *) configuration
+{
+    self = [super init];
+    if (self) {
+        self.totalNumberOfAgents  = configuration[@"totalNumberOfAgents"];
+        self.totalNumberOfSeconds = configuration[@"totalNumberOfSeconds"];
+        self.mapFile              = configuration[@"mapFile"];
+    }
+    return self;
+}
+
++ (TSLConfiguration *) configuration
+{
+    return [[TSLConfiguration alloc] init];
+}
+
++ (TSLConfiguration *) configurationFromFileNamed:(NSString *) fileName
+{
+    return [[TSLConfiguration alloc] initFromFileNamed:fileName];
+}
+
++ (TSLConfiguration *) configurationWithConfigurationDict:(NSDictionary *) configuration
+{
+    return [[TSLConfiguration alloc] initWithConfigurationDict:configuration];
+}
 
 @end

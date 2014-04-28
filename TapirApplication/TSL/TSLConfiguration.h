@@ -15,13 +15,14 @@
 - (instancetype) initFromFileNamed:(NSString *) fileName;
 - (instancetype) initWithConfigurationDict:(NSDictionary *) configuration;
 
-+ (TSLConfiguration *) createFromFileNamed:(NSString *) fileName;
-+ (TSLConfiguration *) createWithConfigurationDict:(NSDictionary *) configuration;
++ (TSLConfiguration *) configuration;
++ (TSLConfiguration *) configurationFromFileNamed:(NSString *) fileName;
++ (TSLConfiguration *) configurationWithConfigurationDict:(NSDictionary *) configuration;
 
 // All property in dictionary
 
-@property (nonatomic) NSUInteger totalNumberOfSeconds;
-@property (nonatomic) NSUInteger totalNumberOfAgents;
-@property (nonatomic, strong) NSString *map;
+@property (nonatomic, strong) NSNumber *totalNumberOfSeconds;
+@property (nonatomic, strong) NSNumber *totalNumberOfAgents;
+@property (nonatomic, strong) NSString *mapFile;
 
 @end
