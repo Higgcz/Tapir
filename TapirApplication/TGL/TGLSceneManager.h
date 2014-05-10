@@ -32,5 +32,4 @@
 + (void) registerLayerWithNode:(SKNode *) node andUpdate:(TGLLayerUpdateBlock) updateBlock;
 + (void) registerLayerWithNode:(SKNode *) node andUpdate:(TGLLayerUpdateBlock) updateBlock atZIndex:(TGLZIndex) zIndex;
 
-
 @end

@@ -8,6 +8,7 @@
 
 #import "TGLScene.h"
 #import "TGLLayer.h"
+#import "Vectors.h"
 
 @interface TGLScene ()
 
@@ -15,19 +16,46 @@
 @property (nonatomic) NSMutableArray *zIndexNodes;              // Different zIndex nodes within the world
 @property (nonatomic) NSMutableArray *layers;                   // Layers to draw and notify during update
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;    // The previous update: loop time interval
+@property (nonatomic) CGFloat        scale;
+
+@end
+
+@implementation SKView(ScrollTouchForwarding)
+
+- (void) scrollWheel:(NSEvent *) event
+{
+    [self.scene scrollWheel:event];
+}
+
+- (void) magnifyWithEvent:(NSEvent *) event
+{
+    [self.scene magnifyWithEvent:event];
+}
+
+- (void) rotateWithEvent:(NSEvent *) event
+{
+    [self.scene rotateWithEvent:event];
+}
+
+- (void) swipeWithEvent:(NSEvent *) event
+{
+    [self.scene swipeWithEvent:event];
+}
 
 @end
 
 @implementation TGLScene
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (instancetype)initWithSize:(CGSize)size
+- (instancetype) initWithSize:(CGSize) size
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     self = [super initWithSize:size];
     if (self) {
         _world = [SKNode node];
         [_world setName:@"world"];
+        
+        _scale = 1.0f;
         
         _layers      = [NSMutableArray array];
         _zIndexNodes = [NSMutableArray arrayWithCapacity:kZIndexCount];
@@ -52,7 +80,6 @@
     [layerNode addChild:node];
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) registerLayer:(TGLLayer *) layer atZIndex:(TGLZIndex) zIndex;
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,10 +101,14 @@
         self.lastUpdateTimeInterval = currentTime;
     }
     
-    if (self.isPaused) return;
+    if (self.isPaused) {
+        return;
+    }
     
     // update universe
     [self.updateDelegate updateWithTimeSinceLastUpdate:deltaTime];
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
     
     [self.layers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -85,7 +116,34 @@
         
         [layer updateWithTimeSinceLastUpdate:deltaTime];
         
+        if (layer.isDead) {
+            [indexSet addIndex:idx];
+        }
     }];
+    
+    [self.layers removeObjectsAtIndexes:indexSet];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) scrollWheel:(NSEvent *) theEvent
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+//    self.scale += theEvent.deltaY / 10.0f;
+//    
+//    CGSize size = self.view.frame.size;
+//    
+//    NSPoint mousePoint = [NSEvent mouseLocation];
+////    NSPoint mousePoint = NSMakePoint(size.width/2, size.height/2);
+//    NSPoint origin = self.world.position;
+//    
+//    NSVector vec = NSVectorResize(NSVectorMake(mousePoint, origin), self.scale);
+//    
+//    self.world.position = NSVectorAdd(vec, mousePoint);
+//    
+//    NSLog(@"Scrolling ... scale: %f point: %@", self.scale, NSStringFromPoint(self.world.position));
+//    
+//    self.world.xScale = self.scale;
+//    self.world.yScale = self.scale;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

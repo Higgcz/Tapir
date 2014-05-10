@@ -26,7 +26,7 @@
 + (TGLSceneManager *) sharedInstance
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    static TGLSceneManager *_sharedInstance = nil;
+    static TGLSceneManager * _sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[TGLSceneManager alloc] init];
@@ -60,7 +60,6 @@
 {
     [self.scene registerLayer:layer atZIndex:zIndex];
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 + (void) registerLayer:(TGLLayer *) layer

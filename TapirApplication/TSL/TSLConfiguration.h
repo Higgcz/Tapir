@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, TSLConfigurationProperty) {
+    TSLConfigurationPropertyTotalNumberOfSeconds = 0,
+    TSLConfigurationPropertyTotalNumberOfAgents,
+    TSLConfigurationPropertyMapFileName,
+    TSLConfigurationPropertyWorldSize,
+    
+    kTSLConfigurationPropertyCount
+};
+
 @interface TSLConfiguration : NSObject
 
 // Init & create
@@ -21,8 +30,9 @@
 
 // All property in dictionary
 
-@property (nonatomic, strong) NSNumber *totalNumberOfSeconds;
-@property (nonatomic, strong) NSNumber *totalNumberOfAgents;
-@property (nonatomic, strong) NSString *mapFile;
+@property (nonatomic        ) NSUInteger totalNumberOfSeconds;
+@property (nonatomic        ) NSUInteger totalNumberOfAgents;
+@property (nonatomic, strong) NSString   *mapFile;
+@property (nonatomic        ) CGSize     worldSize;
 
 @end

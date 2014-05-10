@@ -13,7 +13,7 @@
 
 #define kMinTimeInterval (1.0f / 60.0f)
 
-@class TSLConfiguration, TSLEntity, TSLPhysicsCore;
+@class TSLConfiguration, TSLEntity, TSLObject, TSLPhysicsCore;
 
 @interface TSLUniverse : NSObject <TSLUniverseDelegate, TGLSceneUpdateDelegate>
 
@@ -23,12 +23,12 @@
 @property (nonatomic, strong) TSLPhysicsCore   *physicsCore;
 
 // Initialization & creation of universe
-- (instancetype) initWithConfiguration:(TSLConfiguration*) configuration;
-- (instancetype) initWithConfigurationDict:(NSDictionary*) configuration;
+- (instancetype) initWithConfiguration:(TSLConfiguration *) configuration;
+- (instancetype) initWithConfigurationDict:(NSDictionary *) configuration;
 
 + (TSLUniverse *) universe;
-+ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration*) configuration;
-+ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary*) configuration;
++ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration *) configuration;
++ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary *) configuration;
 
 // Universe running properties
 @property (nonatomic, getter = isLiving) BOOL living;
@@ -38,8 +38,8 @@
 - (void) bang;
 
 // Objects handling
-- (void) addObject:(TSLEntity *) anObject;
-- (void) removeObject:(TSLEntity *) anObject;
+- (void) addObject:(TSLObject *) anObject;
+- (void) removeObject:(TSLObject *) anObject;
 - (void) removeAllObjects;
 
 // Control the universe
