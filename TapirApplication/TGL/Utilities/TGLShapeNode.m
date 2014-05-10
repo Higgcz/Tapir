@@ -14,11 +14,10 @@
 #import "NSBezierPath+BezierPathQuartzUtilities.h"
 
 @interface TGLShapeNode() {
-	CAShapeLayer* shapeLayer;
+	CAShapeLayer *shapeLayer;
 }
 
 @end
-
 
 @implementation TGLShapeNode
 
@@ -26,25 +25,58 @@
 - (id) init
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    
 	if (self = [super init]) {
-		_boundingSize = CGSizeMake(500, 500);
-		_strokeColor = [SKColor whiteColor];
-		_fillColor = [SKColor clearColor];
-		_lineWidth = 1.0;
-		_fillRule = kCAFillRuleNonZero;
-		_lineCap = kCALineCapButt;
-		_lineDashPattern = nil;
-		_lineDashPhase = 0;
-		_lineJoin = kCALineJoinMiter;
-		_miterLimit = 10.0;
-		_strokeEnd = 1.0;
-		_strokeStart = 0.0;
-        
-		self.anchorPoint = CGPointZero;
+        _boundingSize    = CGSizeMake(500, 500);
+        _strokeColor     = [SKColor whiteColor];
+        _fillColor       = [SKColor clearColor];
+        _lineWidth       = 1.0;
+        _fillRule        = kCAFillRuleNonZero;
+        _lineCap         = kCALineCapButt;
+        _lineDashPattern = nil;
+        _lineDashPhase   = 0;
+        _lineJoin        = kCALineJoinMiter;
+        _miterLimit      = 10.0;
+        _strokeEnd       = 1.0;
+        _strokeStart     = 0.0;
+
+        self.anchorPoint = CGPointZero;
 	}
     
 	return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (TGLShapeNode *) shapeNodeWithLineFromA:(NSPoint) pointA toB:(NSPoint) pointB strokeColor:(SKColor *) strokeColor lineWidth:(CGFloat) lineWidth
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return [TGLShapeNode shapeNodeWithLineFromA:pointA
+                                            toB:pointB
+                                    strokeColor:strokeColor
+                                      lineWidth:lineWidth
+                                        lineCap:kCALineCapButt
+                                lineDashPattern:nil
+                                  lineDashPhase:0];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (TGLShapeNode *) shapeNodeWithLineFromA:(NSPoint) pointA toB:(NSPoint) pointB strokeColor:(SKColor *) strokeColor lineWidth:(CGFloat) lineWidth lineCap:(NSString *) lineCap lineDashPattern:(NSArray *) lineDashPattern lineDashPhase:(CGFloat) lineDashPhase
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TGLShapeNode *node = [TGLShapeNode node];
+    
+    node.strokeColor     = strokeColor;
+    node.lineWidth       = lineWidth;
+    node.lineCap         = lineCap;
+    node.lineDashPattern = lineDashPattern;
+    node.lineDashPhase   = lineDashPhase;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint (path, NULL, pointA.x, pointA.y);
+    CGPathAddLineToPoint (path, NULL, pointB.x, pointB.y);
+    node.path = path;
+    CGPathRelease(path);
+    
+    return node;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +90,7 @@
     CGPathRef path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 2 * r, 2 * r), NULL);
     shapeNode.path = path;
     CGPathRelease(path);
+    
     return shapeNode;
 }
 
@@ -72,6 +105,7 @@
     CGPathRef path = CGPathCreateWithRect((CGRect) {{0, 0}, rectSize}, NULL);
     shapeNode.path = path;
     CGPathRelease(path);
+    
     return shapeNode;
 }
 
@@ -82,8 +116,8 @@
     TGLShapeNode *shapeNode = [TGLShapeNode node];
     shapeNode.fillColor   = fillColor;
     shapeNode.strokeColor = strokeColor;
+    shapeNode.path        = bezierPath.quartzPath;
     
-    shapeNode.path = bezierPath.quartzPath;
     return shapeNode;
 }
 
@@ -91,7 +125,6 @@
 - (void) redrawTexture
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    
 	if (!_path) {
 		return;
 	}
@@ -100,17 +133,17 @@
 		shapeLayer = [CAShapeLayer layer];
 	}
     
-	shapeLayer.strokeColor = [_strokeColor CGColor];
-	shapeLayer.fillColor = [_fillColor CGColor];
-	shapeLayer.lineWidth = _lineWidth;
-	shapeLayer.fillRule = _fillRule;
-	shapeLayer.lineCap = _lineCap;
-	shapeLayer.lineDashPattern = _lineDashPattern;
-	shapeLayer.lineDashPhase = _lineDashPhase;
-	shapeLayer.lineJoin = _lineJoin;
-	shapeLayer.miterLimit = _miterLimit;
-	shapeLayer.strokeEnd = _strokeEnd;
-	shapeLayer.strokeStart = _strokeStart;
+    shapeLayer.strokeColor     = [_strokeColor CGColor];
+    shapeLayer.fillColor       = [_fillColor CGColor];
+    shapeLayer.lineWidth       = _lineWidth;
+    shapeLayer.fillRule        = _fillRule;
+    shapeLayer.lineCap         = _lineCap;
+    shapeLayer.lineDashPattern = _lineDashPattern;
+    shapeLayer.lineDashPhase   = _lineDashPhase;
+    shapeLayer.lineJoin        = _lineJoin;
+    shapeLayer.miterLimit      = _miterLimit;
+    shapeLayer.strokeEnd       = _strokeEnd;
+    shapeLayer.strokeStart     = _strokeStart;
     
     
     //	CGAffineTransform transform = CGAffineTransformMake(1, 1, 0, 0, _boundingSize.width*0.75, _boundingSize.height*0.75);
@@ -135,13 +168,13 @@
 	CGColorSpaceRelease(colorSpace);
     
     
-	SKTexture* tex = [SKTexture textureWithCGImage:imageRef];
+	SKTexture *tex = [SKTexture textureWithCGImage:imageRef];
     
 	CGImageRelease(imageRef);
     
     
-	self.texture = tex;
-	self.size = _boundingSize;
+    self.texture = tex;
+    self.size    = _boundingSize;
     
 }
 
@@ -152,7 +185,5 @@
 	_path = path;
 	[self redrawTexture];
 }
-
-
 
 @end

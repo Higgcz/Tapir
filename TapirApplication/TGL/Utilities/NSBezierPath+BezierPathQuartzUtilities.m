@@ -15,23 +15,20 @@
 - (CGPathRef) quartzPath
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    int i, numElements;
+    NSInteger i, numElements;
     
     // Need to begin a path here.
     CGPathRef immutablePath = NULL;
     
     // Then draw the path elements.
     numElements = [self elementCount];
-    if (numElements > 0)
-    {
+    if (numElements > 0) {
         CGMutablePathRef    path         = CGPathCreateMutable();
         NSPoint             points[3];
         BOOL                didClosePath = YES;
         
-        for (i = 0; i < numElements; i++)
-        {
-            switch ([self elementAtIndex:i associatedPoints:points])
-            {
+        for (i = 0; i < numElements; i++) {
+            switch ([self elementAtIndex:i associatedPoints:points]) {
                 case NSMoveToBezierPathElement:
                     CGPathMoveToPoint(path, NULL, points[0].x, points[0].y);
                     break;

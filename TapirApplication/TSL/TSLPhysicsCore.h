@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TSLEntity;
+@class TSLBody;
 
 @interface TSLPhysicsCore : NSObject {
     
@@ -22,13 +22,24 @@
 - (instancetype) initWithGridSize:(CGSize) gridSize andCount:(NSUInteger) count;
 - (instancetype) initWithGridSize:(CGSize) gridSize andCellSize:(CGSize) cellSize;
 
+// Objects
+- (void) registrateBody:(TSLBody *) body;
+- (BOOL) unregistrateBody:(TSLBody *) body; // return NO if failed
+
 // Grid world coordinates conversions
 - (CGPoint) getGridPointFromWorldPoint:(CGPoint) worldPoint;
 - (CGPoint) getWorldPointFromGridPoint:(CGPoint) gridPoint;
 
-// Collisions
-- (BOOL) isPossibleToMoveObject:(TSLEntity *) anObject toPosition:(CGPoint *) point;
-- (BOOL) isPossibleToMoveObject:(TSLEntity *) anObject toPosition:(CGPoint *) point continuously:(BOOL) continuously;
+// update
+- (BOOL) updateForBody:(TSLBody *) body;
 
+// Collisions
+- (TSLBody *) getColiderWithBody:(TSLBody *) body;
+
+- (BOOL) isBody:(TSLBody *) body colidesShape:(NSBezierPath *) shape;
+- (NSSet *) getBodiesColidingShape:(NSBezierPath *) shape inSet:(NSSet *) set;
+
+- (BOOL) isPossibleToMoveObject:(TSLBody *) anObject toPosition:(CGPoint *) point;
+- (BOOL) isPossibleToMoveObject:(TSLBody *) anObject toPosition:(CGPoint *) point continuously:(BOOL) continuously;
 
 @end

@@ -11,6 +11,8 @@
 
 @interface TSLBody ()
 
+@property (nonatomic, strong) NSBezierPath *shape;
+
 - (void) setupSize:(CGSize) size position:(CGPoint) position andZRotation:(CGFloat) zRotation;
 
 @end
@@ -35,15 +37,10 @@ static const CGFloat DEFAULTS_ZROTATION = 0.0f;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     self.positionChanged = !CGPointEqualToPoint(_position, position);
+    if (self.positionChanged) {
+        self.oldPosition = self.position;
+    }
     _position = position;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setZRotation:(CGFloat) zRotation
-////////////////////////////////////////////////////////////////////////////////////////////////
-{
-    self.zRotationChanged = _zRotation != zRotation;
-    _zRotation = zRotation;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +48,6 @@ static const CGFloat DEFAULTS_ZROTATION = 0.0f;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     self.positionChanged  = NO;
-    self.zRotationChanged = NO;
 }
 
 #pragma mark - Initialization & Creation
@@ -95,6 +91,36 @@ static const CGFloat DEFAULTS_ZROTATION = 0.0f;
     self.size      = size;
     
     [self resetChanges];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSBezierPath *) getShape
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (self.shape == NULL) {
+        switch (self.shapeDef) {
+            case TSLBodyShapeRectangle:
+                self.shape = [NSBezierPath bezierPathWithRect:NSMakeRect(0, 0, self.size.width, self.size.height)];
+                break;
+            case TSLBodyShapeElipse:
+                self.shape = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(0, 0, self.size.width, self.size.height)];
+                break;
+            default:
+                NSAssert(NO, @"No such shape exist!");
+                break;
+        }
+    }
+    
+    NSRect bounds = NSMakeRect(0, 0, self.size.width, self.size.height);
+    NSPoint center = NSMakePoint(NSMidX(bounds), NSMidY(bounds));
+    
+    NSAffineTransform *transform = [NSAffineTransform transform];
+    [transform translateXBy:center.x yBy:center.y];
+    [transform rotateByRadians:self.zRotation];
+    [transform translateXBy:self.position.x yBy:self.position.y];
+    [transform translateXBy:-center.x yBy:-center.y];
+    
+    return [transform transformBezierPath:self.shape];
 }
 
 #pragma mark - TSLCollisionDelegate

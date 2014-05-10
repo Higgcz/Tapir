@@ -10,19 +10,25 @@
 #import "TSLBodyConstants.h"
 #import "TSLColisionDelegate.h"
 
-@class TSLEntity;
+typedef NS_ENUM(NSUInteger, TSLBodyShape) {
+    TSLBodyShapeRectangle = 0,
+    TSLBodyShapeElipse
+};
+
+@class TSLCar;
 
 @interface TSLBody : NSObject
 
 // Reference to entity
-@property (nonatomic, weak) TSLEntity *entity;
+@property (nonatomic, weak) TSLCar *car;
 
 // Dynamic properties
-@property (nonatomic) CGPoint position;
+@property (nonatomic) NSPoint position;
 @property (nonatomic) CGFloat zRotation;
 
+@property (nonatomic) NSPoint oldPosition;
+
 @property (nonatomic) BOOL positionChanged;
-@property (nonatomic) BOOL zRotationChanged;
 
 - (void) resetChanges;
 
@@ -41,8 +47,10 @@
 @property (nonatomic, weak) id<TSLColisionDelegate> delegate;
 
 // Collision properties
-@property (nonatomic, strong) NSBezierPath *shape;
+@property (nonatomic) TSLBodyShape shapeDef;
 @property (nonatomic, getter = isDynamic) BOOL dynamic;
+
+- (NSBezierPath *) getShape;
 
 // Bit masks properties
 @property (nonatomic) TBitMask categoryBitMask;

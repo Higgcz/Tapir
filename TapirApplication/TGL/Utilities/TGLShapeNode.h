@@ -49,18 +49,20 @@
  */
 //@property (SK_NONATOMIC_IOSONLY) CGFloat glowWidth;
 
-@property (nonatomic, assign) NSString* fillRule;
-@property (nonatomic, assign) NSString* lineCap;
-@property (nonatomic, assign) NSArray* lineDashPattern;
-@property (nonatomic, assign) CGFloat lineDashPhase;
-@property (nonatomic, assign) NSString* lineJoin;
-@property (nonatomic, assign) CGFloat miterLimit;
-@property (nonatomic, assign) CGFloat strokeEnd;
-@property (nonatomic, assign) CGFloat strokeStart;
+@property (nonatomic, assign) NSString *fillRule;
+@property (nonatomic, assign) NSString *lineCap;
+@property (nonatomic, assign) NSArray  *lineDashPattern;
+@property (nonatomic, assign) CGFloat  lineDashPhase;
+@property (nonatomic, assign) NSString *lineJoin;
+@property (nonatomic, assign) CGFloat  miterLimit;
+@property (nonatomic, assign) CGFloat  strokeEnd;
+@property (nonatomic, assign) CGFloat  strokeStart;
 
 @property (nonatomic, assign) CGSize boundingSize;
 
 // Creators
++ (TGLShapeNode *) shapeNodeWithLineFromA:(NSPoint) pointA toB:(NSPoint) pointB strokeColor:(SKColor *) strokeColor lineWidth:(CGFloat) lineWidth;
++ (TGLShapeNode *) shapeNodeWithLineFromA:(NSPoint) pointA toB:(NSPoint) pointB strokeColor:(SKColor *) strokeColor lineWidth:(CGFloat) lineWidth lineCap:(NSString *) lineCap lineDashPattern:(NSArray *) lineDashPattern lineDashPhase:(CGFloat) lineDashPhase;
 + (TGLShapeNode *) shapeNodeWithCircleOfRadius:(CGFloat) r fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor;
 + (TGLShapeNode *) shapeNodeWithRectangleSize:(CGSize) rectSize fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor;
 + (TGLShapeNode *) shapeNodeWithBezierPath:(NSBezierPath *) bezierPath fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor;

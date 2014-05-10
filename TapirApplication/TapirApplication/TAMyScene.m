@@ -10,7 +10,8 @@
 
 @implementation TAMyScene
 
--(id)initWithSize:(CGSize)size {    
+- (id) initWithSize:(CGSize) size
+{
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
@@ -28,7 +29,8 @@
     return self;
 }
 
--(void)mouseDown:(NSEvent *)theEvent {
+- (void) mouseDown:(NSEvent *) theEvent
+{
      /* Called when a mouse click occurs */
     
     CGPoint location = [theEvent locationInNode:self];
@@ -45,7 +47,8 @@
     [self addChild:sprite];
 }
 
--(void)update:(CFTimeInterval)currentTime {
+- (void) update:(CFTimeInterval) currentTime
+{
     /* Called before each frame is rendered */
 }
 

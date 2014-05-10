@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-typedef void (^TGLLayerUpdateBlock)(CFTimeInterval deltaTime, SKNode *node);
+typedef void (^TGLLayerUpdateBlock)(CFTimeInterval deltaTime, SKNode *node, BOOL *isDead);
 
 @interface TGLLayer : NSObject
 
 @property (nonatomic,         readonly) TGLLayerUpdateBlock updateBlock;
 @property (nonatomic, strong, readonly) SKNode              *node;
+
+@property (nonatomic, getter = isDead) BOOL dead;
 
 // Updating
 - (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime;
@@ -26,15 +28,21 @@ typedef void (^TGLLayerUpdateBlock)(CFTimeInterval deltaTime, SKNode *node);
 + (TGLLayer *) layerWithNode:(SKNode *) node;
 + (TGLLayer *) layerWithNode:(SKNode *) node andUpdate:(TGLLayerUpdateBlock) updateBlock;
 
+// Grid
++ (TGLLayer *) layerWithGridInRectSize:(CGSize) rectSize gridSize:(CGSize) gridSize andStrokeColor:(SKColor *) strokeColor;
+
+// Line
++ (TGLLayer *) layerWithLineFromA:(NSPoint) pointA toB:(NSPoint) pointB strokColor:(SKColor *) strokeColor;
+
 // Rectangle
 + (TGLLayer *) layerWithRectangleSize:(CGSize) rectSize fillColor:(SKColor *) fillColor;
 + (TGLLayer *) layerWithRectangleSize:(CGSize) rectSize fillColor:(SKColor *) fillColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
 + (TGLLayer *) layerWithRectangleSize:(CGSize) rectSize fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
 
 // Circle
-+ (TGLLayer *) layerWithCircleRadius:(CGFloat) r fillColor:(SKColor *) fillColor;
-+ (TGLLayer *) layerWithCircleRadius:(CGFloat) r fillColor:(SKColor *) fillColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
-+ (TGLLayer *) layerWithCircleRadius:(CGFloat) r fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
++ (TGLLayer *) layerWithCircleRadius:(CGFloat) r atPoint:(NSPoint) point fillColor:(SKColor *) fillColor;
++ (TGLLayer *) layerWithCircleRadius:(CGFloat) r atPoint:(NSPoint) point fillColor:(SKColor *) fillColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
++ (TGLLayer *) layerWithCircleRadius:(CGFloat) r atPoint:(NSPoint) point fillColor:(SKColor *) fillColor strokeColor:(SKColor *) strokeColor andUpdate:(TGLLayerUpdateBlock) updateBlock;
 
 // General bezier path
 + (TGLLayer *) layerWithBezierPath:(NSBezierPath *) bezierPath fillColor:(SKColor *) fillColor;

@@ -8,6 +8,7 @@
 
 #import "TSLUniverse.h"
 
+#import "TSLPhysicsCore.h"
 #import "TSLConfiguration.h"
 #import "TSLEntity.h"
 
@@ -36,7 +37,7 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (instancetype) initWithConfigurationDict:(NSDictionary *)configuration
+- (instancetype) initWithConfigurationDict:(NSDictionary *) configuration
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     self = [super init];
@@ -54,14 +55,14 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-+ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration *)configuration
++ (TSLUniverse *) universeWithConfiguration:(TSLConfiguration *) configuration
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return [[TSLUniverse alloc] initWithConfiguration:configuration];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-+ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary *)configuration
++ (TSLUniverse *) universeWithConfigurationDict:(NSDictionary *) configuration
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return [[TSLUniverse alloc] initWithConfigurationDict:configuration];
@@ -76,24 +77,29 @@
     
     // Set configuration
     self.storage = [NSMutableArray array];
+    
+    // Set the Physics core
+    self.physicsCore = [[TSLPhysicsCore alloc] initWithGridSize:self.configuration.worldSize andCount:3];
 }
 
 #pragma mark - Objects handling
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addObject:(TSLEntity *) anObject
+- (void) addObject:(TSLObject *) anObject
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [self.storage addObject:anObject];
-    [anObject didCreatedAtUniverse:self];
+    
+    [anObject performSelector:@selector(didCreatedAtUniverse:) withObject:self afterDelay:0.0f];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeObject:(TSLEntity *) anObject
+- (void) removeObject:(TSLObject *) anObject
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [self.storage removeObject:anObject];
-    [anObject didDeleted];
+    
+    [anObject performSelector:@selector(didDeleted) withObject:nil afterDelay:0.0f];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,12 +107,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (![obj isKindOfClass:[TSLEntity class]]) {
+        if (![obj isKindOfClass:[TSLObject class]]) {
             NSLog(@"WARNING: There is wrong type of object in storage!");
             return;
         }
         
-        TSLEntity *object = (TSLEntity *) obj;
+        TSLObject *object = (TSLObject *) obj;
+        
         [object didDeleted];
     }];
     
@@ -154,12 +161,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (![obj isKindOfClass:[TSLEntity class]]) {
+        if (![obj isKindOfClass:[TSLObject class]]) {
             NSLog(@"WARNING: There is wrong type of object in storage!");
             return;
         }
         
-        TSLEntity *object = (TSLEntity *) obj;
+        TSLObject *object = (TSLObject *) obj;
         [object updateWithTimeSinceLastUpdate:deltaTime];
     }];
     
