@@ -16,7 +16,7 @@
 
 typedef void(^TSLAgentCompletitionBlock)(CGPoint *donePoint);
 
-@class TSLRoad, TSLCar, TSLRoadObject, TSLPlan;
+@class TSLRoad, TSLCar, TSLRoadObject, TSLPlan, TSLPath;
 
 @interface TSLDriverAgent : TSLEntity <TSLColisionDelegate>
 
@@ -31,6 +31,7 @@ typedef void(^TSLAgentCompletitionBlock)(CGPoint *donePoint);
 - (BOOL) shouldExitCar:(TSLCar *) car;
 - (void) didExitCar:(TSLCar *) car;
 - (void) didStartCar:(TSLCar *) car;
-- (void) car:(TSLCar *) car arrivedToRoadObject:(TSLRoadObject *) roadObject;
+- (TSLPath *) pathForCar:(TSLCar *) car andRoadObject:(TSLRoadObject *) roadObject;
+- (void) arriveToNewRoadObject:(TSLRoadObject *) roadObject;
 
 @end

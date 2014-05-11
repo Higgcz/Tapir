@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger, eTSLRoadDirection) {
 - (NSUInteger) lineCountInDirection:(eTSLRoadDirection) dir;
 - (TSLRoadObject *) prevInDirection:(eTSLRoadDirection) dir;
 - (TSLRoadObject *) nextInDirection:(eTSLRoadDirection) dir;
+- (NSVector) directionInDirection:(eTSLRoadDirection) dir;
 
 // Creating
 - (instancetype) initWithStart:(NSPoint) startPoint andEnd:(NSPoint) endPoint;

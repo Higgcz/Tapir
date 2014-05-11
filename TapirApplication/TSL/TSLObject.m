@@ -7,6 +7,7 @@
 //
 
 #import "TSLObject.h"
+#import "TSLUniverse.h"
 
 @implementation TSLObject
 
@@ -16,7 +17,7 @@
 {
     self = [super init];
     if (self) {
-        self.active   = YES;
+        self.active   = NO;
         self.universe = nil;
         self.dead     = NO;
         self.ready    = NO;
@@ -40,6 +41,13 @@
     if (self.isActive == NO) return;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeFromUniverse
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.universe removeObject:self];
+}
+
 #pragma mark - Callbacks
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +55,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     self.universe = universe;
+    self.active   = YES;
     self.ready    = YES;
 }
 

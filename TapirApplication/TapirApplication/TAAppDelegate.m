@@ -20,12 +20,16 @@
 #import "../TSL/TSLPlan.h"
 #import "../TSL/TSLPath.h"
 #import "../TSL/TSLSemaphore.h"
+#import "../TSL/TSLConfiguration.h"
 
 #import "../TSL/Vectors.h"
+
+static NSString *kConfigurationFileName = @"Configuration";
 
 @interface TAAppDelegate ()
 
 @property (nonatomic, strong) TSLUniverse *theUniverse;
+
 
 @end
 
@@ -35,12 +39,15 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
 {
+    // Create configureation
+    TSLConfiguration *conf = [TSLConfiguration configurationFromFileNamed:kConfigurationFileName];
+    
     // Create universe and scene
-    TGLScene *scene = [[TGLSceneManager sharedInstance] createSceneWithSize:CGSizeMake(1024, 768)];
+    TGLScene *scene = [[TGLSceneManager sharedInstance] createSceneWithSize:conf.worldSize];
     
-    self.theUniverse = [TSLUniverse universe];
+    self.theUniverse = [TSLUniverse universeWithConfiguration:conf];
     
-    srand(time(NULL));
+    srand((unsigned) (conf.randomSeed == 0 ? (NSUInteger) time(NULL) : conf.randomSeed));
     
     /* Pick a size for the scene */
     //    SKScene *scene = [TAMyScene sceneWithSize:CGSizeMake(1024, 768)];
@@ -53,7 +60,7 @@
     NSPoint centerC = NSMakePoint(centerA.x * 2, centerA.y * 2);
     NSPoint centerD = NSMakePoint(centerA.x, centerA.y * 2);
     
-    NSUInteger roadLength = 200;
+    NSUInteger roadLength = conf.roadLength;
     
     TSLIntersection *intersectionA = [TSLIntersection intersectionAtPoint:centerA andRadius:20];
     TSLIntersection *intersectionB = [TSLIntersection intersectionAtPoint:centerB andRadius:20];
@@ -66,12 +73,17 @@
     
     NSArray *intersections = @[intersectionA, intersectionB, intersectionC, intersectionD];
     
+    NSUInteger numberOfLines = conf.numberOfLines;
+    
     // Add road between intersections
     for (int i = 0; i < intersections.count; i++) {
         TSLRoadObject *roA = intersections[i];
         TSLRoadObject *roB = intersections[(i + 1 < intersections.count) ? i + 1 : 0];
         
         TSLRoad *newRoad = [TSLRoad roadBetweenRoadObjectA:roA andRoadObjectB:roB];
+        
+        newRoad.lineCountNegativeDir = numberOfLines;
+        newRoad.lineCountPositiveDir = numberOfLines;
         
         [roads addObject:newRoad];
     }
@@ -91,10 +103,16 @@
             TSLZone *newZone = [TSLZone zoneAtPosition:zPoint];
             TSLRoad *newRoad = [TSLRoad roadBetweenRoadObjectA:inter andRoadObjectB:newZone];
             
+            newRoad.lineCountNegativeDir = numberOfLines;
+            newRoad.lineCountPositiveDir = numberOfLines;
+            
             [zones addObject:newZone];
             [roads addObject:newRoad];
         }
     }
+    
+    // Constants
+    CGFloat angleStraightTolerance = conf.angleStraightTolerance;
     
     // Add semaphores
     for (TSLIntersection *inter in intersections) {
@@ -103,28 +121,52 @@
         for (int i = 0; i < count; i++) {
             TSLRoad *road = inter.roads[i];
             
-            TSLSemaphore *newSemaphore = [road createSemaphoreAtLine:0 inDirection:[road getDirectionToRoadObject:inter]];
+            eTSLRoadDirection roadDirection = [road getDirectionToRoadObject:inter];
+            NSUInteger lineCount = [road lineCountInDirection:roadDirection];
             
-            if (i&1) {
-                [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(0, 8)];
-            } else {
-                [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(11, 8)];
+            for (int n = 0; n < lineCount; n++) {
+                TSLSemaphore *newSemaphore = [road createSemaphoreAtLine:n inDirection:roadDirection];
+                
+                if (i&1) {
+                    [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(0, 8)];
+                } else {
+                    [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(11, 8)];
+                }
+                
+                [semaphores addObject:newSemaphore];
+                
             }
             
-            [semaphores addObject:newSemaphore];
+            NSVector roadVecDir = [road directionInDirection:roadDirection];
             
             for (int j = 0; j < count; j++) {
                 if (i == j) continue;
                 
                 TSLRoad *jRoad = inter.roads[j];
-                [inter createPathFromRoad:road fromToLine:0 toRoad:jRoad];
+                
+                eTSLRoadDirection jRoadDir = [jRoad getDirectionFromRoadObject:inter];
+                
+                NSVector jRoadVecDir = [jRoad directionInDirection:jRoadDir];
+                
+                CGFloat angle = NSVectorsAngle(roadVecDir, jRoadVecDir);
+                
+                if (fabs(angle) < angleStraightTolerance) {
+                    // Straight
+                    [inter createPathFromRoad:road fromToLine:MIN(1, lineCount - 1) toRoad:jRoad];
+                } else if (angle < 0) {
+                    // Right
+                    [inter createPathFromRoad:road fromToLine:(lineCount - 1) toRoad:jRoad];
+                } else {
+                    // Left
+                    [inter createPathFromRoad:road fromToLine:0 toRoad:jRoad];
+                }
             }
         }
     }
 
 
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < conf.totalNumberOfAgents; i++) {
         TSLDriverAgent *driverAgent = [[TSLDriverAgent alloc] init];
         TSLCar *car = [TSLCar carWithType:[self getRandomCarType]];
         // Set driver's car
@@ -166,9 +208,18 @@
     
     NSLog(@"Type: %ld", n);
     
-    if (n < 70) {
+    NSInteger cP = _theUniverse.configuration.probCarTypePassenger;
+    NSInteger cT = _theUniverse.configuration.probCarTypeTruck;
+    NSInteger cB = _theUniverse.configuration.probCarTypeBus;
+    
+    NSInteger sumC = cP + cT + cB;
+    
+    NSInteger pP = cP/sumC;
+    NSInteger pT = cT/sumC;
+    
+    if (n < pP) {
         return TSLCarTypePassenger;
-    } else if (n < 90) {
+    } else if (n < pT) {
         return TSLCarTypeTruck;
     } else {
         return TSLCarTypeBus;

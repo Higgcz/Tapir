@@ -81,6 +81,8 @@ typedef struct Indexes Indexes;
     NSUInteger idxA = [self.roads indexOfObjectIdenticalTo:roadA];
     NSUInteger idxB = [self.roads indexOfObjectIdenticalTo:roadB];
     
+    NSAssert(idxA != NSNotFound || idxB != NSNotFound, @"Roads not found in intersection!!");
+    
     NSAssert(idxA < self.count && idxB < self.count, @"Index is larger then count: idxA: %lu, idxB: %lu", idxA, idxB);
     
     return (Indexes) {idxA, idxB};
@@ -206,27 +208,34 @@ typedef struct Indexes Indexes;
 - (void) takeCar:(TSLCar *) car fromRoadObject:(TSLRoadObject *) roadObject
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    NSAssert(roadObject != nil, @"Road object cannot be nil.");
-    
-    [car arrivedToRoadObject:self];
+    [car arriveToNewRoadObject:self];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) shouldExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    return YES;
+    return [car shouldExit];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    [car didExit];
+    
     TSLRoadObject *roadNext = self.roads [car.path.indexTo];
     
     [roadNext takeCar:car fromRoadObject:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (TSLPath *) pathForExitingCar:(TSLCar *) car
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TSLRoadObject *roadNext = self.roads [car.path.indexTo];
     
-    return;
+    return [car pathForRoadObject:roadNext];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

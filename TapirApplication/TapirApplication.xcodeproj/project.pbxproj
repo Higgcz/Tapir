@@ -44,6 +44,7 @@
 		FC637876190DAFD50081C914 /* TGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637875190DAFD50081C914 /* TGLLayer.m */; };
 		FC63787B190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */; };
 		FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63787A190DAFF60081C914 /* TGLShapeNode.m */; };
+		FC744F0F191FCECF00144875 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC744F0E191FCECF00144875 /* Configuration.plist */; };
 		FC8E48D7191DA15400620122 /* TSLPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8E48D6191DA15400620122 /* TSLPlan.m */; };
 		FCA17F31191D4154000E8903 /* TSLPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA17F30191D4154000E8903 /* TSLPath.m */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,7 @@
 		FC63787A190DAFF60081C914 /* TGLShapeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLShapeNode.m; path = TGL/Utilities/TGLShapeNode.m; sourceTree = "<group>"; };
 		FC684709190E629A00167BC5 /* TGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGL.h; path = TGL/TGL.h; sourceTree = "<group>"; };
 		FC68470A190E6CA800167BC5 /* TGLSceneUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGLSceneUpdateDelegate.h; path = TGL/TGLSceneUpdateDelegate.h; sourceTree = "<group>"; };
+		FC744F0E191FCECF00144875 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		FC8E48D5191DA15400620122 /* TSLPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLPlan.h; sourceTree = "<group>"; };
 		FC8E48D6191DA15400620122 /* TSLPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPlan.m; sourceTree = "<group>"; };
 		FCA17F2F191D4154000E8903 /* TSLPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLPath.h; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		FC6376F7190C1FEC0081C914 = {
 			isa = PBXGroup;
 			children = (
+				FC744F0D191FCEB700144875 /* Resources */,
 				FC637863190D99FA0081C914 /* TGL */,
 				FC637836190C20C30081C914 /* TSL */,
 				FC63770B190C1FED0081C914 /* TapirApplication */,
@@ -367,6 +370,14 @@
 			name = Layers;
 			sourceTree = "<group>";
 		};
+		FC744F0D191FCEB700144875 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FC744F0E191FCECF00144875 /* Configuration.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -447,6 +458,7 @@
 				FC637720190C1FED0081C914 /* Spaceship.png in Resources */,
 				FC637722190C1FED0081C914 /* Images.xcassets in Resources */,
 				FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */,
+				FC744F0F191FCECF00144875 /* Configuration.plist in Resources */,
 				FC637716190C1FED0081C914 /* Credits.rtf in Resources */,
 				FC637718190C1FED0081C914 /* MainMenu.xib in Resources */,
 			);

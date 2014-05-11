@@ -22,6 +22,7 @@
 // @return YES if the car was able to exit
 - (BOOL) shouldExitCar:(TSLCar *) car;
 - (void) didExitCar:(TSLCar *) car;
+- (TSLPath *) pathForExitingCar:(TSLCar *) car;
 
 - (NSSet *) pathsNextForPath:(TSLPath *) path;
 - (NSSet *) pathsForPath:(TSLPath *) path fromRoadObject:(TSLRoadObject *) roadObject;

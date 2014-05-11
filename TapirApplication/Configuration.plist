@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TotalNumberOfAgents</key>
+	<integer>1</integer>
+	<key>WorldSize</key>
+	<array>
+		<integer>1024</integer>
+		<integer>768</integer>
+	</array>
+	<key>RoadLength</key>
+	<integer>200</integer>
+	<key>NumberOfLines</key>
+	<integer>2</integer>
+	<key>ProbDriverSpeedUp</key>
+	<integer>70</integer>
+	<key>RandomSeed</key>
+	<integer>0</integer>
+	<key>ProbCarTypePassenger</key>
+	<integer>70</integer>
+	<key>ProbCarTypeTruck</key>
+	<integer>20</integer>
+	<key>ProbCarTypeBus</key>
+	<integer>10</integer>
+</dict>
+</plist>

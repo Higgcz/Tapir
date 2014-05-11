@@ -54,14 +54,13 @@ typedef NS_ENUM(NSUInteger, eTSLPathDirection) {
 - (void) putCar:(TSLCar *) car onPathPosition:(NSUInteger) pathPosition;
 
 // @return YES if the car was able to exit
-- (BOOL) shouldExitCar:(TSLCar *) car;
-- (void) didExitCar:(TSLCar *) car;
+- (BOOL) exitingCar:(TSLCar *) car;
 
 - (id) objectAtPathPosition:(NSUInteger) pathPosition;
 
 - (void) removeCarLeftover:(TSLCar *) car;
 
-- (void) moveCar:(TSLCar *) car;
+- (BOOL) moveCar:(TSLCar *) car;
 
 - (NSPoint) getPositionForPathPosition:(NSUInteger) pathPosition;
 

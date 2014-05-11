@@ -83,6 +83,7 @@
     if (car.path == self) return;
     
     car.path           = self;
+    car.pathPosition   = pathPosition;
     car.sensorProvider = self;
     
     NSAssert(self.cars[pathPosition] == NIL, @"The cars storage should be empty on putting the car.");
@@ -104,8 +105,8 @@
 - (BOOL) canPutCar:(TSLCar *) car onPathPosition:(NSUInteger) pathPostion
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (pathPostion >= self.length || self.carCount == 0) return YES;
-    if (self.cars[pathPostion] != NIL) return NO;
+    if (pathPostion >= self.length || self.cars[pathPostion] != NIL) return NO;
+    if (self.carCount == 0) return YES;
     
     CGFloat carLength = car.body.size.width;
     
@@ -134,7 +135,7 @@
 - (void) removeCarLeftover:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (self.cars[car.pathPosition] == car) {
+    if (car.pathPosition < self.length && self.cars[car.pathPosition] == car) {
         self.cars[car.pathPosition] = NIL;
         self.carCount--;
         car.path = nil;
@@ -152,29 +153,52 @@
 - (BOOL) shouldExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if ([car shouldExit] == NO) return NO;
     if ([self.road shouldExitCar:car] == NO) return NO;
     
     return YES;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) didExitCar:(TSLCar *) car
+- (BOOL) exitingCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [car didExit];
-    [self.road didExitCar:car];
+    if ([self.road shouldExitCar:car] == NO) return NO;
     
-    [self removeCarLeftover:car];
+    TSLPath *newPath = [self.road pathForExitingCar:car];
+    
+    if (newPath == nil) {
+        // Assume the car is on the end of its path, therefor remove car from self
+        [self removeCarLeftover:car];
+        // Notify road about exiting car
+        [self.road didExitCar:car];
+        
+        return YES;
+    } else if ([newPath canPutCar:car]) {
+        // Remove car from self
+        [self removeCarLeftover:car];
+        
+        [self.road didExitCar:car];
+        
+        // Add car to new path
+        [newPath putCar:car];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) moveCar:(TSLCar *) car
+- (BOOL) moveCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     NSUInteger newPosition = MAX(car.pathPosition + car.speed, 0);
     if ([self canPutCar:car onPathPosition:newPosition]) {
         car.pathPosition = newPosition;
+        return YES;
+    } else {
+        car.pathPosition = newPosition;
+        return NO;
     }
 }
 
@@ -191,7 +215,7 @@
     
     NSUInteger oldPathPosition = car.pathPosition;
     
-    [self moveCar:car];
+    BOOL pathPositionExceed = ![self moveCar:car];
     
     if (oldPathPosition == car.pathPosition) return;
     
@@ -199,13 +223,11 @@
     self.cars[oldPathPosition] = NIL;
     
     if (car.pathPosition >= self.length) {
-        if ([self shouldExitCar:car] == NO) {
-            car.pathPosition = self.length-1;
-        } else {
-            car.pathPositionMomentum = car.pathPosition - self.length;
-            car.pathPosition = oldPathPosition;
-            [self didExitCar:car];
+        car.pathPositionMomentum = car.pathPosition - self.length;
+        if ([self exitingCar:car]) {
             return;
+        } else {
+            car.pathPosition = self.length-1;
         }
     }
     
