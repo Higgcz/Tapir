@@ -36,5 +36,4 @@ __builtin_unreachable(); \
 - (TSLPath *) pathNextForPath:(TSLPath *) path D12_ABSTRACT_METHOD
 - (TSLPath *) pathForPath:(TSLPath *) path fromRoadObject:(TSLRoadObject *) roadObject D12_ABSTRACT_METHOD
 
-
 @end

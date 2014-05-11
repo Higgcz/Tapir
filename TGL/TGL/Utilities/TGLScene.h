@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "../TGLSceneUpdateDelegate.h"
+#import "TGLSceneUpdateDelegate.h"
 
 #define kMinTimeInterval (1.0f / 60.0f)
 

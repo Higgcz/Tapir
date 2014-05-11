@@ -7,29 +7,16 @@
 //
 
 #import "TAAppDelegate.h"
-#import "TAMyScene.h"
 
-#import "TGL.h"
+#import <TGL/TGL.h>
 
-#import "TSLUniverse.h"
-#import "../TSL/TSLDriverAgent.h"
-#import "../TSL/TSLCar.h"
-#import "../TSL/TSLRoad.h"
-#import "../TSL/TSLZone.h"
-#import "../TSL/TSLIntersection.h"
-#import "../TSL/TSLPlan.h"
-#import "../TSL/TSLPath.h"
-#import "../TSL/TSLSemaphore.h"
-#import "../TSL/TSLConfiguration.h"
+#import "../TSL/TSL.h"
 
-#import "../TSL/Vectors.h"
-
-static NSString *kConfigurationFileName = @"Configuration";
+static NSString * kConfigurationFileName = @"Configuration";
 
 @interface TAAppDelegate ()
 
 @property (nonatomic, strong) TSLUniverse *theUniverse;
-
 
 @end
 
@@ -55,7 +42,7 @@ static NSString *kConfigurationFileName = @"Configuration";
     NSInteger widthInt = scene.size.width;
     NSInteger heightInt = scene.size.height;
     
-    NSPoint centerA = NSMakePoint((NSInteger) widthInt/3, (NSInteger) heightInt/3);
+    NSPoint centerA = NSMakePoint((NSInteger) widthInt / 3, (NSInteger) heightInt / 3);
     NSPoint centerB = NSMakePoint(centerA.x * 2, centerA.y);
     NSPoint centerC = NSMakePoint(centerA.x * 2, centerA.y * 2);
     NSPoint centerD = NSMakePoint(centerA.x, centerA.y * 2);

@@ -27,6 +27,9 @@
 
 @property (nonatomic) NSUInteger probDriverSpeedUp;
 
+@property (nonatomic) NSUInteger semaphoreTickLength;
+@property (nonatomic) NSUInteger semaphoreStateDelay;
+
 //@property (nonatomic) NSUInteger carMaxRange;
 //
 //@property (nonatomic) CGFloat carTypePassengerMaxSpeed;

@@ -10,8 +10,10 @@
 #import "TSLState.h"
 #import "TSLPath.h"
 #import "NSString+CharacterEnumeration.h"
+#import "TSLUniverse.h"
+#import "TSLConfiguration.h"
 
-#import "../TGL/TGL.h"
+#import <TGL/TGL.h>
 
 @implementation TSLSemaphore {
     BOOL _cycle[kTSLSemaphorePeriodLength];
@@ -29,6 +31,7 @@
         self.state        = [TSLState state];
         self.currentTime  = 0;
         self.pathPosition = 0;
+        self.tickLength   = kTSLSemaphoreTickLength;
         
         memset(_cycle, 0, kTSLSemaphorePeriodLength * sizeof(BOOL));
     }
@@ -97,7 +100,9 @@
 {
     [super updateWithTimeSinceLastUpdate:deltaTime];
     
-    if (self.currentTick % kTSLSemaphoreTickLength == 0) {
+    if (self.isActive == NO) return;
+    
+    if (self.currentTick % self.tickLength == 0) {
         
         [self.state updateWithTimeSinceLastUpdate:deltaTime];
         
@@ -120,6 +125,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [super didCreatedAtUniverse:universe];
+    [self.state didCreatedAtUniverse:universe];
+    
+    self.tickLength = universe.configuration.semaphoreTickLength;
     
     SKSpriteNode *spriteNode = [SKSpriteNode spriteNodeWithColor:self.state.color size:CGSizeMake(5, 5)];
     spriteNode.position = [self.path getPositionForPathPosition:self.pathPosition];

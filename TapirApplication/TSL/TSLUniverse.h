@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "../TGL/TGLSceneUpdateDelegate.h"
+#import <TGL/TGLSceneUpdateDelegate.h>
 #import "TSLUniverseDelegate.h"
 
 #define kMinTimeInterval (1.0f / 60.0f)

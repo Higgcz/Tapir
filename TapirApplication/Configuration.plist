@@ -23,5 +23,9 @@
 	<integer>20</integer>
 	<key>ProbCarTypeBus</key>
 	<integer>10</integer>
+	<key>SemaphoreTickLength</key>
+	<integer>5</integer>
+	<key>SemaphoreStateDelay</key>
+	<integer>2</integer>
 </dict>
 </plist>

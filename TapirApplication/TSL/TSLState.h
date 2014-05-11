@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, eTSLState) {
 @property (nonatomic) eTSLState value;
 @property (nonatomic, weak) NSColor *color;
 
+@property (nonatomic) NSUInteger stateDelay;
+
 @property (nonatomic) NSUInteger timeSinceLastChange;
 
 - (void) change:(BOOL) value;

@@ -72,6 +72,9 @@
     
     self.randomSeed             = 0;
     
+    self.semaphoreTickLength = 5;
+    self.semaphoreStateDelay = 2;
+    
     self.probCarTypePassenger = 70;
     self.probCarTypeTruck     = 20;
     self.probCarTypeBus       = 10;
@@ -168,6 +171,20 @@
         tmp = value;
         if (tmp != nil) {
             self.probCarTypeBus = tmp.unsignedIntegerValue;
+        }
+        
+    } else if ([key isEqualToString:@"SemaphoreStateDelay"]) {
+        
+        tmp = value;
+        if (tmp != nil) {
+            self.semaphoreStateDelay = tmp.unsignedIntegerValue;
+        }
+        
+    } else if ([key isEqualToString:@"SemaphoreTickLength"]) {
+        
+        tmp = value;
+        if (tmp != nil) {
+            self.semaphoreTickLength = tmp.unsignedIntegerValue;
         }
         
     } else {

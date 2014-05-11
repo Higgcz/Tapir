@@ -8,7 +8,6 @@
 
 #import "TGLScene.h"
 #import "TGLLayer.h"
-#import "Vectors.h"
 
 @interface TGLScene ()
 

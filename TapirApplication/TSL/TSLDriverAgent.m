@@ -19,7 +19,7 @@
 
 #import "Vectors.h"
 
-#import "../TGL/TGL.h"
+#import <TGL/TGL.h>
 
 @interface TSLDriverAgent ()
 

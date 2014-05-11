@@ -16,7 +16,7 @@
 #import "TSLPath.h"
 #import "TSLSemaphore.h"
 
-#import "../TGL/TGL.h"
+#import <TGL/TGL.h>
 
 #import "Vectors.h"
 

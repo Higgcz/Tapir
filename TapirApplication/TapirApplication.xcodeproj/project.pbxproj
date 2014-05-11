@@ -15,7 +15,6 @@
 		FC2E4F66191BCED0009D7DAD /* TSLCar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E4F65191BCED0009D7DAD /* TSLCar.m */; };
 		FC2E4F6C191BE5AD009D7DAD /* TSLZone.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E4F6B191BE5AD009D7DAD /* TSLZone.m */; };
 		FC2E4F6F191BF4F2009D7DAD /* TSLRoadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E4F6E191BF4F2009D7DAD /* TSLRoadObject.m */; };
-		FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2F083C190DC7CA008C247E /* TGLScene.m */; };
 		FC52CA3F191E8DD700CFAA5A /* TSLPathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA3E191E8DD700CFAA5A /* TSLPathTest.m */; };
 		FC52CA42191ED5B900CFAA5A /* TSLSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA41191ED5B900CFAA5A /* TSLSemaphore.m */; };
 		FC52CA45191EDAC700CFAA5A /* TSLState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA44191EDAC700CFAA5A /* TSLState.m */; };
@@ -26,9 +25,7 @@
 		FC637712190C1FED0081C914 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637711190C1FED0081C914 /* main.m */; };
 		FC637716190C1FED0081C914 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC637714190C1FED0081C914 /* Credits.rtf */; };
 		FC637718190C1FED0081C914 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC637717190C1FED0081C914 /* MainMenu.xib */; };
-		FC63771A190C1FED0081C914 /* TAMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637719190C1FED0081C914 /* TAMyScene.m */; };
 		FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63771C190C1FED0081C914 /* TAAppDelegate.m */; };
-		FC637720190C1FED0081C914 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = FC63771F190C1FED0081C914 /* Spaceship.png */; };
 		FC637722190C1FED0081C914 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC637721190C1FED0081C914 /* Images.xcassets */; };
 		FC637729190C1FED0081C914 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637728190C1FED0081C914 /* XCTest.framework */; };
 		FC63772A190C1FED0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
@@ -40,13 +37,11 @@
 		FC637859190D2C860081C914 /* TSLBody.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637858190D2C860081C914 /* TSLBody.m */; };
 		FC63785E190D52740081C914 /* TSLPhysicsCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63785D190D52740081C914 /* TSLPhysicsCore.m */; };
 		FC637861190D56390081C914 /* TSLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637860190D56390081C914 /* TSLEntity.m */; };
-		FC637866190D9A160081C914 /* TGLSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637865190D9A160081C914 /* TGLSceneManager.m */; };
-		FC637876190DAFD50081C914 /* TGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637875190DAFD50081C914 /* TGLLayer.m */; };
-		FC63787B190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */; };
-		FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63787A190DAFF60081C914 /* TGLShapeNode.m */; };
 		FC744F0F191FCECF00144875 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC744F0E191FCECF00144875 /* Configuration.plist */; };
 		FC8E48D7191DA15400620122 /* TSLPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8E48D6191DA15400620122 /* TSLPlan.m */; };
 		FCA17F31191D4154000E8903 /* TSLPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA17F30191D4154000E8903 /* TSLPath.m */; };
+		FCB34F85191FE42400445DCD /* TGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F84191FE42400445DCD /* TGL.framework */; };
+		FCB34FC2191FF88900445DCD /* TGL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FCB34F84191FE42400445DCD /* TGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +53,19 @@
 			remoteInfo = TapirApplication;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FCB34FC1191FF87300445DCD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FCB34FC2191FF88900445DCD /* TGL.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FC2E4F51191A6DFA009D7DAD /* TSLRoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLRoad.h; sourceTree = "<group>"; };
@@ -77,8 +85,6 @@
 		FC2E4F6B191BE5AD009D7DAD /* TSLZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLZone.m; sourceTree = "<group>"; };
 		FC2E4F6D191BF4F2009D7DAD /* TSLRoadObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLRoadObject.h; sourceTree = "<group>"; };
 		FC2E4F6E191BF4F2009D7DAD /* TSLRoadObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLRoadObject.m; sourceTree = "<group>"; };
-		FC2F083B190DC7CA008C247E /* TGLScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLScene.h; path = TGL/Utilities/TGLScene.h; sourceTree = "<group>"; };
-		FC2F083C190DC7CA008C247E /* TGLScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLScene.m; path = TGL/Utilities/TGLScene.m; sourceTree = "<group>"; };
 		FC52CA3E191E8DD700CFAA5A /* TSLPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPathTest.m; sourceTree = "<group>"; };
 		FC52CA40191ED5B900CFAA5A /* TSLSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLSemaphore.h; sourceTree = "<group>"; };
 		FC52CA41191ED5B900CFAA5A /* TSLSemaphore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLSemaphore.m; sourceTree = "<group>"; };
@@ -98,11 +104,8 @@
 		FC637713190C1FED0081C914 /* TapirApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapirApplication-Prefix.pch"; sourceTree = "<group>"; };
 		FC637715190C1FED0081C914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC637717190C1FED0081C914 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		FC637719190C1FED0081C914 /* TAMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAMyScene.m; sourceTree = "<group>"; };
-		FC63771B190C1FED0081C914 /* TAMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TAMyScene.h; sourceTree = "<group>"; };
 		FC63771C190C1FED0081C914 /* TAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAAppDelegate.m; sourceTree = "<group>"; };
 		FC63771E190C1FED0081C914 /* TAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TAAppDelegate.h; sourceTree = "<group>"; };
-		FC63771F190C1FED0081C914 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		FC637721190C1FED0081C914 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FC637727190C1FED0081C914 /* TapirApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapirApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC637728190C1FED0081C914 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -124,22 +127,14 @@
 		FC63785F190D56390081C914 /* TSLEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLEntity.h; sourceTree = "<group>"; };
 		FC637860190D56390081C914 /* TSLEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLEntity.m; sourceTree = "<group>"; };
 		FC637862190D5B1D0081C914 /* TSLColisionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLColisionDelegate.h; sourceTree = "<group>"; };
-		FC637864190D9A160081C914 /* TGLSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLSceneManager.h; path = TGL/TGLSceneManager.h; sourceTree = "<group>"; };
-		FC637865190D9A160081C914 /* TGLSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLSceneManager.m; path = TGL/TGLSceneManager.m; sourceTree = "<group>"; };
-		FC637874190DAFD50081C914 /* TGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLLayer.h; path = TGL/TGLLayer.h; sourceTree = "<group>"; };
-		FC637875190DAFD50081C914 /* TGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLLayer.m; path = TGL/TGLLayer.m; sourceTree = "<group>"; };
-		FC637877190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+BezierPathQuartzUtilities.h"; path = "TGL/Utilities/NSBezierPath+BezierPathQuartzUtilities.h"; sourceTree = "<group>"; };
-		FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+BezierPathQuartzUtilities.m"; path = "TGL/Utilities/NSBezierPath+BezierPathQuartzUtilities.m"; sourceTree = "<group>"; };
-		FC637879190DAFF60081C914 /* TGLShapeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLShapeNode.h; path = TGL/Utilities/TGLShapeNode.h; sourceTree = "<group>"; };
-		FC63787A190DAFF60081C914 /* TGLShapeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLShapeNode.m; path = TGL/Utilities/TGLShapeNode.m; sourceTree = "<group>"; };
-		FC684709190E629A00167BC5 /* TGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGL.h; path = TGL/TGL.h; sourceTree = "<group>"; };
-		FC68470A190E6CA800167BC5 /* TGLSceneUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TGLSceneUpdateDelegate.h; path = TGL/TGLSceneUpdateDelegate.h; sourceTree = "<group>"; };
 		FC744F0E191FCECF00144875 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		FC8E48D5191DA15400620122 /* TSLPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLPlan.h; sourceTree = "<group>"; };
 		FC8E48D6191DA15400620122 /* TSLPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPlan.m; sourceTree = "<group>"; };
 		FCA17F2F191D4154000E8903 /* TSLPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLPath.h; sourceTree = "<group>"; };
 		FCA17F30191D4154000E8903 /* TSLPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPath.m; sourceTree = "<group>"; };
 		FCA17F32191D6498000E8903 /* TSLSencorsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLSencorsProtocol.h; sourceTree = "<group>"; };
+		FCB34F84191FE42400445DCD /* TGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGL.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug/TGL.framework"; sourceTree = "<group>"; };
+		FCB34FC31920055200445DCD /* TSL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSL.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB34F85191FE42400445DCD /* TGL.framework in Frameworks */,
 				FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */,
 				FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */,
 			);
@@ -208,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				FC744F0D191FCEB700144875 /* Resources */,
-				FC637863190D99FA0081C914 /* TGL */,
 				FC637836190C20C30081C914 /* TSL */,
 				FC63770B190C1FED0081C914 /* TapirApplication */,
 				FC63772D190C1FED0081C914 /* TapirApplicationTests */,
@@ -229,6 +224,7 @@
 		FC637702190C1FEC0081C914 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCB34F84191FE42400445DCD /* TGL.framework */,
 				FC637703190C1FEC0081C914 /* Cocoa.framework */,
 				FC637705190C1FEC0081C914 /* SpriteKit.framework */,
 				FC637728190C1FED0081C914 /* XCTest.framework */,
@@ -251,11 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				FC637717190C1FED0081C914 /* MainMenu.xib */,
-				FC637719190C1FED0081C914 /* TAMyScene.m */,
-				FC63771B190C1FED0081C914 /* TAMyScene.h */,
 				FC63771C190C1FED0081C914 /* TAAppDelegate.m */,
 				FC63771E190C1FED0081C914 /* TAAppDelegate.h */,
-				FC63771F190C1FED0081C914 /* Spaceship.png */,
 				FC637721190C1FED0081C914 /* Images.xcassets */,
 				FC63770C190C1FED0081C914 /* Supporting Files */,
 			);
@@ -314,6 +307,7 @@
 				FC2E4F57191A7B1B009D7DAD /* TSLWaypoint.h */,
 				FC2E4F58191A7B1B009D7DAD /* TSLWaypoint.m */,
 				FCA17F32191D6498000E8903 /* TSLSencorsProtocol.h */,
+				FCB34FC31920055200445DCD /* TSL.h */,
 			);
 			path = TSL;
 			sourceTree = "<group>";
@@ -335,41 +329,6 @@
 			name = Agents;
 			sourceTree = "<group>";
 		};
-		FC637863190D99FA0081C914 /* TGL */ = {
-			isa = PBXGroup;
-			children = (
-				FC637867190D9E190081C914 /* Utilities */,
-				FC637864190D9A160081C914 /* TGLSceneManager.h */,
-				FC637865190D9A160081C914 /* TGLSceneManager.m */,
-				FC63787D190DB06F0081C914 /* Layers */,
-				FC684709190E629A00167BC5 /* TGL.h */,
-				FC68470A190E6CA800167BC5 /* TGLSceneUpdateDelegate.h */,
-			);
-			name = TGL;
-			sourceTree = "<group>";
-		};
-		FC637867190D9E190081C914 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				FC637877190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.h */,
-				FC637878190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m */,
-				FC637879190DAFF60081C914 /* TGLShapeNode.h */,
-				FC63787A190DAFF60081C914 /* TGLShapeNode.m */,
-				FC2F083B190DC7CA008C247E /* TGLScene.h */,
-				FC2F083C190DC7CA008C247E /* TGLScene.m */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		FC63787D190DB06F0081C914 /* Layers */ = {
-			isa = PBXGroup;
-			children = (
-				FC637874190DAFD50081C914 /* TGLLayer.h */,
-				FC637875190DAFD50081C914 /* TGLLayer.m */,
-			);
-			name = Layers;
-			sourceTree = "<group>";
-		};
 		FC744F0D191FCEB700144875 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +348,7 @@
 				FC6376FD190C1FEC0081C914 /* Frameworks */,
 				FC6376FE190C1FEC0081C914 /* Resources */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
+				FCB34FC1191FF87300445DCD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -455,7 +415,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC637720190C1FED0081C914 /* Spaceship.png in Resources */,
 				FC637722190C1FED0081C914 /* Images.xcassets in Resources */,
 				FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */,
 				FC744F0F191FCECF00144875 /* Configuration.plist in Resources */,
@@ -499,9 +458,7 @@
 				FC2E4F66191BCED0009D7DAD /* TSLCar.m in Sources */,
 				FC8E48D7191DA15400620122 /* TSLPlan.m in Sources */,
 				FC63785E190D52740081C914 /* TSLPhysicsCore.m in Sources */,
-				FC63787B190DAFF60081C914 /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */,
 				FC637859190D2C860081C914 /* TSLBody.m in Sources */,
-				FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */,
 				FC2E4F59191A7B1B009D7DAD /* TSLWaypoint.m in Sources */,
 				FC637840190C20C30081C914 /* TSLDriverAgent.m in Sources */,
 				FC52CA42191ED5B900CFAA5A /* TSLSemaphore.m in Sources */,
@@ -509,15 +466,11 @@
 				FC637843190C20C30081C914 /* TSLUniverse.m in Sources */,
 				FC637712190C1FED0081C914 /* main.m in Sources */,
 				FC637861190D56390081C914 /* TSLEntity.m in Sources */,
-				FC63771A190C1FED0081C914 /* TAMyScene.m in Sources */,
-				FC637876190DAFD50081C914 /* TGLLayer.m in Sources */,
-				FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */,
 				FC2E4F63191BB0E6009D7DAD /* TSLIntersection.m in Sources */,
 				FC52CA49191EF20F00CFAA5A /* NSString+CharacterEnumeration.m in Sources */,
 				FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */,
 				FC2E4F6C191BE5AD009D7DAD /* TSLZone.m in Sources */,
 				FC2E4F56191A7155009D7DAD /* TSLObject.m in Sources */,
-				FC637866190D9A160081C914 /* TGLSceneManager.m in Sources */,
 				FC2E4F53191A6DFA009D7DAD /* TSLRoad.m in Sources */,
 				FCA17F31191D4154000E8903 /* TSLPath.m in Sources */,
 				FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */,
@@ -655,6 +608,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
 				INFOPLIST_FILE = "TapirApplication/TapirApplication-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
@@ -673,6 +627,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapirApplication/TapirApplication-Prefix.pch";
 				INFOPLIST_FILE = "TapirApplication/TapirApplication-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;

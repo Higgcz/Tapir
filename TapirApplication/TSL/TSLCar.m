@@ -16,7 +16,7 @@
 #import "TSLSemaphore.h"
 #import "TSLIntersection.h"
 
-#import "../TGL/TGL.h"
+#import <TGL/TGL.h>
 
 @interface TSLCar ()
 

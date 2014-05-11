@@ -9,7 +9,7 @@
 #import "TSLPhysicsCore.h"
 #import "TSLBody.h"
 
-#import "../TGL/TGL.h"
+
 
 @interface TSLPhysicsCore ()
 

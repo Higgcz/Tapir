@@ -11,5 +11,6 @@
 
 #import "TGLSceneManager.h"
 #import "TGLShapeNode.h"
+#import "TGLLayer.h"
 
 #endif

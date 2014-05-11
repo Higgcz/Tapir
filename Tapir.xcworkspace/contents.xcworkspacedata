@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:TGL/TGL.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:TapirApplication/TapirApplication.xcodeproj">
    </FileRef>
 </Workspace>

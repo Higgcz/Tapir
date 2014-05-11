@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FCB34F26191FE33200445DCD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F25191FE33200445DCD /* Cocoa.framework */; };
+		FCB34F30191FE33200445DCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCB34F2E191FE33200445DCD /* InfoPlist.strings */; };
+		FCB34F3B191FE33200445DCD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F3A191FE33200445DCD /* XCTest.framework */; };
+		FCB34F3C191FE33200445DCD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F25191FE33200445DCD /* Cocoa.framework */; };
+		FCB34F3F191FE33200445DCD /* TGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F22191FE33200445DCD /* TGL.framework */; };
+		FCB34F45191FE33200445DCD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FCB34F43191FE33200445DCD /* InfoPlist.strings */; };
+		FCB34F47191FE33200445DCD /* TGLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F46191FE33200445DCD /* TGLTests.m */; };
+		FCB34F78191FE3BB00445DCD /* TGL.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F6B191FE3BB00445DCD /* TGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F79191FE3BB00445DCD /* TGLLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F6C191FE3BB00445DCD /* TGLLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F7A191FE3BB00445DCD /* TGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F6D191FE3BB00445DCD /* TGLLayer.m */; };
+		FCB34F7B191FE3BB00445DCD /* TGLSceneManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F6E191FE3BB00445DCD /* TGLSceneManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F7C191FE3BB00445DCD /* TGLSceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F6F191FE3BB00445DCD /* TGLSceneManager.m */; };
+		FCB34F7D191FE3BB00445DCD /* TGLSceneUpdateDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F70191FE3BB00445DCD /* TGLSceneUpdateDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F7E191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F72191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.h */; };
+		FCB34F7F191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F73191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.m */; };
+		FCB34F80191FE3BB00445DCD /* TGLScene.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F74191FE3BB00445DCD /* TGLScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F81191FE3BB00445DCD /* TGLScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F75191FE3BB00445DCD /* TGLScene.m */; };
+		FCB34F82191FE3BB00445DCD /* TGLShapeNode.h in Headers */ = {isa = PBXBuildFile; fileRef = FCB34F76191FE3BB00445DCD /* TGLShapeNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCB34F83191FE3BB00445DCD /* TGLShapeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34F77191FE3BB00445DCD /* TGLShapeNode.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCB34F3D191FE33200445DCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCB34F19191FE33200445DCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCB34F21191FE33200445DCD;
+			remoteInfo = TGL;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCB34F22191FE33200445DCD /* TGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB34F25191FE33200445DCD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FCB34F28191FE33200445DCD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FCB34F29191FE33200445DCD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FCB34F2A191FE33200445DCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FCB34F2D191FE33200445DCD /* TGL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TGL-Info.plist"; sourceTree = "<group>"; };
+		FCB34F2F191FE33200445DCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCB34F31191FE33200445DCD /* TGL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TGL-Prefix.pch"; sourceTree = "<group>"; };
+		FCB34F39191FE33200445DCD /* TGLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TGLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB34F3A191FE33200445DCD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FCB34F42191FE33200445DCD /* TGLTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TGLTests-Info.plist"; sourceTree = "<group>"; };
+		FCB34F44191FE33200445DCD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FCB34F46191FE33200445DCD /* TGLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TGLTests.m; sourceTree = "<group>"; };
+		FCB34F6B191FE3BB00445DCD /* TGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGL.h; sourceTree = "<group>"; };
+		FCB34F6C191FE3BB00445DCD /* TGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLLayer.h; sourceTree = "<group>"; };
+		FCB34F6D191FE3BB00445DCD /* TGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLLayer.m; sourceTree = "<group>"; };
+		FCB34F6E191FE3BB00445DCD /* TGLSceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLSceneManager.h; sourceTree = "<group>"; };
+		FCB34F6F191FE3BB00445DCD /* TGLSceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLSceneManager.m; sourceTree = "<group>"; };
+		FCB34F70191FE3BB00445DCD /* TGLSceneUpdateDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLSceneUpdateDelegate.h; sourceTree = "<group>"; };
+		FCB34F72191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+BezierPathQuartzUtilities.h"; sourceTree = "<group>"; };
+		FCB34F73191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+BezierPathQuartzUtilities.m"; sourceTree = "<group>"; };
+		FCB34F74191FE3BB00445DCD /* TGLScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLScene.h; sourceTree = "<group>"; };
+		FCB34F75191FE3BB00445DCD /* TGLScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLScene.m; sourceTree = "<group>"; };
+		FCB34F76191FE3BB00445DCD /* TGLShapeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGLShapeNode.h; sourceTree = "<group>"; };
+		FCB34F77191FE3BB00445DCD /* TGLShapeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGLShapeNode.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCB34F1E191FE33200445DCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F26191FE33200445DCD /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCB34F36191FE33200445DCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F3F191FE33200445DCD /* TGL.framework in Frameworks */,
+				FCB34F3C191FE33200445DCD /* Cocoa.framework in Frameworks */,
+				FCB34F3B191FE33200445DCD /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCB34F18191FE33200445DCD = {
+			isa = PBXGroup;
+			children = (
+				FCB34F2B191FE33200445DCD /* TGL */,
+				FCB34F40191FE33200445DCD /* TGLTests */,
+				FCB34F24191FE33200445DCD /* Frameworks */,
+				FCB34F23191FE33200445DCD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCB34F23191FE33200445DCD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F22191FE33200445DCD /* TGL.framework */,
+				FCB34F39191FE33200445DCD /* TGLTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCB34F24191FE33200445DCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F25191FE33200445DCD /* Cocoa.framework */,
+				FCB34F3A191FE33200445DCD /* XCTest.framework */,
+				FCB34F27191FE33200445DCD /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCB34F27191FE33200445DCD /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F28191FE33200445DCD /* Foundation.framework */,
+				FCB34F29191FE33200445DCD /* CoreData.framework */,
+				FCB34F2A191FE33200445DCD /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FCB34F2B191FE33200445DCD /* TGL */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F6B191FE3BB00445DCD /* TGL.h */,
+				FCB34F6C191FE3BB00445DCD /* TGLLayer.h */,
+				FCB34F6D191FE3BB00445DCD /* TGLLayer.m */,
+				FCB34F6E191FE3BB00445DCD /* TGLSceneManager.h */,
+				FCB34F6F191FE3BB00445DCD /* TGLSceneManager.m */,
+				FCB34F70191FE3BB00445DCD /* TGLSceneUpdateDelegate.h */,
+				FCB34F71191FE3BB00445DCD /* Utilities */,
+				FCB34F2C191FE33200445DCD /* Supporting Files */,
+			);
+			path = TGL;
+			sourceTree = "<group>";
+		};
+		FCB34F2C191FE33200445DCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F2D191FE33200445DCD /* TGL-Info.plist */,
+				FCB34F2E191FE33200445DCD /* InfoPlist.strings */,
+				FCB34F31191FE33200445DCD /* TGL-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCB34F40191FE33200445DCD /* TGLTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F46191FE33200445DCD /* TGLTests.m */,
+				FCB34F41191FE33200445DCD /* Supporting Files */,
+			);
+			path = TGLTests;
+			sourceTree = "<group>";
+		};
+		FCB34F41191FE33200445DCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F42191FE33200445DCD /* TGLTests-Info.plist */,
+				FCB34F43191FE33200445DCD /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCB34F71191FE3BB00445DCD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FCB34F72191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.h */,
+				FCB34F73191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.m */,
+				FCB34F74191FE3BB00445DCD /* TGLScene.h */,
+				FCB34F75191FE3BB00445DCD /* TGLScene.m */,
+				FCB34F76191FE3BB00445DCD /* TGLShapeNode.h */,
+				FCB34F77191FE3BB00445DCD /* TGLShapeNode.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FCB34F1F191FE33200445DCD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F78191FE3BB00445DCD /* TGL.h in Headers */,
+				FCB34F7D191FE3BB00445DCD /* TGLSceneUpdateDelegate.h in Headers */,
+				FCB34F79191FE3BB00445DCD /* TGLLayer.h in Headers */,
+				FCB34F80191FE3BB00445DCD /* TGLScene.h in Headers */,
+				FCB34F7B191FE3BB00445DCD /* TGLSceneManager.h in Headers */,
+				FCB34F82191FE3BB00445DCD /* TGLShapeNode.h in Headers */,
+				FCB34F7E191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FCB34F21191FE33200445DCD /* TGL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCB34F4A191FE33200445DCD /* Build configuration list for PBXNativeTarget "TGL" */;
+			buildPhases = (
+				FCB34F1D191FE33200445DCD /* Sources */,
+				FCB34F1E191FE33200445DCD /* Frameworks */,
+				FCB34F1F191FE33200445DCD /* Headers */,
+				FCB34F20191FE33200445DCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TGL;
+			productName = TGL;
+			productReference = FCB34F22191FE33200445DCD /* TGL.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FCB34F38191FE33200445DCD /* TGLTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCB34F4D191FE33200445DCD /* Build configuration list for PBXNativeTarget "TGLTests" */;
+			buildPhases = (
+				FCB34F35191FE33200445DCD /* Sources */,
+				FCB34F36191FE33200445DCD /* Frameworks */,
+				FCB34F37191FE33200445DCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCB34F3E191FE33200445DCD /* PBXTargetDependency */,
+			);
+			name = TGLTests;
+			productName = TGLTests;
+			productReference = FCB34F39191FE33200445DCD /* TGLTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCB34F19191FE33200445DCD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Vojtech Micka";
+				TargetAttributes = {
+					FCB34F38191FE33200445DCD = {
+						TestTargetID = FCB34F21191FE33200445DCD;
+					};
+				};
+			};
+			buildConfigurationList = FCB34F1C191FE33200445DCD /* Build configuration list for PBXProject "TGL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FCB34F18191FE33200445DCD;
+			productRefGroup = FCB34F23191FE33200445DCD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCB34F21191FE33200445DCD /* TGL */,
+				FCB34F38191FE33200445DCD /* TGLTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCB34F20191FE33200445DCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F30191FE33200445DCD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCB34F37191FE33200445DCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F45191FE33200445DCD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCB34F1D191FE33200445DCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F7F191FE3BB00445DCD /* NSBezierPath+BezierPathQuartzUtilities.m in Sources */,
+				FCB34F7C191FE3BB00445DCD /* TGLSceneManager.m in Sources */,
+				FCB34F83191FE3BB00445DCD /* TGLShapeNode.m in Sources */,
+				FCB34F81191FE3BB00445DCD /* TGLScene.m in Sources */,
+				FCB34F7A191FE3BB00445DCD /* TGLLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCB34F35191FE33200445DCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCB34F47191FE33200445DCD /* TGLTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCB34F3E191FE33200445DCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCB34F21191FE33200445DCD /* TGL */;
+			targetProxy = FCB34F3D191FE33200445DCD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCB34F2E191FE33200445DCD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCB34F2F191FE33200445DCD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FCB34F43191FE33200445DCD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCB34F44191FE33200445DCD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCB34F48191FE33200445DCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FCB34F49191FE33200445DCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FCB34F4B191FE33200445DCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TGL/TGL-Prefix.pch";
+				INFOPLIST_FILE = "TGL/TGL-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		FCB34F4C191FE33200445DCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TGL/TGL-Prefix.pch";
+				INFOPLIST_FILE = "TGL/TGL-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		FCB34F4E191FE33200445DCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TGL.framework/Versions/A/TGL";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TGL/TGL-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TGLTests/TGLTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FCB34F4F191FE33200445DCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TGL.framework/Versions/A/TGL";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TGL/TGL-Prefix.pch";
+				INFOPLIST_FILE = "TGLTests/TGLTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCB34F1C191FE33200445DCD /* Build configuration list for PBXProject "TGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCB34F48191FE33200445DCD /* Debug */,
+				FCB34F49191FE33200445DCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCB34F4A191FE33200445DCD /* Build configuration list for PBXNativeTarget "TGL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCB34F4B191FE33200445DCD /* Debug */,
+				FCB34F4C191FE33200445DCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FCB34F4D191FE33200445DCD /* Build configuration list for PBXNativeTarget "TGLTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCB34F4E191FE33200445DCD /* Debug */,
+				FCB34F4F191FE33200445DCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCB34F19191FE33200445DCD /* Project object */;
+}

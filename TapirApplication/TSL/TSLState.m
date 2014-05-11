@@ -7,6 +7,8 @@
 //
 
 #import "TSLState.h"
+#import "TSLUniverse.h"
+#import "TSLConfiguration.h"
 
 @implementation TSLState
 
@@ -18,8 +20,9 @@
 {
     self = [super init];
     if (self) {
-        self.value = TSLStateRed;
+        self.value               = TSLStateRed;
         self.timeSinceLastChange = 0;
+        self.stateDelay          = kTSLOrangeTime;
     }
     return self;
 }
@@ -97,7 +100,9 @@
 {
     [super updateWithTimeSinceLastUpdate:deltaTime];
     
-    if (self.timeSinceLastChange == kTSLOrangeTime) {
+    if (self.isActive == NO) return;
+    
+    if (self.timeSinceLastChange == self.stateDelay) {
         switch (self.value) {
             case TSLStateRedOrange:
             case TSLStateOrange:
@@ -110,6 +115,15 @@
     }
     
     self.timeSinceLastChange++;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didCreatedAtUniverse:(TSLUniverse *) universe
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [super didCreatedAtUniverse:universe];
+    
+    self.stateDelay = universe.configuration.semaphoreStateDelay;
 }
 
 @end

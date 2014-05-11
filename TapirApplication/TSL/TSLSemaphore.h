@@ -20,6 +20,8 @@
 @property (nonatomic, weak) TSLPath *path;
 
 // Semaphore properties
+@property (nonatomic) NSUInteger tickLength;
+
 // Current state
 @property (nonatomic, strong) TSLState *state;
 

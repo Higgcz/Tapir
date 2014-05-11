@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TGLLayer.h"
-#import "Utilities/TGLScene.h"
+#import "TGLScene.h"
 
 @class SKNode;
 
