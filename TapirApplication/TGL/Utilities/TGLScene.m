@@ -17,6 +17,12 @@
 @property (nonatomic) NSMutableArray *layers;                   // Layers to draw and notify during update
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;    // The previous update: loop time interval
 @property (nonatomic) CGFloat        scale;
+@property (nonatomic) NSUInteger     delay;
+@property (nonatomic) NSUInteger     updateCounter;
+
+@property (nonatomic) SKLabelNode    *topLeftLabel;
+
+- (void) handleKeyEvent:(NSEvent *) theEvent keyDown:(BOOL) downOrUp;
 
 @end
 
@@ -56,6 +62,8 @@
         [_world setName:@"world"];
         
         _scale = 1.0f;
+        _delay = 1;
+        _updateCounter = 0;
         
         _layers      = [NSMutableArray array];
         _zIndexNodes = [NSMutableArray arrayWithCapacity:kZIndexCount];
@@ -68,6 +76,13 @@
         }
         
         [self addChild:_world];
+        
+        _topLeftLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica-Neue"];
+        [self addNode:_topLeftLabel atZIndex:TGLZIndexTop];
+        
+        _topLeftLabel.fontSize = 16.0f;
+        _topLeftLabel.text = [NSString stringWithFormat:@"Delay: %lu", self.delay];
+        _topLeftLabel.position = CGPointMake(_topLeftLabel.frame.size.width / 2.0f + 5, self.size.height - _topLeftLabel.frame.size.height - 5);
     }
     return self;
 }
@@ -92,6 +107,7 @@
 - (void) update:(NSTimeInterval) currentTime
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    self.updateCounter++;
     // Handle time delta.
     // If we drop below 60fps, we still want everything to move the same distance.
     CFTimeInterval deltaTime = currentTime - self.lastUpdateTimeInterval;
@@ -101,7 +117,9 @@
         self.lastUpdateTimeInterval = currentTime;
     }
     
-    if (self.isPaused) {
+    _topLeftLabel.text = [NSString stringWithFormat:@"Delay: %lu", self.delay];
+    
+    if (self.isPaused || (self.updateCounter % self.delay) != 0) {
         return;
     }
     
@@ -147,12 +165,56 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) keyUp:(NSEvent *) theEvent
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self handleKeyEvent:theEvent keyDown:NO];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) keyDown:(NSEvent *) theEvent
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (theEvent.keyCode == 0x31) {
-        self.paused = !self.isPaused;
+    [self handleKeyEvent:theEvent keyDown:YES];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) handleKeyEvent:(NSEvent *) theEvent keyDown:(BOOL) downOrUp
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (downOrUp == NO) return;
+    
+    if ([theEvent modifierFlags] & NSNumericPadKeyMask) { // arrow keys have this mask
+        NSString *theArrow = [theEvent charactersIgnoringModifiers];
+        unichar keyChar = 0;
+        if ([theArrow length] == 1) {
+            keyChar = [theArrow characterAtIndex:0];
+            switch (keyChar) {
+                case NSUpArrowFunctionKey:
+                    self.delay++;
+                    break;
+                case NSDownArrowFunctionKey:
+                    self.delay = MAX(self.delay - 1, 1);
+                    break;
+            }
+        }
     }
+    
+    // Now check the rest of the keyboard
+    NSString *characters = [theEvent characters];
+    for (int s = 0; s < [characters length]; s++) {
+        unichar character = [characters characterAtIndex:s];
+        switch (character) {
+            case ' ':
+                self.paused = !self.isPaused;
+                break;
+        }
+    }
+}
+
+- (BOOL) acceptsFirstResponder
+{
+    return YES;
 }
 
 @end

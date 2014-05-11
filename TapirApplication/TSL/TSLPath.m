@@ -11,6 +11,7 @@
 
 #import "TSLCar.h"
 #import "TSLBody.h"
+#import "TSLSemaphore.h"
 
 #define NIL ([NSNull null])
 
@@ -72,14 +73,21 @@
 - (void) putCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    [self putCar:car onPathPosition:car.pathPositionMomentum];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) putCar:(TSLCar *) car onPathPosition:(NSUInteger) pathPosition
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
     if (car.path == self) return;
     
     car.path           = self;
     car.sensorProvider = self;
     
-    NSAssert(self.cars[car.pathPositionMomentum] == NIL, @"The cars storage should be empty on putting the car.");
+    NSAssert(self.cars[pathPosition] == NIL, @"The cars storage should be empty on putting the car.");
     
-    self.cars[car.pathPositionMomentum] = car;
+    self.cars[pathPosition] = car;
     self.carCount++;
     
     [car didStart];
@@ -99,11 +107,18 @@
     if (pathPostion >= self.length || self.carCount == 0) return YES;
     if (self.cars[pathPostion] != NIL) return NO;
     
-    CGFloat carLength = car.body.size.width / 2.0f;
+    CGFloat carLength = car.body.size.width;
     
-    for (NSUInteger i = 1; i < ceil(carLength) && (i + pathPostion) < self.length; i++) {
-        if (self.cars[pathPostion + i] != NIL) return NO;
+    NSUInteger loc = MAX((NSInteger) pathPostion - carLength / 2.0f, 0);
+    NSUInteger len = MIN(carLength - pathPostion + loc, self.length);
+    
+    for (id obj in [self.cars subarrayWithRange:NSMakeRange(loc, len)]) {
+        if (obj != NIL) return NO;
     }
+    
+//    for (NSUInteger i = 1; i < ceil(carLength) && (i + pathPostion) < self.length; i++) {
+//        if (self.cars[pathPostion + i] != NIL) return NO;
+//    }
     
     return YES;
 }
@@ -171,6 +186,9 @@
     tempObjAfter  = NIL; // !! Most important
     tempObjBefore = NIL; // !! Most important
     
+//    // Update semaphore
+//    [self.semaphore updateWithTimeSinceLastUpdate:0];
+    
     NSUInteger oldPathPosition = car.pathPosition;
     
     [self moveCar:car];
@@ -199,6 +217,7 @@
 - (void) addCrossConnectedPath:(NSSet *) set
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    NSMutableSet *linearPathsSet = [NSMutableSet set];
     [set enumerateObjectsUsingBlock:^(id obj, BOOL *stop){
         TSLPath *path = (TSLPath *) obj;
         
@@ -217,9 +236,14 @@
         
         // Not a cross point
         if (k > path.length || k < 0) return;
-        NSAssert(k != 0, @"Given path is not cross connected but it's linear connected!");
         
         NSVector z = NSVectorAdd(NSVectorResize(v, k), w);
+        
+//        NSAssert(k != 0, @"Given path is not cross connected but it's linear connected!");
+        if (k == 0 && NSVectorSize(z) == 0) {
+            WARNING(@"Trying to add cross connected path, but it's not cross connected!");
+            return;
+        }
 
         // Add path to connected paths
         path.crossConnectedPaths[[self value]] = @((NSUInteger) k);
@@ -334,7 +358,7 @@
     id obj = self.cars[car.pathPosition];
     NSAssert(obj == car, @"Weird! The object on pathPosition is not car.");
 
-    id foundObj = [self getClosestObjectInDirection:dir forIndex:car.pathPosition + 1 withLimit:car.maxRange objectIndex:objectIndex];
+    id foundObj = [self getClosestObjectInDirection:dir forIndex:car.pathPosition + 1 withLimit:car.maxRange objectIndex:objectIndex withRecursionLimit:kTSLPathResursionLimit];
     
     switch (dir) {
         case TSLPathDirectionAfter:
@@ -349,10 +373,11 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forIndex:(NSUInteger) index withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex
+- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forIndex:(NSUInteger) index withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex withRecursionLimit:(NSInteger) recursionLimit
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     if (limit <= 0) return NIL;
+    recursionLimit--;
     
     NSUInteger n = 0;
     __block id nextObj = NIL;
@@ -409,11 +434,11 @@
         
     }
     
-    if (self.crossConnectedPaths.count > 0) {
+    if (self.crossConnectedPaths.count > 0 && recursionLimit > 0) {
     
         NSMutableSet *pathToScan = [NSMutableSet set];
         
-        [[self.crossConnectedPaths allKeys] enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [[self.crossConnectedPaths allKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             TSLPath *path = ((NSValue *) obj).nonretainedObjectValue;
             NSUInteger pathIndex = ((NSNumber *) self.crossConnectedPaths[[path value]]).unsignedIntegerValue; // index
@@ -421,16 +446,12 @@
             switch (dir) {
                 case TSLPathDirectionAfter:
                     if (((nextObj != NIL && pathIndex < n + index) || nextObj == NIL) && pathIndex > index && pathIndex < index + limit) {
-                        @synchronized(pathToScan) {
-                            [pathToScan addObject:path];
-                        }
+                        [pathToScan addObject:path];
                     }
                     break;
                 case TSLpathDirectionBefore:
                     if (((nextObj != NIL && pathIndex > index - n) || nextObj == NIL) && pathIndex < index && pathIndex > index - limit) {
-                        @synchronized(pathToScan) {
-                            [pathToScan addObject:path];
-                        }
+                        [pathToScan addObject:path];
                     }
                     break;
             }
@@ -450,8 +471,8 @@
                 id nextObj, prevObj;
                 NSUInteger nextIndex = 0, prevIndex = 0;
                 
-                nextObj = [path getClosestObjectInDirection:TSLPathDirectionAfter forPath:self withLimit:kTSLCarMaxLength/2.0f objectIndex:&nextIndex];
-                prevObj = [path getClosestObjectInDirection:TSLpathDirectionBefore forPath:self withLimit:kTSLCarMaxLength/2.0f objectIndex:&prevIndex];
+                nextObj = [path getClosestObjectInDirection:TSLPathDirectionAfter forPath:self withLimit:kTSLCarMaxLength/2.0f objectIndex:&nextIndex withRecursionLimit:recursionLimit];
+                prevObj = [path getClosestObjectInDirection:TSLpathDirectionBefore forPath:self withLimit:kTSLCarMaxLength/2.0f objectIndex:&prevIndex withRecursionLimit:recursionLimit];
                 
                 NSUInteger nextDist = labs(nextIndex - pathIndex);
                 NSUInteger prevDist = labs(prevIndex - pathIndex);
@@ -474,19 +495,19 @@
         }
     }
     
-    if (nextObj == NIL && self.length - index < limit) {
+    if (nextObj == NIL && self.length - index < limit && recursionLimit > 0) {
         
         __block NSUInteger minIndex = NSUIntegerMax;
         __block id minObj = NIL;
         
-        [self.linearCconnectedPaths enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id obj, BOOL *stop) {
+        [self.linearCconnectedPaths enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
             
             TSLPath *path = obj;
             
-            id nextObj = NIL;
+            id nextObj;
             NSUInteger nextIndex = 0;
             
-            nextObj = [path getClosestObjectInDirection:TSLPathDirectionAfter forIndex:0 withLimit:MAX(limit - n, 0) objectIndex:&nextIndex];
+            nextObj = [path getClosestObjectInDirection:TSLPathDirectionAfter forIndex:0 withLimit:MAX(limit - n, 0) objectIndex:&nextIndex withRecursionLimit:recursionLimit];
             
             if (nextIndex < minIndex) {
                 minObj = nextObj;
@@ -514,10 +535,10 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forPath:(TSLPath *) path withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex
+- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forPath:(TSLPath *) path withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex withRecursionLimit:(NSInteger)recursionLimit
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    return [self getClosestObjectInDirection:dir forIndex:[self indexForConnectedPath:path] withLimit:limit objectIndex:objectIndex];
+    return [self getClosestObjectInDirection:dir forIndex:[self indexForConnectedPath:path] withLimit:limit objectIndex:objectIndex withRecursionLimit:recursionLimit];
 }
 
 #pragma mark - Getters
@@ -547,6 +568,16 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return self.crossConnectedPaths[[path value]] != nil;
+}
+
+#pragma mark - Setters
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setSemaphore:(TSLSemaphore *) semaphore
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    _semaphore = semaphore;
+    semaphore.path = self;
 }
 
 #pragma mark - Private setters

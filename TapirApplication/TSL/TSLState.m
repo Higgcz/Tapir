@@ -1,0 +1,115 @@
+//
+//  TSLState.m
+//  TapirApplication
+//
+//  Created by Vojtech Micka on 11.05.14.
+//  Copyright (c) 2014 Vojtech Micka. All rights reserved.
+//
+
+#import "TSLState.h"
+
+@implementation TSLState
+
+#pragma mark - Inititalization
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (instancetype) init
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    self = [super init];
+    if (self) {
+        self.value = TSLStateRed;
+        self.timeSinceLastChange = 0;
+    }
+    return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (instancetype) state
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return [[TSLState alloc] init];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) change:(BOOL) value
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (value) {
+        [self changeToGreen];
+    } else {
+        [self changeToRed];
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) changeToRed
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    switch (self.value) {
+        case TSLStateRed:
+        case TSLStateOrange:
+            break;
+        default:
+            self.value = TSLStateOrange;
+            self.timeSinceLastChange = 0;
+            break;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) changeToGreen
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    switch (self.value) {
+        case TSLStateGreen:
+        case TSLStateRedOrange:
+            break;
+        default:
+            self.value = TSLStateRedOrange;
+            self.timeSinceLastChange = 0;
+            break;
+    }
+}
+
+#pragma mark - Getters
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSColor *) color
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    switch (self.value) {
+        case TSLStateRedOrange:
+        case TSLStateOrange:
+            return [NSColor orangeColor];
+        case TSLStateRed:
+            return [NSColor redColor];
+        case TSLStateGreen:
+            return [NSColor greenColor];
+    }
+}
+
+#pragma mark - TSLObject
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [super updateWithTimeSinceLastUpdate:deltaTime];
+    
+    if (self.timeSinceLastChange == kTSLOrangeTime) {
+        switch (self.value) {
+            case TSLStateRedOrange:
+            case TSLStateOrange:
+                self.value++;
+                self.value %= kTSLStateCount;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    self.timeSinceLastChange++;
+}
+
+@end

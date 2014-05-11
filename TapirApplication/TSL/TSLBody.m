@@ -106,7 +106,7 @@ static const CGFloat DEFAULTS_ZROTATION = 0.0f;
                 self.shape = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(0, 0, self.size.width, self.size.height)];
                 break;
             default:
-                NSAssert(NO, @"No such shape exist!");
+                ERROR(@"No such shape exist!");
                 break;
         }
     }

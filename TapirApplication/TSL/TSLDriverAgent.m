@@ -12,6 +12,8 @@
 #import "TSLPlan.h"
 #import "TSLPath.h"
 #import "TSLIntersection.h"
+#import "TSLSemaphore.h"
+#import "TSLState.h"
 
 #import "Vectors.h"
 
@@ -19,7 +21,9 @@
 
 @interface TSLDriverAgent ()
 
+- (eTSLCarLineChange) shouldChangeLine;
 - (BOOL) shouldSpeedUp;
+- (BOOL) shouldStayOnSemaphoreState:(TSLState *) state;
 
 @end
 
@@ -106,40 +110,23 @@
     
     if ( self.isActive == NO ) return;
     
-    CGFloat distance = [self.car getDistanceToCarAfter];
+    CGFloat distance            = [self.car getDistanceToCarAfter];
+    CGFloat distanceToSemaphore = [self.car getDistanceToSemaphore];
+    CGFloat desiredSpeed        = MAX(distance - self.preferedDistance, 0);
     
-//    if (distance != CGFLOAT_MAX) {
-//        distance -= self.preferedDistance;
+//    eTSLCarLineChange lineChange = [self shouldChangeLine];
+//    
+//    if (lineChange != TSLCarLineChangeNO && [self.car isPossibleToChangeLine:lineChange]) {
+//        [self.car changeLine:lineChange];
 //    }
-    CGFloat desiredSpeed = distance - self.preferedDistance;
-
-    if (desiredSpeed <= 0) {
-        desiredSpeed = 0;
+    
+    if (distanceToSemaphore < distance) {
+        TSLSemaphore *semaphore = [self.car getClosestSemaphore];
+        
+        if ([self shouldStayOnSemaphoreState:semaphore.state]) {
+            desiredSpeed = MAX(distanceToSemaphore - self.preferedDistance, 0);
+        }
     }
-    
-//    if (desiredSpeed <= 0) {
-//        id other = [self.car getClosestObjectAfter];
-//        
-//        if ([other isKindOfClass:[TSLCar class]]) {
-//            TSLCar *otherCar = other;
-//            
-//            CGFloat otherSpeed = otherCar.speed;
-//            BOOL sameDir = NSVectorsEqual(self.car.direction, otherCar.direction);
-//            
-//            if (sameDir) {
-//                if (otherSpeed == 0) {
-//                    desiredSpeed = 0;
-//                }
-//            } else {
-//                if (otherSpeed == 0 && distance > 0) {
-//                    desiredSpeed = distance - self.preferedDistanceMin;
-//                } else {
-//                    desiredSpeed = 0;
-//                }
-//            }
-//            
-//        }
-//    }
     
     if (desiredSpeed > self.car.maxSpeed) {
         if ([self shouldSpeedUp]) {
@@ -149,6 +136,32 @@
         }
     } else {
         self.car.speed = desiredSpeed;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (eTSLCarLineChange) shouldChangeLine
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    NSUInteger desiredLine = [self.car getLineForDesiredRoad:self.plan.nextRoad];
+    if (self.car.roadLine < desiredLine) {
+        return TSLCarLineChangeRIGHT;
+    } else if (self.car.roadLine > desiredLine) {
+        return TSLCarLineChangeLEFT;
+    } else {
+        return TSLCarLineChangeNO;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) shouldStayOnSemaphoreState:(TSLState *) state
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    switch (state.value) {
+        case TSLStateRed:    return YES;
+        case TSLStateOrange: return YES;
+        default:
+            return NO;
     }
 }
 

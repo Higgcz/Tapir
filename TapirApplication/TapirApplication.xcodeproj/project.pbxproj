@@ -17,6 +17,9 @@
 		FC2E4F6F191BF4F2009D7DAD /* TSLRoadObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E4F6E191BF4F2009D7DAD /* TSLRoadObject.m */; };
 		FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2F083C190DC7CA008C247E /* TGLScene.m */; };
 		FC52CA3F191E8DD700CFAA5A /* TSLPathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA3E191E8DD700CFAA5A /* TSLPathTest.m */; };
+		FC52CA42191ED5B900CFAA5A /* TSLSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA41191ED5B900CFAA5A /* TSLSemaphore.m */; };
+		FC52CA45191EDAC700CFAA5A /* TSLState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA44191EDAC700CFAA5A /* TSLState.m */; };
+		FC52CA49191EF20F00CFAA5A /* NSString+CharacterEnumeration.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52CA48191EF20F00CFAA5A /* NSString+CharacterEnumeration.m */; };
 		FC637704190C1FEC0081C914 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637703190C1FEC0081C914 /* Cocoa.framework */; };
 		FC637706190C1FEC0081C914 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC637705190C1FEC0081C914 /* SpriteKit.framework */; };
 		FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC63770E190C1FED0081C914 /* InfoPlist.strings */; };
@@ -76,6 +79,12 @@
 		FC2F083B190DC7CA008C247E /* TGLScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGLScene.h; path = TGL/Utilities/TGLScene.h; sourceTree = "<group>"; };
 		FC2F083C190DC7CA008C247E /* TGLScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TGLScene.m; path = TGL/Utilities/TGLScene.m; sourceTree = "<group>"; };
 		FC52CA3E191E8DD700CFAA5A /* TSLPathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLPathTest.m; sourceTree = "<group>"; };
+		FC52CA40191ED5B900CFAA5A /* TSLSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLSemaphore.h; sourceTree = "<group>"; };
+		FC52CA41191ED5B900CFAA5A /* TSLSemaphore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLSemaphore.m; sourceTree = "<group>"; };
+		FC52CA43191EDAC700CFAA5A /* TSLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLState.h; sourceTree = "<group>"; };
+		FC52CA44191EDAC700CFAA5A /* TSLState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLState.m; sourceTree = "<group>"; };
+		FC52CA47191EF20F00CFAA5A /* NSString+CharacterEnumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CharacterEnumeration.h"; sourceTree = "<group>"; };
+		FC52CA48191EF20F00CFAA5A /* NSString+CharacterEnumeration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CharacterEnumeration.m"; sourceTree = "<group>"; };
 		FC637700190C1FEC0081C914 /* TapirApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapirApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC637703190C1FEC0081C914 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC637705190C1FEC0081C914 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -166,6 +175,7 @@
 				FC2E4F6E191BF4F2009D7DAD /* TSLRoadObject.m */,
 				FCA17F2F191D4154000E8903 /* TSLPath.h */,
 				FCA17F30191D4154000E8903 /* TSLPath.m */,
+				FC52CA46191EDACB00CFAA5A /* Semaphores */,
 			);
 			name = Roads;
 			sourceTree = "<group>";
@@ -175,8 +185,21 @@
 			children = (
 				FC2E4F5D191AA582009D7DAD /* Vectors.h */,
 				FC2E4F60191ADA00009D7DAD /* VectorType.h */,
+				FC52CA47191EF20F00CFAA5A /* NSString+CharacterEnumeration.h */,
+				FC52CA48191EF20F00CFAA5A /* NSString+CharacterEnumeration.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		FC52CA46191EDACB00CFAA5A /* Semaphores */ = {
+			isa = PBXGroup;
+			children = (
+				FC52CA40191ED5B900CFAA5A /* TSLSemaphore.h */,
+				FC52CA41191ED5B900CFAA5A /* TSLSemaphore.m */,
+				FC52CA43191EDAC700CFAA5A /* TSLState.h */,
+				FC52CA44191EDAC700CFAA5A /* TSLState.m */,
+			);
+			name = Semaphores;
 			sourceTree = "<group>";
 		};
 		FC6376F7190C1FEC0081C914 = {
@@ -469,6 +492,7 @@
 				FC63787C190DAFF60081C914 /* TGLShapeNode.m in Sources */,
 				FC2E4F59191A7B1B009D7DAD /* TSLWaypoint.m in Sources */,
 				FC637840190C20C30081C914 /* TSLDriverAgent.m in Sources */,
+				FC52CA42191ED5B900CFAA5A /* TSLSemaphore.m in Sources */,
 				FC2E4F6F191BF4F2009D7DAD /* TSLRoadObject.m in Sources */,
 				FC637843190C20C30081C914 /* TSLUniverse.m in Sources */,
 				FC637712190C1FED0081C914 /* main.m in Sources */,
@@ -477,6 +501,7 @@
 				FC637876190DAFD50081C914 /* TGLLayer.m in Sources */,
 				FC2F083D190DC7CA008C247E /* TGLScene.m in Sources */,
 				FC2E4F63191BB0E6009D7DAD /* TSLIntersection.m in Sources */,
+				FC52CA49191EF20F00CFAA5A /* NSString+CharacterEnumeration.m in Sources */,
 				FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */,
 				FC2E4F6C191BE5AD009D7DAD /* TSLZone.m in Sources */,
 				FC2E4F56191A7155009D7DAD /* TSLObject.m in Sources */,
@@ -484,6 +509,7 @@
 				FC2E4F53191A6DFA009D7DAD /* TSLRoad.m in Sources */,
 				FCA17F31191D4154000E8903 /* TSLPath.m in Sources */,
 				FC637841190C20C30081C914 /* TSLConfiguration.m in Sources */,
+				FC52CA45191EDAC700CFAA5A /* TSLState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

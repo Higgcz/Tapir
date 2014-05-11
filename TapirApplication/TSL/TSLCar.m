@@ -13,6 +13,8 @@
 #import "Vectors.h"
 #import "TSLDriverAgent.h"
 #import "TSLWaypoint.h"
+#import "TSLSemaphore.h"
+#import "TSLIntersection.h"
 
 #import "../TGL/TGL.h"
 
@@ -55,7 +57,7 @@
             self.body         = [TSLBody bodyWithSize:NSMakeSize(kTSLCarMaxLength, 4)];
             break;
         default:
-            NSAssert(NO, @"No such car type!");
+            ERROR(@"No such car type!");
             break;
     }
     
@@ -251,6 +253,23 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) getDistanceToSemaphore
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (self.path.semaphore == nil) {
+        return CGFLOAT_MAX;
+    }
+    return self.path.semaphore.pathPosition - self.pathPosition - self.body.size.width / 2.0f;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (TSLSemaphore *) getClosestSemaphore
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return self.path.semaphore;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSColor *) color
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -294,6 +313,100 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [self.driver car:self arrivedToRoadObject:roadObject];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSUInteger) getLineForDesiredRoad:(TSLRoad *) desiredRoad
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if ([self.road isKindOfClass:[TSLRoad class]]) {
+        TSLRoad *currentRoad = (TSLRoad *) self.road;
+        TSLRoadObject *nextRoadObject = [currentRoad nextInDirection:self.roadDirection];
+        
+        if ([nextRoadObject isKindOfClass:[TSLIntersection class]]) {
+            
+            TSLIntersection *nextIntersection = (TSLIntersection *) nextRoadObject;
+            
+            return [nextIntersection getLineNumberPathFromRoad:currentRoad toRoad:desiredRoad];
+        }
+    }
+    
+    return NSNotFound;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) isPossibleToChangeLine:(eTSLCarLineChange) lineChange
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (self.speed == 0) return NO;
+    
+    if ([self.road isKindOfClass:[TSLRoad class]]) {
+        TSLRoad *currentRoad = (TSLRoad *) self.road;
+        NSUInteger desiredLine = self.roadLine;
+
+        switch (lineChange) {
+            case TSLCarLineChangeNO:
+                break;
+            case TSLCarLineChangeLEFT:
+                if (desiredLine == 0) {
+                    return NO;
+                }
+                desiredLine--;
+                break;
+            case TSLCarLineChangeRIGHT:
+                if (desiredLine == [currentRoad lineCountInDirection:self.roadDirection]) {
+                    return NO;
+                }
+                desiredLine++;
+                break;
+        }
+        
+        TSLPath *desiredPath = [currentRoad pathForLine:desiredLine andDirection:self.roadDirection];
+        
+        CGFloat calcSpeed = self.speed - kTSLRoadWidth;
+        if (calcSpeed < 0) return NO;
+        
+        if ([desiredPath canPutCar:self onPathPosition:(self.pathPosition + calcSpeed)]) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) changeLine:(eTSLCarLineChange) lineChange
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    NSAssert([self.road isKindOfClass:[TSLRoad class]], @"You should call 'isPossibleToChangeLine:' first.");
+    TSLRoad *currentRoad = (TSLRoad *) self.road;
+    NSUInteger desiredLine = self.roadLine;
+    
+    switch (lineChange) {
+        case TSLCarLineChangeNO:
+            break;
+        case TSLCarLineChangeLEFT:
+            NSAssert(desiredLine != 0, @"You should call 'isPossibleToChangeLine:' first.");
+            desiredLine--;
+            break;
+        case TSLCarLineChangeRIGHT:
+            NSAssert(desiredLine == [currentRoad lineCountInDirection:self.roadDirection], @"You should call 'isPossibleToChangeLine:' first.");
+            desiredLine++;
+            break;
+    }
+    
+    TSLPath *desiredPath = [currentRoad pathForLine:desiredLine andDirection:self.roadDirection];
+    
+    NSUInteger desiredPathPosition = self.pathPosition + self.speed - kTSLRoadWidth;
+    
+    if ([desiredPath canPutCar:self onPathPosition:desiredPathPosition]) {
+        // Remove from current path
+        [self.path removeCarLeftover:self];
+        // Add to desired path
+        [desiredPath putCar:self onPathPosition:desiredPathPosition];
+    }
 }
 
 #pragma mark - Sensors
