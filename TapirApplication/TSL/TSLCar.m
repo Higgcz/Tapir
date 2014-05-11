@@ -338,14 +338,13 @@
 - (BOOL) isPossibleToChangeLine:(eTSLCarLineChange) lineChange
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (self.speed == 0) return NO;
-    
-    if ([self.road isKindOfClass:[TSLRoad class]]) {
+    if (self.speed != 0 && [self.road isKindOfClass:[TSLRoad class]]) {
         TSLRoad *currentRoad = (TSLRoad *) self.road;
         NSUInteger desiredLine = self.roadLine;
 
         switch (lineChange) {
             case TSLCarLineChangeNO:
+                return NO;
                 break;
             case TSLCarLineChangeLEFT:
                 if (desiredLine == 0) {
@@ -373,14 +372,14 @@
         }
     }
     
-    return YES;
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) changeLine:(eTSLCarLineChange) lineChange
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    NSAssert([self.road isKindOfClass:[TSLRoad class]], @"You should call 'isPossibleToChangeLine:' first.");
+    NSAssert([self.road isKindOfClass:[TSLRoad class]], @"You should call 'isPossibleToChangeLine:' first. (self.road is not TSLRoad)");
     TSLRoad *currentRoad = (TSLRoad *) self.road;
     NSUInteger desiredLine = self.roadLine;
     
@@ -388,11 +387,11 @@
         case TSLCarLineChangeNO:
             break;
         case TSLCarLineChangeLEFT:
-            NSAssert(desiredLine != 0, @"You should call 'isPossibleToChangeLine:' first.");
+            NSAssert(desiredLine > 0, @"You should call 'isPossibleToChangeLine:' first. (desiredLine < 0)");
             desiredLine--;
             break;
         case TSLCarLineChangeRIGHT:
-            NSAssert(desiredLine == [currentRoad lineCountInDirection:self.roadDirection], @"You should call 'isPossibleToChangeLine:' first.");
+            NSAssert(desiredLine < [currentRoad lineCountInDirection:self.roadDirection], @"You should call 'isPossibleToChangeLine:' first. (desiredLine > lineCount)");
             desiredLine++;
             break;
     }

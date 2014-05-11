@@ -114,11 +114,11 @@
     CGFloat distanceToSemaphore = [self.car getDistanceToSemaphore];
     CGFloat desiredSpeed        = MAX(distance - self.preferedDistance, 0);
     
-//    eTSLCarLineChange lineChange = [self shouldChangeLine];
-//    
-//    if (lineChange != TSLCarLineChangeNO && [self.car isPossibleToChangeLine:lineChange]) {
-//        [self.car changeLine:lineChange];
-//    }
+    eTSLCarLineChange lineChange = [self shouldChangeLine];
+    
+    if (lineChange != TSLCarLineChangeNO && [self.car isPossibleToChangeLine:lineChange]) {
+        [self.car changeLine:lineChange];
+    }
     
     if (distanceToSemaphore < distance) {
         TSLSemaphore *semaphore = [self.car getClosestSemaphore];
@@ -144,6 +144,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     NSUInteger desiredLine = [self.car getLineForDesiredRoad:self.plan.nextRoad];
+    if (desiredLine == NSNotFound) {
+        return TSLCarLineChangeNO;
+    }
+    
     if (self.car.roadLine < desiredLine) {
         return TSLCarLineChangeRIGHT;
     } else if (self.car.roadLine > desiredLine) {
