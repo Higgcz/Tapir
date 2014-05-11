@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapirApplication/TSL/TSLCar.m"
-            timestampString = "421503888.473336"
+            timestampString = "421511903.399996"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "-didCreatedAtUniverse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapirApplication/TSL/TSLRoad.m"
-            timestampString = "421421899.075319"
+            timestampString = "421510462.571183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-pathForLine:andDirection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -70,16 +70,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             condition = "obj != car"
             continueAfterRunningActions = "No"
             filePath = "TapirApplication/TSL/TSLPath.m"
-            timestampString = "421503152.570101"
+            timestampString = "421512616.460281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-getClosestObjectInDirection:toCar:objectIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -91,29 +91,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TapirApplication/TSL/TSLPath.m"
-            timestampString = "421503152.570101"
+            timestampString = "421512616.460281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "-getClosestObjectInDirection:forIndex:withLimit:objectIndex:withRecursionLimit:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            condition = "self.cars[car.pathPosition] != [NSNull null]"
-            continueAfterRunningActions = "No"
-            filePath = "TapirApplication/TSL/TSLPath.m"
-            timestampString = "421503152.570101"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-updateCarPosition:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,45 +121,83 @@
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
+            condition = "lineNumber &gt;= 2"
             continueAfterRunningActions = "No"
-            filePath = "TapirApplication/TSL/TSLIntersection.m"
-            timestampString = "421441012.269865"
+            filePath = "TapirApplication/TSL/TSLRoad.m"
+            timestampString = "421510462.571183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "-pathsForPath:fromRoadObject:"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
+            landmarkName = "-pathForLine:andDirection:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TSLIntersection pathsForPath:fromRoadObject:]"
-                  moduleName = "TapirApplication"
-                  urlString = "file:///Users/vojtechmicka/Dropbox/Projects/Git/Tapir/TapirApplication/TSL/TSLIntersection.m"
-                  timestampString = "421503980.631955"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "300">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__47-[TSLIntersection pathsForPath:fromRoadObject:]_block_invoke"
-                  moduleName = "TapirApplication"
-                  urlString = "file:///Users/vojtechmicka/Dropbox/Projects/Git/Tapir/TapirApplication/TSL/TSLIntersection.m"
-                  timestampString = "421503980.632118"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "self.cars[oldPathPosition] != car"
+            continueAfterRunningActions = "No"
+            filePath = "TapirApplication/TSL/TSLPath.m"
+            timestampString = "421512616.460281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "-updateCarPosition:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TapirApplication/TSL/TSLCar.m"
+            timestampString = "421510462.571183"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "-changeLine:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "idxA &gt;= self.count || idxB &gt;= self.count"
+            continueAfterRunningActions = "No"
+            filePath = "TapirApplication/TSL/TSLIntersection.m"
+            timestampString = "421510793.316213"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-getRoadIndexesForRoadA:andRoadB:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "car.pathPosition &gt;= self.length"
+            continueAfterRunningActions = "No"
+            filePath = "TapirApplication/TSL/TSLPath.m"
+            timestampString = "421512616.460281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "-getClosestObjectInDirection:toCar:objectIndex:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -157,10 +157,7 @@
 - (void) setPath:(TSLPath *) path
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (path != nil) {
-        self.pathPosition   = self.pathPositionMomentum;
-        self.sensorProvider = self.path.road;
-    } else {
+    if (path == nil) {
         _tempRoadDirection = _path.roadDirection;
         _tempRoadLine      = _path.roadLine;
         _tempRoadObject    = _path.road;
@@ -309,16 +306,25 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) arrivedToRoadObject:(TSLRoadObject *) roadObject
+- (TSLPath *) pathForRoadObject:(TSLRoadObject *) roadObject
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [self.driver car:self arrivedToRoadObject:roadObject];
+    return [self.driver pathForCar:self andRoadObject:roadObject];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) arriveToNewRoadObject:(TSLRoadObject *) roadObject
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.driver arriveToNewRoadObject:roadObject];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSUInteger) getLineForDesiredRoad:(TSLRoad *) desiredRoad
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    if (desiredRoad == nil) return NSNotFound;
+    
     if ([self.road isKindOfClass:[TSLRoad class]]) {
         TSLRoad *currentRoad = (TSLRoad *) self.road;
         TSLRoadObject *nextRoadObject = [currentRoad nextInDirection:self.roadDirection];
@@ -362,7 +368,7 @@
         
         TSLPath *desiredPath = [currentRoad pathForLine:desiredLine andDirection:self.roadDirection];
         
-        CGFloat calcSpeed = self.speed - kTSLRoadWidth;
+        CGFloat calcSpeed = self.speed - kTSLRoadWidth/2;
         if (calcSpeed < 0) return NO;
         
         if ([desiredPath canPutCar:self onPathPosition:(self.pathPosition + calcSpeed)]) {
@@ -401,6 +407,9 @@
     NSUInteger desiredPathPosition = self.pathPosition + self.speed - kTSLRoadWidth;
     
     if ([desiredPath canPutCar:self onPathPosition:desiredPathPosition]) {
+        
+        NSLog(@"Car %@ is changing line from %@ to %@ with desiredPP: %lu", self, self.path.name, desiredPath.name, desiredPathPosition);
+        
         // Remove from current path
         [self.path removeCarLeftover:self];
         // Add to desired path
@@ -471,6 +480,13 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeFromUniverse
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [super removeFromUniverse];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didCreatedAtUniverse:(TSLUniverse *) universe
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -486,7 +502,7 @@
                                       );
         node.zRotation = self.body.zRotation;
         
-//        *isDead = self.isDead;
+        *isDead = self.isDead;
     }];
     
     [self.driver didCreatedAtUniverse:universe];

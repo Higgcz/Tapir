@@ -78,7 +78,8 @@ typedef NS_ENUM(NSUInteger, eTSLCarLineChange) {
 - (BOOL) shouldExit;
 - (void) didExit;
 - (void) didStart;
-- (void) arrivedToRoadObject:(TSLRoadObject *) roadObject;
+- (TSLPath *) pathForRoadObject:(TSLRoadObject *) roadObject;
+- (void) arriveToNewRoadObject:(TSLRoadObject *) roadObject;
 
 - (NSUInteger) getLineForDesiredRoad:(TSLRoad *) desiredRoad;
 - (BOOL) isPossibleToChangeLine:(eTSLCarLineChange) lineChange;

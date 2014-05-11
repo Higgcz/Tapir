@@ -14,6 +14,8 @@
 #import "TSLIntersection.h"
 #import "TSLSemaphore.h"
 #import "TSLState.h"
+#import "TSLUniverse.h"
+#import "TSLConfiguration.h"
 
 #import "Vectors.h"
 
@@ -57,7 +59,7 @@
 #pragma mark - Car controling on Path
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) car:(TSLCar *) car arrivedToRoadObject:(TSLRoadObject *) roadObject
+- (TSLPath *) pathForCar:(TSLCar *) car andRoadObject:(TSLRoadObject *) roadObject;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     TSLPath *newPath;
@@ -70,12 +72,17 @@
             TSLRoad *road = (TSLRoad *) roadObject;
             newPath = [road pathForLine:car.roadLine andDirection:car.roadDirection];
         }
-        
-        [self.plan moveNext];
     }
     
-    if (newPath != nil) {
-        [newPath putCar:car];
+    return newPath;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) arriveToNewRoadObject:(TSLRoadObject *) roadObject
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if ([roadObject isKindOfClass:[TSLIntersection class]] == NO) {
+        [self.plan moveNext];
     }
 }
 
@@ -90,7 +97,7 @@
 - (BOOL) shouldExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (self.isActive == NO || self.plan.nextRoad == nil) {
+    if (self.isActive == NO) {
         return NO;
     }
     return YES;
@@ -109,15 +116,26 @@
     [super updateWithTimeSinceLastUpdate:deltaTime];
     
     if ( self.isActive == NO ) return;
-    
-    CGFloat distance            = [self.car getDistanceToCarAfter];
-    CGFloat distanceToSemaphore = [self.car getDistanceToSemaphore];
-    CGFloat desiredSpeed        = MAX(distance - self.preferedDistance, 0);
+
+    CGFloat desiredSpeed = CGFLOAT_MAX;
     
     eTSLCarLineChange lineChange = [self shouldChangeLine];
     
     if (lineChange != TSLCarLineChangeNO && [self.car isPossibleToChangeLine:lineChange]) {
         [self.car changeLine:lineChange];
+    } else {
+        if (self.car.speed - kTSLRoadWidth/2 < 0) {
+            desiredSpeed = kTSLRoadWidth/2 - self.car.speed;
+        }
+    }
+    
+    CGFloat distance            = [self.car getDistanceToCarAfter];
+    CGFloat distanceToSemaphore = [self.car getDistanceToSemaphore];
+    
+    if (distance < self.preferedDistance) {
+        desiredSpeed = 0;
+    } else if (desiredSpeed == CGFLOAT_MAX) {
+        desiredSpeed = distance - self.preferedDistance;
     }
     
     if (distanceToSemaphore < distance) {
@@ -173,7 +191,7 @@
 - (BOOL) shouldSpeedUp
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    return (rand() % 100) < 70;
+    return (rand() % 100) < self.universe.configuration.probDriverSpeedUp;
 }
 
 

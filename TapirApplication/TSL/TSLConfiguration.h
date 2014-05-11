@@ -8,15 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, TSLConfigurationProperty) {
-    TSLConfigurationPropertyTotalNumberOfSeconds = 0,
-    TSLConfigurationPropertyTotalNumberOfAgents,
-    TSLConfigurationPropertyMapFileName,
-    TSLConfigurationPropertyWorldSize,
-    
-    kTSLConfigurationPropertyCount
-};
-
 @interface TSLConfiguration : NSObject
 
 // Init & create
@@ -29,6 +20,29 @@ typedef NS_ENUM(NSUInteger, TSLConfigurationProperty) {
 + (TSLConfiguration *) configurationWithConfigurationDict:(NSDictionary *) configuration;
 
 // All property in dictionary
+
+@property (nonatomic) NSUInteger roadLength;
+@property (nonatomic) NSUInteger numberOfLines;
+@property (nonatomic) CGFloat angleStraightTolerance;
+
+@property (nonatomic) NSUInteger probDriverSpeedUp;
+
+//@property (nonatomic) NSUInteger carMaxRange;
+//
+//@property (nonatomic) CGFloat carTypePassengerMaxSpeed;
+//@property (nonatomic) CGFloat carTypePassengerAcceleration;
+//
+//@property (nonatomic) CGFloat carTypeTruckMaxSpeed;
+//@property (nonatomic) CGFloat carTypeTruckAcceleration;
+//
+//@property (nonatomic) CGFloat carTypeBusMaxSpeed;
+//@property (nonatomic) CGFloat carTypeBusAcceleration;
+
+@property (nonatomic) NSUInteger randomSeed;
+
+@property (nonatomic) NSUInteger probCarTypePassenger;
+@property (nonatomic) NSUInteger probCarTypeTruck;
+@property (nonatomic) NSUInteger probCarTypeBus;
 
 @property (nonatomic        ) NSUInteger totalNumberOfSeconds;
 @property (nonatomic        ) NSUInteger totalNumberOfAgents;

@@ -185,9 +185,18 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSVector) directionInDirection:(eTSLRoadDirection) dir
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return dir ? self.direction : NSVectorOpossite(self.direction);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) shouldExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    if ([car shouldExit] == NO) return NO;
+    
     TSLRoadObject *ro = [self nextInDirection:car.roadDirection];
     
     if ([ro isKindOfClass:[TSLRoad class]]) {
@@ -205,9 +214,20 @@
 - (void) didExitCar:(TSLCar *) car
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    [car didExit];
+    
     TSLRoadObject *ro = [self nextInDirection:car.roadDirection];
     
     [ro takeCar:car fromRoadObject:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (TSLPath *) pathForExitingCar:(TSLCar *) car
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TSLRoadObject *ro = [self nextInDirection:car.roadDirection];
+    
+    return [car pathForRoadObject:ro];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,15 +236,7 @@
 {
     NSAssert(roadObject != nil, @"Road object cannot be nil.");
     
-    [car arrivedToRoadObject:self];
-    
-//    if ([roadObject isKindOfClass:[TSLZone class]] || [roadObject isKindOfClass:[TSLRoad class]]) {
-//    if (car.path == nil) {
-//        NSMutableArray *paths = [self pathsInDirection:car.roadDirection];
-//        TSLPath *path = paths[car.roadLine];
-//        [path putCar:car];
-//    }
-//    }
+    [car arriveToNewRoadObject:self];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,7 +305,7 @@
 - (TSLPath *) pathForLine:(NSUInteger) lineNumber andDirection:(eTSLRoadDirection) dir
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    NSAssert(lineNumber >= 0 && lineNumber < [self lineCountInDirection:dir], @"Wrong number of line in the given direction.");
+    NSAssert(lineNumber < [self lineCountInDirection:dir], @"Wrong number of line in the given direction.");
     
     NSMutableArray *paths = [self pathsInDirection:dir];
     

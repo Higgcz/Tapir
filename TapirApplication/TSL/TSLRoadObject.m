@@ -32,6 +32,7 @@ __builtin_unreachable(); \
 - (void) takeCar:(TSLCar *) car fromRoadObject:(TSLRoadObject *) roadObject D12_ABSTRACT_METHOD
 - (BOOL) shouldExitCar:(TSLCar *) car D12_ABSTRACT_METHOD
 - (void) didExitCar:(TSLCar *) car D12_ABSTRACT_METHOD
+- (TSLPath *) pathForExitingCar:(TSLCar *) car D12_ABSTRACT_METHOD
 - (TSLPath *) pathNextForPath:(TSLPath *) path D12_ABSTRACT_METHOD
 - (TSLPath *) pathForPath:(TSLPath *) path fromRoadObject:(TSLRoadObject *) roadObject D12_ABSTRACT_METHOD
 
