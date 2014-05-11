@@ -19,6 +19,9 @@
 #import "../TSL/TSLIntersection.h"
 #import "../TSL/TSLPlan.h"
 #import "../TSL/TSLPath.h"
+#import "../TSL/TSLSemaphore.h"
+
+#import "../TSL/Vectors.h"
 
 @interface TAAppDelegate ()
 
@@ -41,68 +44,111 @@
     
     /* Pick a size for the scene */
     //    SKScene *scene = [TAMyScene sceneWithSize:CGSizeMake(1024, 768)];
-    scene.updateDelegate = self.theUniverse;
     
     NSInteger widthInt = scene.size.width;
     NSInteger heightInt = scene.size.height;
     
-    NSPoint center = NSMakePoint((NSInteger) widthInt/2, (NSInteger) heightInt/2);
+    NSPoint centerA = NSMakePoint((NSInteger) widthInt/3, (NSInteger) heightInt/3);
+    NSPoint centerB = NSMakePoint(centerA.x * 2, centerA.y);
+    NSPoint centerC = NSMakePoint(centerA.x * 2, centerA.y * 2);
+    NSPoint centerD = NSMakePoint(centerA.x, centerA.y * 2);
     
-    TSLZone *zoneA = [TSLZone zoneAtPosition:NSMakePoint(center.x - 200, center.y)];
-    TSLZone *zoneB = [TSLZone zoneAtPosition:NSMakePoint(center.x, center.y - 200)];
-    TSLZone *zoneC = [TSLZone zoneAtPosition:NSMakePoint(center.x + 200, center.y)];
-    TSLZone *zoneD = [TSLZone zoneAtPosition:NSMakePoint(center.x, center.y + 200)];
+    NSUInteger roadLength = 200;
     
-    TSLIntersection *intersection = [TSLIntersection intersectionAtPoint:center andRadius:20];
+    TSLIntersection *intersectionA = [TSLIntersection intersectionAtPoint:centerA andRadius:20];
+    TSLIntersection *intersectionB = [TSLIntersection intersectionAtPoint:centerB andRadius:20];
+    TSLIntersection *intersectionC = [TSLIntersection intersectionAtPoint:centerC andRadius:20];
+    TSLIntersection *intersectionD = [TSLIntersection intersectionAtPoint:centerD andRadius:20];
     
-    TSLRoad *roadA = [TSLRoad roadBetweenRoadObjectA:zoneA andRoadObjectB:intersection];
-    TSLRoad *roadB = [TSLRoad roadBetweenRoadObjectA:intersection andRoadObjectB:zoneB];
-    TSLRoad *roadC = [TSLRoad roadBetweenRoadObjectA:intersection andRoadObjectB:zoneC];
-    TSLRoad *roadD = [TSLRoad roadBetweenRoadObjectA:intersection andRoadObjectB:zoneD];
+    NSMutableArray *zones      = [NSMutableArray array];
+    NSMutableArray *roads      = [NSMutableArray array];
+    NSMutableArray *semaphores = [NSMutableArray array];
     
-//    [intersection createPathFromRoad:roadA fromToLine:0 toRoad:roadB];
-    [intersection createPathFromRoad:roadA fromToLine:0 toRoad:roadC];
-    [intersection createPathFromRoad:roadD fromToLine:0 toRoad:roadB];
+    NSArray *intersections = @[intersectionA, intersectionB, intersectionC, intersectionD];
     
-//    roadA.lineCountPositiveDir = 2;
-//    roadA.lineCountNegativeDir = 2;
+    // Add road between intersections
+    for (int i = 0; i < intersections.count; i++) {
+        TSLRoadObject *roA = intersections[i];
+        TSLRoadObject *roB = intersections[(i + 1 < intersections.count) ? i + 1 : 0];
+        
+        TSLRoad *newRoad = [TSLRoad roadBetweenRoadObjectA:roA andRoadObjectB:roB];
+        
+        [roads addObject:newRoad];
+    }
     
-//    roadA.prev = zoneA;
-//    roadA.next = zoneB;
+    // Add zones and road between zones and intersections
+    for (TSLIntersection *inter in intersections) {
+        NSUInteger count = inter.count;
+        
+        for (int i = 0; i < count; i++) {
+            TSLRoad *road = inter.roads[i];
+            
+            eTSLRoadDirection dir = [road getDirectionFromRoadObject:inter];
+            NSVector direction = !dir ? road.direction : NSVectorOpossite(road.direction);
+            
+            NSPoint zPoint = NSVectorAdd(inter.position, NSVectorResize(direction, roadLength));
+            
+            TSLZone *newZone = [TSLZone zoneAtPosition:zPoint];
+            TSLRoad *newRoad = [TSLRoad roadBetweenRoadObjectA:inter andRoadObjectB:newZone];
+            
+            [zones addObject:newZone];
+            [roads addObject:newRoad];
+        }
+    }
     
-    for (int i = 0; i < 20; i++) {
+    // Add semaphores
+    for (TSLIntersection *inter in intersections) {
+        NSUInteger count = inter.count;
+        
+        for (int i = 0; i < count; i++) {
+            TSLRoad *road = inter.roads[i];
+            
+            TSLSemaphore *newSemaphore = [road createSemaphoreAtLine:0 inDirection:[road getDirectionToRoadObject:inter]];
+            
+            if (i&1) {
+                [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(0, 8)];
+            } else {
+                [newSemaphore setCycleOnValue:YES inRange:NSMakeRange(11, 8)];
+            }
+            
+            [semaphores addObject:newSemaphore];
+            
+            for (int j = 0; j < count; j++) {
+                if (i == j) continue;
+                
+                TSLRoad *jRoad = inter.roads[j];
+                [inter createPathFromRoad:road fromToLine:0 toRoad:jRoad];
+            }
+        }
+    }
+
+
+    
+    for (int i = 0; i < 10; i++) {
         TSLDriverAgent *driverAgent = [[TSLDriverAgent alloc] init];
         TSLCar *car = [TSLCar carWithType:[self getRandomCarType]];
         // Set driver's car
         driverAgent.car = car;
         
-        if (rand()&1) {
-            [driverAgent.plan addRoad:roadD];
-            [driverAgent.plan addRoad:roadB];
-            [zoneD.cars addObject:car];
-        } else {
-            [driverAgent.plan addRoad:roadA];
-            [driverAgent.plan addRoad:roadC];
-            [zoneA.cars addObject:car];
-        }
+        TSLZone *zoneA = zones[rand()%zones.count];
+        TSLZone *zoneB;
+        
+        do {
+            zoneB = zones[rand()%zones.count];
+        } while (zoneB == zoneA);
+
+        
+        [driverAgent.plan searchPathFromZone:zoneA toZone:zoneB];
+        [zoneA.cars addObject:car];
     }
     
-//    TSLCar *testCar = [TSLCar carWithType:TSLCarTypePassenger];
-//    TSLPath *pathAC = [intersection pathFromRoad:roadA toRoad:roadC];
-//    testCar.pathPositionMomentum = 10;
-//    [pathAC putCar:testCar];
-//    [self.theUniverse addObject:testCar];
-    
     // Add object to the Universe
-    [self.theUniverse addObject:zoneA];
-    [self.theUniverse addObject:zoneB];
-    [self.theUniverse addObject:zoneC];
-    [self.theUniverse addObject:zoneD];
-    [self.theUniverse addObject:intersection];
-    [self.theUniverse addObject:roadA];
-    [self.theUniverse addObject:roadB];
-    [self.theUniverse addObject:roadC];
-    [self.theUniverse addObject:roadD];
+    [self.theUniverse addObjects:zones];
+    [self.theUniverse addObjects:intersections];
+    [self.theUniverse addObjects:roads];
+    [self.theUniverse addObjects:semaphores];
+    
+    scene.updateDelegate = self.theUniverse;
     
     /* Set the scale mode to scale to fit the window */
     scene.scaleMode = SKSceneScaleModeAspectFit;

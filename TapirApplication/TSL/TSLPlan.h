@@ -17,9 +17,9 @@
 
 - (TSLRoad *) moveNext;
 - (void) addRoad:(TSLRoad *) road;
-- (void) searchPathFromRoadObject:(TSLZone *) start toRoadObject:(TSLZone *) target;
+- (void) searchPathFromZone:(TSLZone *) start toZone:(TSLZone *) target;
 
 + (instancetype) plan;
-+ (instancetype) planFromRoadObject:(TSLZone *) start toRoadObject:(TSLZone *) target;
++ (instancetype) planFromZone:(TSLZone *) start toZone:(TSLZone *) target;
 
 @end

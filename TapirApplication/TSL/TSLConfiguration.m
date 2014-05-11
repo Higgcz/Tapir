@@ -93,7 +93,7 @@
             self.worldSize = CGSizeMake(((NSNumber *) worldSize[0]).floatValue, ((NSNumber *) worldSize[1]).floatValue);
             break;
         default:
-            NSAssert(NO, @"No such key exist.");
+            ERROR(@"No such key exist.");
             break;
     }
 }

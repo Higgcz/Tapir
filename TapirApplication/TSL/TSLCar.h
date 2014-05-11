@@ -20,7 +20,13 @@ typedef NS_ENUM(NSUInteger, eTSLCarType) {
     TSLCarTypeBus           // Length: MAX, MaxSpeed: 22, Acc: 0.5
 };
 
-@class TSLBody, TSLRoad, TSLDriverAgent, TSLWaypoint, TSLPath, TSLRoadObject;
+typedef NS_ENUM(NSUInteger, eTSLCarLineChange) {
+    TSLCarLineChangeNO = 0,
+    TSLCarLineChangeLEFT,
+    TSLCarLineChangeRIGHT
+};
+
+@class TSLBody, TSLRoad, TSLDriverAgent, TSLWaypoint, TSLPath, TSLRoadObject, TSLSemaphore;
 
 @interface TSLCar : TSLObject
 
@@ -65,12 +71,18 @@ typedef NS_ENUM(NSUInteger, eTSLCarType) {
 - (void) moveToPosition:(NSPoint) position;
 
 - (CGFloat) getDistanceToCar:(TSLCar *) otherCar;
+- (CGFloat) getDistanceToSemaphore;
+- (TSLSemaphore *) getClosestSemaphore;
 
 // @return YES if the car was able to exit
 - (BOOL) shouldExit;
 - (void) didExit;
 - (void) didStart;
 - (void) arrivedToRoadObject:(TSLRoadObject *) roadObject;
+
+- (NSUInteger) getLineForDesiredRoad:(TSLRoad *) desiredRoad;
+- (BOOL) isPossibleToChangeLine:(eTSLCarLineChange) lineChange;
+- (void) changeLine:(eTSLCarLineChange) lineChange;
 
 // Sensors
 - (CGFloat) getDistanceToCarAfter;

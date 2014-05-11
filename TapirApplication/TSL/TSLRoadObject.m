@@ -35,11 +35,5 @@ __builtin_unreachable(); \
 - (TSLPath *) pathNextForPath:(TSLPath *) path D12_ABSTRACT_METHOD
 - (TSLPath *) pathForPath:(TSLPath *) path fromRoadObject:(TSLRoadObject *) roadObject D12_ABSTRACT_METHOD
 
-#pragma mark - TSLSensorsProvider
-
-- (CGFloat) getDistanceToCarBefore:(TSLCar *) car D12_ABSTRACT_METHOD
-- (CGFloat) getSpeedToCarBefore:(TSLCar *) car D12_ABSTRACT_METHOD
-- (id) getClosestObjectBeforeCar:(TSLCar *) car D12_ABSTRACT_METHOD
-
 
 @end

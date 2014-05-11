@@ -16,7 +16,9 @@ typedef NS_ENUM(NSUInteger, eTSLPathDirection) {
     TSLpathDirectionBefore = 0
 };
 
-@class TSLCar, TSLRoadObject;
+#define kTSLPathResursionLimit (3)
+
+@class TSLCar, TSLRoadObject, TSLSemaphore;
 
 @interface TSLPath : TSLObject <TSLSencorsProtocol>
 
@@ -37,14 +39,19 @@ typedef NS_ENUM(NSUInteger, eTSLPathDirection) {
 @property (nonatomic, readonly) NSUInteger roadLine;
 @property (nonatomic, readonly) eTSLRoadDirection roadDirection; // eTSLRoadDirection
 
+// TSLIntersection
 @property (nonatomic) NSUInteger indexFrom;
 @property (nonatomic) NSUInteger indexTo;
+
+// TSLSemaphore
+@property (nonatomic, strong) TSLSemaphore *semaphore;
 
 + (instancetype) pathFromPoint:(NSPoint) pointA toPoint:(NSPoint) pointB;
 
 - (BOOL) canPutCar:(TSLCar *) car onPathPosition:(NSUInteger) pathPostion;
 - (BOOL) canPutCar:(TSLCar *) car;
 - (void) putCar:(TSLCar *) car;
+- (void) putCar:(TSLCar *) car onPathPosition:(NSUInteger) pathPosition;
 
 // @return YES if the car was able to exit
 - (BOOL) shouldExitCar:(TSLCar *) car;
@@ -70,7 +77,7 @@ typedef NS_ENUM(NSUInteger, eTSLPathDirection) {
 - (void) addLinarConnectedPath:(NSSet *) set;
 
 - (id) getClosestObjectInDirection:(eTSLPathDirection) dir toCar:(TSLCar *) car objectIndex:(NSUInteger *) objectIndex;
-- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forIndex:(NSUInteger) index withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex;
-- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forPath:(TSLPath *) path withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex;
+- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forPath:(TSLPath *) path withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex withRecursionLimit:(NSInteger) recursionLimit;
+- (id) getClosestObjectInDirection:(eTSLPathDirection) dir forIndex:(NSUInteger) index withLimit:(NSInteger) limit objectIndex:(NSUInteger *) objectIndex withRecursionLimit:(NSInteger) recursionLimit;
 
 @end

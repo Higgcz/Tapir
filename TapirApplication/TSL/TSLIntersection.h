@@ -28,7 +28,6 @@
 - (TSLPath *) pathFromRoad:(TSLRoad *) roadFrom toRoad:(TSLRoad *) roadTo;
 - (TSLPath *) pathFromRoadIdx:(NSUInteger) roadIdxFrom toRoadIdx:(NSUInteger) roadIdxTo;
 
-
 // ----------------
 // Path creation
 // ----------------

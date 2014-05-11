@@ -6,4 +6,13 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+
+#ifdef DEBUG
+#define WARNING(x) NSLog(@"WARN: %@", x)
+#define ERROR(x) NSAssert(NO, @"ERR: %@", x)
+#else
+#define WARNING(x)
+#define ERROR(x)
+#endif
+
 #endif

@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, eTSLRoadDirection) {
     TSLRoadDirectionNone     = -1 // None
 };
 
-@class TSLWaypoint, TSLCar, TSLPath;
+@class TSLWaypoint, TSLCar, TSLPath, TSLSemaphore;
 
 @interface TSLRoad : TSLRoadObject
 
@@ -62,5 +62,10 @@ typedef NS_ENUM(NSUInteger, eTSLRoadDirection) {
 - (eTSLRoadDirection) getDirectionToRoadObject:(TSLRoadObject *) roadObject;
 
 - (TSLPath *) pathForLine:(NSUInteger) lineNumber andDirection:(eTSLRoadDirection) dir;
+
+// ----------------
+// Semaphore
+// ----------------
+- (TSLSemaphore *) createSemaphoreAtLine:(NSUInteger) lineNumber inDirection:(eTSLRoadDirection) dir;
 
 @end

@@ -18,7 +18,7 @@
 @interface TSLUniverse : NSObject <TSLUniverseDelegate, TGLSceneUpdateDelegate>
 
 // Main properties
-@property (nonatomic, strong) NSMutableArray   *storage;
+@property (atomic, strong) NSMutableArray   *storage;
 @property (nonatomic, strong) TSLConfiguration *configuration;
 @property (nonatomic, strong) TSLPhysicsCore   *physicsCore;
 
@@ -39,6 +39,7 @@
 
 // Objects handling
 - (void) addObject:(TSLObject *) anObject;
+- (void) addObjects:(NSArray *) objectsArray;
 - (void) removeObject:(TSLObject *) anObject;
 - (void) removeAllObjects;
 

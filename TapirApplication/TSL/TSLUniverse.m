@@ -90,7 +90,17 @@
 {
     [self.storage addObject:anObject];
     
+//    [anObject didCreatedAtUniverse:self];
     [anObject performSelector:@selector(didCreatedAtUniverse:) withObject:self afterDelay:0.0f];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addObjects:(NSArray *) objectsArray
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    for (TSLObject *obj in objectsArray) {
+        [self addObject:obj];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,15 +170,14 @@
 - (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (![obj isKindOfClass:[TSLObject class]]) {
-            NSLog(@"WARNING: There is wrong type of object in storage!");
-            return;
-        }
-        
-        TSLObject *object = (TSLObject *) obj;
-        [object updateWithTimeSinceLastUpdate:deltaTime];
-    }];
+    NSArray *tmp = [NSArray arrayWithArray:self.storage];
+    
+    NSAssert(tmp != nil, @"Universe storage NIL!!?");
+    
+    for (TSLObject *obj in tmp) {
+        if (!obj.isReady) continue;
+        [obj updateWithTimeSinceLastUpdate:deltaTime];
+    }
     
     [self.delegate didEvaluateUpdate];
 }

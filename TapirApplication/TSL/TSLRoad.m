@@ -14,6 +14,7 @@
 #import "TSLZone.h"
 #import "TSLIntersection.h"
 #import "TSLPath.h"
+#import "TSLSemaphore.h"
 
 #import "../TGL/TGL.h"
 
@@ -520,7 +521,18 @@
     return point;
 }
 
-#pragma mark - Graph
+#pragma mark - TSLSemaphore
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (TSLSemaphore *) createSemaphoreAtLine:(NSUInteger) lineNumber inDirection:(eTSLRoadDirection) dir
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TSLPath *pathForSemaphore  = [self pathForLine:lineNumber andDirection:dir];
+    TSLSemaphore *semaphore    = [TSLSemaphore semaphoreAtPathPosition:pathForSemaphore.length];
+
+    pathForSemaphore.semaphore = semaphore;
+    return semaphore;
+}
 
 #pragma mark - TSLObject
 

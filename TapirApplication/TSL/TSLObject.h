@@ -14,6 +14,7 @@
 
 // Other properties
 @property (nonatomic, getter = isActive) BOOL active;
+@property (nonatomic, getter = isReady)  BOOL ready;
 @property (nonatomic, getter = isDead)   BOOL dead;
 @property (nonatomic, readonly, weak) TSLUniverse *universe;
 
