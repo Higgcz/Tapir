@@ -214,8 +214,8 @@ static NSString *kConfigurationFileName = @"Configuration";
     
     NSInteger sumC = cP + cT + cB;
     
-    NSInteger pP = cP/sumC;
-    NSInteger pT = cT/sumC;
+    NSInteger pP = 100 * ((CGFloat) cP / sumC);
+    NSInteger pT = 100 * ((CGFloat) cT / sumC);
     
     if (n < pP) {
         return TSLCarTypePassenger;
