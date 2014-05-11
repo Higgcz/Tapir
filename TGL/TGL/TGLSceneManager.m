@@ -9,7 +9,21 @@
 #import "TGLSceneManager.h"
 #import "Utilities/TGLScene.h"
 
-@implementation TGLSceneManager
+@implementation TGLSceneManager {
+    NSMutableArray *_layersToRegistraion;
+    NSMutableArray *_layersZIndex;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _scene = nil;
+        _layersToRegistraion = [NSMutableArray array];
+        _layersZIndex        = [NSMutableArray array];
+    }
+    return self;
+}
 
 #pragma mark - Private setters 
 
@@ -18,6 +32,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     _scene = scene;
+    
+    if ([_layersToRegistraion count] != 0) {
+        
+        // Add registrated layers
+        [_layersToRegistraion enumerateObjectsUsingBlock:^(TGLLayer *layer, NSUInteger idx, BOOL *stop) {
+            [self registerLayer:layer atZIndex:((NSNumber *) _layersZIndex[idx]).unsignedIntegerValue];
+        }];
+        
+        // Cleanup
+        [_layersToRegistraion removeAllObjects];
+        [_layersZIndex removeAllObjects];
+    }
 }
 
 #pragma mark - Singleton
@@ -58,7 +84,12 @@
 - (void) registerLayer:(TGLLayer *) layer atZIndex:(TGLZIndex) zIndex
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [self.scene registerLayer:layer atZIndex:zIndex];
+    if (self.scene == nil) {
+        [_layersToRegistraion addObject:layer];
+        [_layersZIndex addObject:@(zIndex)];
+    } else {
+        [self.scene registerLayer:layer atZIndex:zIndex];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>TotalNumberOfAgents</key>
-	<integer>1</integer>
+	<integer>100</integer>
+	<key>TotalNumberOfSteps</key>
+	<integer>1000</integer>
 	<key>WorldSize</key>
 	<array>
 		<integer>1024</integer>
@@ -20,9 +22,9 @@
 	<key>ProbCarTypePassenger</key>
 	<integer>70</integer>
 	<key>ProbCarTypeTruck</key>
-	<integer>20</integer>
+	<integer>30</integer>
 	<key>ProbCarTypeBus</key>
-	<integer>10</integer>
+	<integer>0</integer>
 	<key>SemaphoreTickLength</key>
 	<integer>5</integer>
 	<key>SemaphoreStateDelay</key>

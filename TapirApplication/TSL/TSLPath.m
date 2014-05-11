@@ -108,13 +108,24 @@
     if (pathPostion >= self.length || self.cars[pathPostion] != NIL) return NO;
     if (self.carCount == 0) return YES;
     
-    CGFloat carLength = car.body.size.width;
+    CGFloat carLength = car.body.size.width / 2.0f;
     
-    NSUInteger loc = MAX((NSInteger) pathPostion - carLength / 2.0f, 0);
-    NSUInteger len = MIN(carLength - pathPostion + loc, self.length);
+//    NSUInteger loc = MAX((NSInteger) pathPostion - carLength / 2.0f, 0);
+//    NSUInteger len = MIN(carLength - pathPostion + loc, self.length);
+
+    NSUInteger loc = pathPostion;
+    NSUInteger len = carLength;
+    
+    if (self.length < pathPostion + carLength) {
+        len = self.length - pathPostion;
+    }
     
     for (id obj in [self.cars subarrayWithRange:NSMakeRange(loc, len)]) {
-        if (obj != NIL) return NO;
+        if (obj != NIL) {
+            if (obj != car) {
+                return NO;
+            }
+        }
     }
     
 //    for (NSUInteger i = 1; i < ceil(carLength) && (i + pathPostion) < self.length; i++) {
@@ -227,8 +238,10 @@
         if ([self exitingCar:car]) {
             return;
         } else {
-            car.pathPosition = self.length-1;
+            car.pathPosition = self.length - 1;
         }
+    } else if (pathPositionExceed) {
+        car.pathPosition = oldPathPosition;
     }
     
     NSAssert(self.cars[car.pathPosition] == NIL, @"New position is occupied!");

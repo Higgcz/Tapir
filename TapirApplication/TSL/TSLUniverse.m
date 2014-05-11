@@ -11,16 +11,20 @@
 #import "TSLPhysicsCore.h"
 #import "TSLConfiguration.h"
 #import "TSLEntity.h"
+#import "TSLCar.h"
 
 @interface TSLUniverse ()
 
 - (void) setup;
+- (BOOL) shouldDie;
 
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;    // The previous update: loop time interval
 
 @end
 
-@implementation TSLUniverse
+@implementation TSLUniverse {
+    BOOL _start;
+}
 
 #pragma mark - Initialization & Creation
 
@@ -72,8 +76,14 @@
 - (void) setup
 //////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    self.living = YES;
+    _start = NO;
+    
     // Setting self as delegate
     self.delegate = self;
+    
+    self.numberOfCars  = 0;
+    self.numberOfSteps = 0;
     
     // Set configuration
     self.storage = [NSMutableArray array];
@@ -90,8 +100,12 @@
 {
     [self.storage addObject:anObject];
     
-//    [anObject didCreatedAtUniverse:self];
-    [anObject performSelector:@selector(didCreatedAtUniverse:) withObject:self afterDelay:0.0f];
+    if ([anObject isKindOfClass:[TSLCar class]]) {
+        self.numberOfCars++;
+    }
+    
+    [anObject didCreatedAtUniverse:self];
+//    [anObject performSelector:@selector(didCreatedAtUniverse:) withObject:self afterDelay:0.0f];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +123,12 @@
 {
     [self.storage removeObject:anObject];
     
-    [anObject performSelector:@selector(didDeleted) withObject:nil afterDelay:0.0f];
+    if ([anObject isKindOfClass:[TSLCar class]]) {
+        self.numberOfCars--;
+    }
+    
+    [anObject didDeleted];
+//    [anObject performSelector:@selector(didDeleted) withObject:nil afterDelay:0.0f];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +137,7 @@
 {
     [self.storage enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (![obj isKindOfClass:[TSLObject class]]) {
-            NSLog(@"WARNING: There is wrong type of object in storage!");
+//            NSLog(@"WARNING: There is wrong type of object in storage!");
             return;
         }
         
@@ -136,11 +155,15 @@
 - (void) start
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    if (!self.isLiving) return;
-    
-    [self update:[NSDate timeIntervalSinceReferenceDate]];
-    
-    [self performSelector:@selector(start) withObject:nil afterDelay:0.0f];
+    while (self.isLiving) {
+        @autoreleasepool {
+            [self update:[NSDate timeIntervalSinceReferenceDate]];
+        }
+    }
+//    [self performSelector:@selector(start) withObject:nil afterDelay:0.0f];
+//    [[NSOperationQueue currentQueue] addOperationWithBlock:^{
+//        [self start];
+//    }];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +193,8 @@
 - (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    if ([self isLiving] == NO) return;
+    
     NSArray *tmp = [NSArray arrayWithArray:self.storage];
     
     NSAssert(tmp != nil, @"Universe storage NIL!!?");
@@ -179,18 +204,51 @@
         [obj updateWithTimeSinceLastUpdate:deltaTime];
     }
     
-    [self.delegate didEvaluateUpdate];
+    if (self.numberOfSteps >= self.configuration.totalNumberOfSteps || [self.delegate shouldDie:self] || [self shouldDie]) {
+        self.living = NO;
+        [self.delegate didUniverseDie:self];
+    }
+    
+    self.numberOfSteps++;
+    [self.delegate didEvaluateUpdate:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) shouldDie
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if (self.numberOfCars != 0 && _start) return NO;
+    
+    if (_start == NO && self.numberOfCars != 0) {
+        _start = YES;
+    } else if (_start && self.numberOfCars == 0) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark - TSLUniverseDelegate - delegation methods
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) didEvaluateUpdate
+- (BOOL) shouldDie:(TSLUniverse *) universe
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    return NO;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didUniverseDie:(TSLUniverse *) universe
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) didSimulatePhysics
+- (void) didEvaluateUpdate:(TSLUniverse *) universe
+////////////////////////////////////////////////////////////////////////////////////////////////
+{}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didSimulatePhysics:(TSLUniverse *) universe
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {}
 

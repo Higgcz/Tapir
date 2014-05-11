@@ -82,7 +82,7 @@
     self.probDriverSpeedUp = 70;
     
     self.totalNumberOfAgents = 1;
-    self.totalNumberOfSeconds = 1000;
+    self.totalNumberOfSteps  = 1000;
     self.mapFile = nil;
     self.worldSize = CGSizeMake(1024, 768);
 }
@@ -93,11 +93,11 @@
 {
     NSNumber *tmp = nil;
     NSArray  *worldSize = nil;
-    if ([key isEqualToString:@"TotalNumberOfSeconds"]) {
+    if ([key isEqualToString:@"TotalNumberOfSteps"]) {
         
         tmp = value;
         if (tmp != nil) {
-            self.totalNumberOfSeconds = tmp.unsignedIntegerValue;
+            self.totalNumberOfSteps = tmp.unsignedIntegerValue;
         }
         
     } else if ([key isEqualToString:@"TotalNumberOfAgents"]) {

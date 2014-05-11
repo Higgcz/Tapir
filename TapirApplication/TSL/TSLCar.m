@@ -408,7 +408,7 @@
     
     if ([desiredPath canPutCar:self onPathPosition:desiredPathPosition]) {
         
-        NSLog(@"Car %@ is changing line from %@ to %@ with desiredPP: %lu", self, self.path.name, desiredPath.name, desiredPathPosition);
+//        NSLog(@"Car %@ is changing line from %@ to %@ with desiredPP: %lu", self, self.path.name, desiredPath.name, desiredPathPosition);
         
         // Remove from current path
         [self.path removeCarLeftover:self];
@@ -484,6 +484,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [super removeFromUniverse];
+    
+    if (self.path != nil) {
+        [self.path removeCarLeftover:self];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

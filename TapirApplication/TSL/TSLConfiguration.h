@@ -47,7 +47,7 @@
 @property (nonatomic) NSUInteger probCarTypeTruck;
 @property (nonatomic) NSUInteger probCarTypeBus;
 
-@property (nonatomic        ) NSUInteger totalNumberOfSeconds;
+@property (nonatomic        ) NSUInteger totalNumberOfSteps;
 @property (nonatomic        ) NSUInteger totalNumberOfAgents;
 @property (nonatomic, strong) NSString   *mapFile;
 @property (nonatomic        ) CGSize     worldSize;

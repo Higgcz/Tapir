@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class TSLUniverse;
+
 @protocol TSLUniverseDelegate <NSObject>
 
-- (void) didEvaluateUpdate;
-- (void) didSimulatePhysics;
+- (BOOL) shouldDie:(TSLUniverse *) universe;
+- (void) didUniverseDie:(TSLUniverse *) universe;
+- (void) didEvaluateUpdate:(TSLUniverse *) universe;
+- (void) didSimulatePhysics:(TSLUniverse *) universe;
 
 @end

@@ -30,6 +30,9 @@
 + (TSLUniverse *) universeWithConfiguration:(TSLConfiguration *) configuration;
 + (TSLUniverse *) universeWithConfigurationDict:(NSDictionary *) configuration;
 
+@property (nonatomic) NSUInteger numberOfCars;
+@property (nonatomic) NSUInteger numberOfSteps;
+
 // Universe running properties
 @property (nonatomic, getter = isLiving) BOOL living;
 

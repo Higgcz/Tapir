@@ -42,6 +42,8 @@
 		FCA17F31191D4154000E8903 /* TSLPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA17F30191D4154000E8903 /* TSLPath.m */; };
 		FCB34F85191FE42400445DCD /* TGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB34F84191FE42400445DCD /* TGL.framework */; };
 		FCB34FC2191FF88900445DCD /* TGL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FCB34F84191FE42400445DCD /* TGL.framework */; };
+		FCB34FC619200B4B00445DCD /* TSimulation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34FC519200B4B00445DCD /* TSimulation.m */; };
+		FCE4D26C19203673001F937E /* TGeneticAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4D26B19203673001F937E /* TGeneticAlgorithm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,10 @@
 		FCA17F32191D6498000E8903 /* TSLSencorsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSLSencorsProtocol.h; sourceTree = "<group>"; };
 		FCB34F84191FE42400445DCD /* TGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TGL.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Tapir-cpcdawermaebwtdpwnswalkhclxc/Build/Products/Debug/TGL.framework"; sourceTree = "<group>"; };
 		FCB34FC31920055200445DCD /* TSL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSL.h; sourceTree = "<group>"; };
+		FCB34FC419200B4B00445DCD /* TSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSimulation.h; sourceTree = "<group>"; };
+		FCB34FC519200B4B00445DCD /* TSimulation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSimulation.m; sourceTree = "<group>"; };
+		FCE4D26A19203673001F937E /* TGeneticAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGeneticAlgorithm.h; sourceTree = "<group>"; };
+		FCE4D26B19203673001F937E /* TGeneticAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGeneticAlgorithm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,10 +253,14 @@
 			isa = PBXGroup;
 			children = (
 				FC637717190C1FED0081C914 /* MainMenu.xib */,
+				FCB34FC419200B4B00445DCD /* TSimulation.h */,
+				FCB34FC519200B4B00445DCD /* TSimulation.m */,
 				FC63771C190C1FED0081C914 /* TAAppDelegate.m */,
 				FC63771E190C1FED0081C914 /* TAAppDelegate.h */,
 				FC637721190C1FED0081C914 /* Images.xcassets */,
 				FC63770C190C1FED0081C914 /* Supporting Files */,
+				FCE4D26A19203673001F937E /* TGeneticAlgorithm.h */,
+				FCE4D26B19203673001F937E /* TGeneticAlgorithm.m */,
 			);
 			path = TapirApplication;
 			sourceTree = "<group>";
@@ -467,9 +477,11 @@
 				FC637712190C1FED0081C914 /* main.m in Sources */,
 				FC637861190D56390081C914 /* TSLEntity.m in Sources */,
 				FC2E4F63191BB0E6009D7DAD /* TSLIntersection.m in Sources */,
+				FCB34FC619200B4B00445DCD /* TSimulation.m in Sources */,
 				FC52CA49191EF20F00CFAA5A /* NSString+CharacterEnumeration.m in Sources */,
 				FC63771D190C1FED0081C914 /* TAAppDelegate.m in Sources */,
 				FC2E4F6C191BE5AD009D7DAD /* TSLZone.m in Sources */,
+				FCE4D26C19203673001F937E /* TGeneticAlgorithm.m in Sources */,
 				FC2E4F56191A7155009D7DAD /* TSLObject.m in Sources */,
 				FC2E4F53191A6DFA009D7DAD /* TSLRoad.m in Sources */,
 				FCA17F31191D4154000E8903 /* TSLPath.m in Sources */,
