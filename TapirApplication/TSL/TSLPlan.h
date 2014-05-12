@@ -15,6 +15,8 @@
 @property (nonatomic, weak) TSLRoad *current;
 @property (nonatomic, weak) TSLRoad *nextRoad;
 
+- (void) resetToBeginning;
+
 - (TSLRoad *) moveNext;
 - (void) addRoad:(TSLRoad *) road;
 - (void) searchPathFromZone:(TSLZone *) start toZone:(TSLZone *) target;

@@ -13,6 +13,8 @@
 #import "TSLEntity.h"
 #import "TSLCar.h"
 
+#import <TGL/TGL.h>
+
 @interface TSLUniverse ()
 
 - (void) setup;
@@ -88,8 +90,19 @@
     // Set configuration
     self.storage = [NSMutableArray array];
     
+    SKLabelNode *node = [SKLabelNode labelNodeWithFontNamed:@"Helvetica-Neue"];
+    node.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
+    node.fontSize = 16.0f;
+    node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
+    
+    [TGLSceneManager registerLayerWithNode:node andUpdate:^(CFTimeInterval deltaTime, SKNode *node, BOOL *isDead) {
+        SKLabelNode *labelNode = (SKLabelNode *) node;
+        labelNode.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
+        node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
+    }];
+    
     // Set the Physics core
-    self.physicsCore = [[TSLPhysicsCore alloc] initWithGridSize:self.configuration.worldSize andCount:3];
+//    self.physicsCore = [[TSLPhysicsCore alloc] initWithGridSize:self.configuration.worldSize andCount:3];
 }
 
 #pragma mark - Objects handling
@@ -187,7 +200,30 @@
     [self updateWithTimeSinceLastUpdate:deltaTime];
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) resetUniverse
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.delegate willUniverseReset:self];
+    
+    NSArray *tmp = [NSArray arrayWithArray:self.storage];
+    for (TSLObject *obj in tmp) {
+        [obj reset];
+    }
+    
+    self.living        = YES;
+    self.numberOfSteps = 0;
+    self.numberOfCars  = 0;
+}
+
 #pragma mark - TGLSceneUpdateDelegate - delegation method
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) resetScene
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self resetUniverse];
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime
@@ -229,6 +265,11 @@
 }
 
 #pragma mark - TSLUniverseDelegate - delegation methods
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) willUniverseReset:(TSLUniverse *) universe
+////////////////////////////////////////////////////////////////////////////////////////////////
+{}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) shouldDie:(TSLUniverse *) universe

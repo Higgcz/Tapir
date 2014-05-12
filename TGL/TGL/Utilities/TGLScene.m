@@ -207,6 +207,9 @@
             case ' ':
                 self.paused = !self.isPaused;
                 break;
+            case 'r':
+                [self.updateDelegate resetScene];
+                break;
         }
     }
 }

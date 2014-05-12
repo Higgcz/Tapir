@@ -30,6 +30,7 @@
 @property (nonatomic) NSUInteger currentTick;
 
 // Setting the cycle
+- (void) setCycleFromArray:(NSArray *) array;
 - (void) setCycleFromString:(NSString *) string;
 - (void) setCycleFromString:(NSString *) string startedAtIndex:(NSUInteger) startIndex;
 - (void) setCycleOnValue:(BOOL) value inRange:(NSRange) range;

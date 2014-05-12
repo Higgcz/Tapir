@@ -7,6 +7,7 @@
 //
 
 #import "TSimulation.h"
+#import "../TSL/TSLSemaphore.h"
 
 #import <TGL/TGL.h>
 
@@ -229,7 +230,7 @@ static NSString * kConfigurationFileName = @"Configuration";
         
         
         [driverAgent.plan searchPathFromZone:zoneA toZone:zoneB];
-        [zoneA.cars addObject:car];
+        [car addToZone:zoneA];
     }
     
     self.cars = [NSArray arrayWithArray:cars];
@@ -278,6 +279,15 @@ static NSString * kConfigurationFileName = @"Configuration";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) configurateSemaphoresWithArray:(NSArray *) semaphoreConfig
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.semaphores enumerateObjectsUsingBlock:^(TSLSemaphore *sem, NSUInteger idx, BOOL *stop) {
+        [sem setCycleFromArray:semaphoreConfig[idx]];
+    }];
+ }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isReady
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -285,7 +295,7 @@ static NSString * kConfigurationFileName = @"Configuration";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) runSimulationWithCompletion:(void (^)(NSUInteger)) completion
+- (void) runSimulationWithCompletion:(void (^)(NSUInteger,NSUInteger)) completion
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     if ([self isReady] == NO) return;
@@ -299,9 +309,9 @@ static NSString * kConfigurationFileName = @"Configuration";
     }];
     
     [self.simulationQueue addOperationWithBlock:^{
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            completion(self.universe.numberOfSteps);
-        }];
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            completion(self.universe.numberOfSteps, self.universe.numberOfCars);
+//        }];
     }];
 }
 
@@ -317,6 +327,15 @@ static NSString * kConfigurationFileName = @"Configuration";
 #pragma mark - TSLUniverseDelegate
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) willUniverseReset:(TSLUniverse *) universe
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    for (TSLCar *car in self.cars) {
+        [car reset];
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) shouldDie:(TSLUniverse *) universe
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -328,6 +347,8 @@ static NSString * kConfigurationFileName = @"Configuration";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     _finished = YES;
+//    NSLog(@"NumberOfSteps: %lu", self.universe.numberOfSteps);
+//    NSLog(@"NumberOfCars: %lu", self.universe.numberOfCars);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

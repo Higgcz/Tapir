@@ -9,10 +9,15 @@
 #import "TGLSceneManager.h"
 #import "Utilities/TGLScene.h"
 
-@implementation TGLSceneManager {
-    NSMutableArray *_layersToRegistraion;
-    NSMutableArray *_layersZIndex;
-}
+@interface TGLSceneManager ()
+@property (nonatomic, strong) NSMutableArray *layersToRegistraion;
+@property (nonatomic, strong) NSMutableArray *layersZIndex;
+
+- (void) flush;
+
+@end
+
+@implementation TGLSceneManager
 
 - (instancetype)init
 {
@@ -76,6 +81,21 @@
     TGLScene *theScene = [TGLScene sceneWithSize:sceneSize];
     self.scene = theScene;
     return theScene;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (void) flush
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [[TGLSceneManager sharedInstance] flush];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) flush
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [_layersToRegistraion removeAllObjects];
+    [_layersZIndex removeAllObjects];
 }
 
 #pragma mark - Registering layers

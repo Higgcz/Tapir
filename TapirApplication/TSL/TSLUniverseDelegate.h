@@ -12,7 +12,9 @@
 
 @protocol TSLUniverseDelegate <NSObject>
 
+
 - (BOOL) shouldDie:(TSLUniverse *) universe;
+- (void) willUniverseReset:(TSLUniverse *) universe;
 - (void) didUniverseDie:(TSLUniverse *) universe;
 - (void) didEvaluateUpdate:(TSLUniverse *) universe;
 - (void) didSimulatePhysics:(TSLUniverse *) universe;

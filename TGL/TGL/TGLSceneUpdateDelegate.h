@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class TSLConfiguration;
+
 @protocol TGLSceneUpdateDelegate <NSObject>
 
+- (void) resetScene;
 - (void) updateWithTimeSinceLastUpdate:(CFTimeInterval) deltaTime;
 
 @end

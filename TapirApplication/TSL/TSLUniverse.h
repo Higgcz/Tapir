@@ -20,7 +20,6 @@
 // Main properties
 @property (atomic, strong) NSMutableArray   *storage;
 @property (nonatomic, strong) TSLConfiguration *configuration;
-@property (nonatomic, strong) TSLPhysicsCore   *physicsCore;
 
 // Initialization & creation of universe
 - (instancetype) initWithConfiguration:(TSLConfiguration *) configuration;
@@ -45,6 +44,8 @@
 - (void) addObjects:(NSArray *) objectsArray;
 - (void) removeObject:(TSLObject *) anObject;
 - (void) removeAllObjects;
+
+- (void) resetUniverse;
 
 // Control the universe
 - (void) update:(NSTimeInterval) currentTime;

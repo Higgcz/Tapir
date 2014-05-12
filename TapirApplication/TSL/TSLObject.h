@@ -25,6 +25,8 @@
 - (void) didCreatedAtUniverse:(TSLUniverse *) universe;
 - (void) didDeleted;
 
+- (void) reset;
+
 - (void) removeFromUniverse;
 
 @end

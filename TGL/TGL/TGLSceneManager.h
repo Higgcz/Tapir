@@ -24,6 +24,7 @@
 // Class method - singleton & faster layer registration
 
 + (TGLSceneManager *) sharedInstance;
++ (void) flush;
 
 + (void) registerLayer:(TGLLayer *) layer;
 + (void) registerLayer:(TGLLayer *) layer atZIndex:(TGLZIndex) zIndex;

@@ -123,9 +123,9 @@
     
     if (lineChange != TSLCarLineChangeNO && [self.car isPossibleToChangeLine:lineChange]) {
         [self.car changeLine:lineChange];
-    } else {
-        if (self.car.speed - kTSLRoadWidth/2 < 0) {
-            desiredSpeed = kTSLRoadWidth/2 - self.car.speed;
+    } else if (lineChange != TSLCarLineChangeNO) {
+        if (self.car.speed - kTSLRoadWidth / 2 < 0) {
+            desiredSpeed = kTSLRoadWidth / 2 - self.car.speed;
         }
     }
     
@@ -225,6 +225,13 @@
 }
 
 #pragma mark - TSLObject
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) reset
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [self.plan resetToBeginning];
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didCreatedAtUniverse:(TSLUniverse *) universe

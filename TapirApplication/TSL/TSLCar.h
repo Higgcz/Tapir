@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, eTSLCarLineChange) {
     TSLCarLineChangeRIGHT
 };
 
-@class TSLBody, TSLRoad, TSLDriverAgent, TSLWaypoint, TSLPath, TSLRoadObject, TSLSemaphore;
+@class TSLBody, TSLRoad, TSLDriverAgent, TSLWaypoint, TSLPath, TSLRoadObject, TSLSemaphore, TSLZone;
 
 @interface TSLCar : TSLObject
 
@@ -67,6 +67,9 @@ typedef NS_ENUM(NSUInteger, eTSLCarLineChange) {
 @property (nonatomic, strong) TSLDriverAgent *driver;
 
 @property (nonatomic, weak, readonly) NSColor *color;
+
+@property (nonatomic, readonly, weak) TSLZone *startedZone;
+- (void) addToZone:(TSLZone *) zone;
 
 - (void) moveToPosition:(NSPoint) position;
 

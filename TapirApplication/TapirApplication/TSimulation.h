@@ -27,11 +27,13 @@
 - (void) buildSimulationWithConfigFile:(NSString *) fileName;
 - (void) buildSimulationWithDefaultConfigFile;
 
+- (void) configurateSemaphoresWithArray:(NSArray *) semaphoreConfig;
+
 - (void) prepareCars;
 - (void) createCars;
 - (void) removeAllCars;
 
-- (void) runSimulationWithCompletion:(void(^)(NSUInteger simulationSteps)) completion;
+- (void) runSimulationWithCompletion:(void (^)(NSUInteger simulationSteps, NSUInteger stayingCars)) completion;
 - (void) runSimulationInScene:(TGLScene *) scene;
 
 @end
