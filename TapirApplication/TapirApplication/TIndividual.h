@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class TGeneticAlgorithm;
+
 @interface TIndividual : NSObject
 
 @property (nonatomic, readonly, assign) CGFloat fitness;
 @property (nonatomic, readonly, strong) NSArray *cycles;
+
++ (instancetype) individualInGeneticAlgorithm:(TGeneticAlgorithm *) geneticAlgorithm;
 
 // Create new pair of individuals by crossover this individual with other
 - (NSArray *) crossWithIndividual:(TIndividual *) other;
@@ -27,5 +31,7 @@
 
 // Return description just for cycle on given index
 - (NSString *) descriptionOfCycleOnIndex:(NSUInteger) index;
+
+- (NSDictionary *) dictionaryAsDescription;
 
 @end

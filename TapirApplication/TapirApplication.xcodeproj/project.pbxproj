@@ -45,6 +45,7 @@
 		FCB34FC619200B4B00445DCD /* TSimulation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB34FC519200B4B00445DCD /* TSimulation.m */; };
 		FCE4D26C19203673001F937E /* TGeneticAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4D26B19203673001F937E /* TGeneticAlgorithm.m */; };
 		FCE4D27019203B1F001F937E /* TIndividual.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4D26F19203B1F001F937E /* TIndividual.m */; };
+		FCE4D2721921210B001F937E /* Results.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCE4D2711921210B001F937E /* Results.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		FCE4D26B19203673001F937E /* TGeneticAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGeneticAlgorithm.m; sourceTree = "<group>"; };
 		FCE4D26E19203B1F001F937E /* TIndividual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIndividual.h; sourceTree = "<group>"; };
 		FCE4D26F19203B1F001F937E /* TIndividual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIndividual.m; sourceTree = "<group>"; };
+		FCE4D2711921210B001F937E /* Results.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Results.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				FC744F0E191FCECF00144875 /* Configuration.plist */,
+				FCE4D2711921210B001F937E /* Results.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				FC637722190C1FED0081C914 /* Images.xcassets in Resources */,
 				FC637710190C1FED0081C914 /* InfoPlist.strings in Resources */,
 				FC744F0F191FCECF00144875 /* Configuration.plist in Resources */,
+				FCE4D2721921210B001F937E /* Results.plist in Resources */,
 				FC637716190C1FED0081C914 /* Credits.rtf in Resources */,
 				FC637718190C1FED0081C914 /* MainMenu.xib in Resources */,
 			);

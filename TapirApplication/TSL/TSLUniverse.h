@@ -13,9 +13,11 @@
 
 #define kMinTimeInterval (1.0f / 60.0f)
 
-@class TSLConfiguration, TSLEntity, TSLObject, TSLPhysicsCore;
+@class TSLConfiguration, TSLEntity, TSLObject, TSLPhysicsCore, TGLScene;
 
 @interface TSLUniverse : NSObject <TSLUniverseDelegate, TGLSceneUpdateDelegate>
+
+@property (nonatomic, getter = isVisualizationOn) BOOL visualizationOn;
 
 // Main properties
 @property (atomic, strong) NSMutableArray   *storage;
@@ -37,6 +39,7 @@
 
 // Start of universe
 - (void) start; // how to start with graphical output ?
+- (void) startInScene:(TGLScene *) scene;
 - (void) bang;
 
 // Objects handling
@@ -46,6 +49,7 @@
 - (void) removeAllObjects;
 
 - (void) resetUniverse;
+- (void) visualize;
 
 // Control the universe
 - (void) update:(NSTimeInterval) currentTime;

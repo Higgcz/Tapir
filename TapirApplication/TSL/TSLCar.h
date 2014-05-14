@@ -36,6 +36,10 @@ typedef NS_ENUM(NSUInteger, eTSLCarLineChange) {
 + (instancetype) car;
 + (instancetype) carWithType:(eTSLCarType) carType;
 
+// Statistics
+@property (nonatomic) CGFloat finishTime;
+@property (nonatomic) CGFloat finishDistance;
+
 // Parameters of car
 @property (nonatomic) CGFloat maxSpeed;
 @property (nonatomic) NSInteger maxRange;

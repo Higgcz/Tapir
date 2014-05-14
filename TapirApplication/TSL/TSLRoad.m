@@ -562,19 +562,30 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [super didCreatedAtUniverse:universe];
-    
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didDeleted
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [super didDeleted];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) visualize
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
     // Draw road
-    
     SKSpriteNode *node = [SKSpriteNode spriteNodeWithColor:[SKColor lightGrayColor]
                                                       size:CGSizeMake(self.length, 1.0f)];
     
     node.position = NSVectorAdd(NSVectorResize(NSVectorMake(self.startPoint, self.endPoint), 0.5f), self.startPoint);
     node.zRotation = NSVectorAngle(self.direction);
-
+    
     [TGLSceneManager registerLayerWithNode:node];
     
     CGFloat width = kTSLRoadWidth * _lineCountPositiveDir;
-
+    
     NSPoint pointA = [self cornerPointFromDirection:TSLRoadDirectionPositive withWidthOfRoad:width];
     NSPoint pointB = [self cornerPointFromDirection:TSLRoadDirectionNegative withWidthOfRoad:width];
     
@@ -596,24 +607,6 @@
     node.zRotation = NSVectorAngle(self.direction);
     
     [TGLSceneManager registerLayerWithNode:node];
-    
-//    [TGLSceneManager registerLayer:[TGLLayer layerWithLineFromA:self.startPoint toB:self.endPoint strokColor:[SKColor lightGrayColor]]];
-//    
-//    CGFloat width = kTSLRoadWidth * _lineCountPositiveDir;
-//    
-//    NSPoint pointA = [self cornerPointNearToStart:YES withWidthOfRoad:width];
-//    NSPoint pointB = [self cornerPointNearToStart:NO withWidthOfRoad:width];
-//    
-//    [TGLSceneManager registerLayer:[TGLLayer layerWithLineFromA:pointA toB:pointB strokColor:[SKColor darkGrayColor]]];
-    
-//    [TGLSceneManager registerLayer:[TGLLayer layerWithCircleRadius:20.0f atPoint:self.endPoint fillColor:[SKColor blueColor]]];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) didDeleted
-////////////////////////////////////////////////////////////////////////////////////////////////
-{
-    [super didDeleted];
 }
 
 @end

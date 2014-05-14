@@ -28,10 +28,15 @@
 - (void) buildSimulationWithDefaultConfigFile;
 
 - (void) configurateSemaphoresWithArray:(NSArray *) semaphoreConfig;
+- (void) configurateSemaphoresFromConfiguration;
 
 - (void) prepareCars;
 - (void) createCars;
 - (void) removeAllCars;
+
+- (void) resetSimulation;
+
+- (CGFloat) calculateCarsFitness;
 
 - (void) runSimulationWithCompletion:(void (^)(NSUInteger simulationSteps, NSUInteger stayingCars)) completion;
 - (void) runSimulationInScene:(TGLScene *) scene;

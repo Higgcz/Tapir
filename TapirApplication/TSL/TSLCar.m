@@ -16,7 +16,7 @@
 #import "TSLSemaphore.h"
 #import "TSLIntersection.h"
 #import "TSLZone.h"
-
+#import "TSLUniverse.h"
 
 #import <TGL/TGL.h>
 
@@ -40,6 +40,9 @@
     self.carType = carType;
     
     self.maxRange = 30;
+    
+    self.finishTime     = 0;
+    self.finishDistance = 0;
     
     // default values
     switch (carType) {
@@ -149,7 +152,9 @@
 - (void) addToZone:(TSLZone *) zone
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
-    [zone.cars addObject:self];
+    if ([zone.cars indexOfObjectIdenticalTo:self] == NSNotFound) {
+        [zone.cars addObject:self];
+    }
     _startedZone = zone;
 }
 
@@ -481,9 +486,12 @@
     [self.driver reset];
     [self removeFromUniverse];
     
-    self.speed = 0;
-    self.pathPosition = 0;
+    self.speed                = 0;
+    self.pathPosition         = 0;
     self.pathPositionMomentum = 0;
+    
+    self.finishTime     = 0;
+    self.finishDistance = 0;
     
     _tempRoadObject = nil;
     
@@ -503,7 +511,10 @@
     // Update car
     if (self.isActive == NO) return;
     
+    self.finishTime++;
+    NSPoint oldPoint = self.body.position;
     [self.path updateCarPosition:self];
+    self.finishDistance += NSVectorSize(NSVectorMake(oldPoint, self.body.position));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -523,6 +534,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     [super didCreatedAtUniverse:universe];
+    [self.driver didCreatedAtUniverse:universe];
+    
+    if ([universe isVisualizationOn]) {
+        [self visualize];
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didDeleted
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [super didDeleted];
+    [self.driver didDeleted];
+    [self.path removeCarLeftover:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) visualize
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    if ([self.universe isVisualizationOn] == NO) return;
     
     [TGLSceneManager registerLayerWithNode:[TGLShapeNode shapeNodeWithRectangleSize:self.body.size fillColor:self.color strokeColor:nil] andUpdate:^(CFTimeInterval deltaTime, SKNode *node, BOOL *isDead) {
         
@@ -536,17 +568,6 @@
         
         *isDead = self.isDead;
     }];
-    
-    [self.driver didCreatedAtUniverse:universe];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) didDeleted
-////////////////////////////////////////////////////////////////////////////////////////////////
-{
-    [super didDeleted];
-    [self.driver didDeleted];
-    [self.path removeCarLeftover:self];
 }
 
 @end

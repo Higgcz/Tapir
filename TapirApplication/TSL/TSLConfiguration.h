@@ -20,6 +20,8 @@
 + (TSLConfiguration *) configurationWithConfigurationDict:(NSDictionary *) configuration;
 
 // All property in dictionary
+@property (nonatomic, readonly, strong) NSString *pathName;
+@property (nonatomic, getter = shouldUseEvolution) BOOL useEvolution;
 
 @property (nonatomic) NSUInteger roadLength;
 @property (nonatomic) NSUInteger numberOfLines;
@@ -29,6 +31,8 @@
 
 @property (nonatomic) NSUInteger semaphoreTickLength;
 @property (nonatomic) NSUInteger semaphoreStateDelay;
+
+@property (nonatomic, strong) NSArray *sempahoreCycles;
 
 //@property (nonatomic) NSUInteger carMaxRange;
 //

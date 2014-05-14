@@ -13,6 +13,8 @@
 - (void) loadPropertyWithValue:(id) value withKey:(NSString *) key;
 - (void) setup;
 
+@property (nonatomic, readwrite, strong) NSString *pathName;
+
 @end
 
 @implementation TSLConfiguration
@@ -36,9 +38,22 @@
     if (self) {
         [self setup]; // set defaults
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
         
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+        NSString *plistPath = [[[[[NSBundle mainBundle] bundlePath]
+                                 stringByDeletingPathExtension]
+                                stringByDeletingLastPathComponent]
+                               stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", fileName]];
+        
+        if ([fileManager fileExistsAtPath:plistPath] == NO) {
+            NSString *resourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+            [fileManager copyItemAtPath:resourcePath toPath:plistPath error:&error];
+        }
+        
+        self.pathName = plistPath;
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
             [self loadPropertyWithValue:obj withKey:key];
         }];
@@ -85,6 +100,8 @@
     self.totalNumberOfSteps  = 1000;
     self.mapFile = nil;
     self.worldSize = CGSizeMake(1024, 768);
+    
+    self.sempahoreCycles = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,6 +202,17 @@
         tmp = value;
         if (tmp != nil) {
             self.semaphoreTickLength = tmp.unsignedIntegerValue;
+        }
+        
+    } else if ([key isEqualToString:@"SemaphoreCycles"]) {
+        
+        self.sempahoreCycles = [NSArray arrayWithArray:value];
+        
+    } else if ([key isEqualToString:@"UseEvolution"]) {
+        
+        tmp = value;
+        if (tmp != nil) {
+            self.useEvolution = tmp.boolValue;
         }
         
     } else {

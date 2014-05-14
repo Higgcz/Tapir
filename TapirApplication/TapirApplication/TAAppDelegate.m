@@ -15,10 +15,17 @@
 #import "TIndividual.h"
 #import "TGeneticAlgorithm.h"
 
+#define SIMULATIONS_COUNT (8)
+
 @interface TAAppDelegate()
 
 @property (nonatomic, strong) NSArray *simulations;
-@property (nonatomic, strong) TSimulation *simulation;
+@property (nonatomic, strong) TGLScene *scene;
+@property (nonatomic, strong) TGeneticAlgorithm *algorithm;
+
+- (void) prepareSimulations;
+- (void) runEvolutionAlgorithm;
+- (void) createAndDisplaySimulation:(TSimulation *) simulation;
 
 @end
 
@@ -26,35 +33,86 @@
 
 @synthesize window = _window;
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) applicationDidFinishLaunching:(NSNotification *) aNotification
+////////////////////////////////////////////////////////////////////////////////////////////////
 {
-//    TGeneticAlgorithm *algorithm = [TGeneticAlgorithm new];
-//    
-//    [algorithm execute];
-//    
-//    [TGLSceneManager flush];
-//    NSLog(@"Done");
+    [self prepareSimulations];
     
-    self.simulation = [TSimulation simulation];
-    [self.simulation buildSimulationWithDefaultConfigFile];
-//    [self.simulation configurateSemaphoresWithArray:algorithm.bestIndividual.cycles];
-    [self.simulation prepareCars];
+    TSimulation *simulation = self.simulations[0];
+    
+    BOOL shouldUseEvolution = simulation.universe.configuration.shouldUseEvolution;
+    
+    if (shouldUseEvolution) {
+        [self runEvolutionAlgorithm];
+    }
+    
+    [TGLSceneManager flush];
+    
+    NSLog(@"Done - showing the best.");
+    
+    [self createAndDisplaySimulation:simulation];
+}
 
-    // Create universe and scene
-    TGLScene *scene = [[TGLSceneManager sharedInstance] createSceneWithSize:self.simulation.universe.configuration.worldSize];
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) prepareSimulations
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    NSMutableArray *simulations = [NSMutableArray arrayWithCapacity:SIMULATIONS_COUNT];
     
-    [self.simulation runSimulationInScene:scene];
+    for (int i = 0; i < SIMULATIONS_COUNT; i++) {
+        TSimulation *sim = [TSimulation simulation];
+        [sim buildSimulationWithDefaultConfigFile];
+        [sim prepareCars];
+        [simulations addObject:sim];
+    }
+    
+    self.simulations = simulations;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) runEvolutionAlgorithm
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    self.algorithm = [TGeneticAlgorithm algorithmWithSimulations:self.simulations];
+    [self.algorithm execute];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) createAndDisplaySimulation:(TSimulation *) simulation
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    BOOL shouldUseEvolution = simulation.universe.configuration.shouldUseEvolution;
+    
+    if (shouldUseEvolution) {
+        [self.algorithm writeToFile];
+        [simulation calculateCarsFitness];
+        [simulation configurateSemaphoresWithArray:self.algorithm.bestIndividual.cycles];
+    } else {
+        [simulation configurateSemaphoresFromConfiguration];
+    }
+    
+    // Create universe and scene
+    self.scene = [[TGLSceneManager sharedInstance] createSceneWithSize:simulation.universe.configuration.worldSize];
+    
+    // Reset simulation
+    [simulation resetSimulation];
+    
+    // Run simulation in scene
+    [simulation runSimulationInScene:self.scene];
     
     /* Set the scale mode to scale to fit the window */
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+    self.scene.scaleMode = SKSceneScaleModeAspectFit;
     
-    [self.skView presentScene:scene];
-
+    [self.skView presentScene:self.scene];
+    
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount = YES;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *) sender
+////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return YES;
 }

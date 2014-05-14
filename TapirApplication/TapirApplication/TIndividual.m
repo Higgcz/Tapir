@@ -8,9 +8,9 @@
 
 #import "TIndividual.h"
 #import "TSimulation.h"
+#import "TGeneticAlgorithm.h"
 #import "TSLSemaphore.h"
 
-#define SIMULATIONS_COUNT (4)
 #define SEMAPHORES_COUNT (32) // IntersectionCount * NumberOfRoadsByIntersection * NumberOfLinesByRoad (4 * 4 * 2)
 
 #define RAND()          (arc4random())
@@ -23,8 +23,10 @@
 
 @interface TIndividual ()
 
+@property (nonatomic, readwrite, weak) TGeneticAlgorithm *geneticAlgorithm;
 @property (nonatomic, readwrite, assign) CGFloat fitness;
 @property (nonatomic, readwrite, strong) NSArray *cycles;
+@property (nonatomic, readwrite) BOOL mutated;
 
 - (NSArray *) fillCyclesRandom;
 - (NSArray *) createRandomCycle;
@@ -36,8 +38,16 @@
 
 @end
 
-@implementation TIndividual {
-    BOOL _mutated;
+@implementation TIndividual
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSDictionary *) dictionaryAsDescription
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:@(_fitness) forKey:@"Fitness"];
+    [dict setObject:_cycles forKey:@"Cycles"];
+    return dict;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +74,29 @@
         _cycles   = nil;
     }
     return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (instancetype) copy
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TIndividual *copied     = [TIndividual empty];
+
+    copied.geneticAlgorithm = self.geneticAlgorithm;
+    copied.mutated          = self.mutated;
+    copied.fitness          = self.fitness;
+    copied.cycles           = [self.cycles copy];
+    
+    return copied;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (instancetype) individualInGeneticAlgorithm:(TGeneticAlgorithm *) geneticAlgorithm
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TIndividual *ind = [TIndividual new];
+    ind.geneticAlgorithm = geneticAlgorithm;
+    return ind;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,6 +195,9 @@
     TIndividual *childA = [TIndividual empty];
     TIndividual *childB = [TIndividual empty];
     
+    childA.geneticAlgorithm = self.geneticAlgorithm;
+    childB.geneticAlgorithm = self.geneticAlgorithm;
+    
     NSMutableArray *childAcycles = [NSMutableArray new];
     NSMutableArray *childBcycles = [NSMutableArray new];
     
@@ -221,25 +257,21 @@
     _mutated = NO;
     
     // Run simulation SIMULATIONS_COUNT times and return the average of the total number of steps
-    NSMutableArray *simulations = [NSMutableArray new];
+    NSArray *simulations = self.geneticAlgorithm.simulations;
     
-    __block NSUInteger sumTotalNumberOfSteps = 0;
+    __block NSUInteger sumTotalNumberOfSteps      = 0;
     __block NSUInteger sumTotalNumberOfStayingCar = 0;
     
     dispatch_group_t group = dispatch_group_create();
     
-    for (int i = 0; i < SIMULATIONS_COUNT; i++) {
-        TSimulation *simulation = [TSimulation simulation];
-        [simulation buildSimulationWithDefaultConfigFile];
+    for (TSimulation *simulation in simulations) {
+        
         [simulation configurateSemaphoresWithArray:self.cycles];
-        
-        [simulations addObject:simulation];
-        
-        [simulation prepareCars];
+        [simulation resetSimulation];
         
         dispatch_group_enter(group);
         [simulation runSimulationWithCompletion:^(NSUInteger simulationSteps, NSUInteger stayingCars) {
-//            NSLog(@"Simulation step: %lu", simulationSteps);
+            //            NSLog(@"Simulation step: %lu", simulationSteps);
             @synchronized(simulations) {
                 sumTotalNumberOfSteps      += simulationSteps;
                 sumTotalNumberOfStayingCar += stayingCars;
@@ -250,7 +282,7 @@
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     
-    self.fitness = (CGFloat) sumTotalNumberOfSteps / SIMULATIONS_COUNT;
+    self.fitness = (CGFloat) (sumTotalNumberOfSteps + sumTotalNumberOfStayingCar) / simulations.count;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

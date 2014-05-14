@@ -8,15 +8,17 @@
 
 #import "TGeneticAlgorithm.h"
 #import "TIndividual.h"
+#import "TSimulation.h"
 
 #define NIL [NSNull null]
 
 #pragma mark - Parameters of evolutionary algorithm
 
-#define MAX_GENERATIONS (10) // Maximal number of generations
-#define ELITISM         (YES)  // Elitism
+#define MAX_GENERATIONS (100) // Maximal number of generations
+#define ELITISM         (YES) // Elitism
+#define MAX_SAME_BEST   (10)  // Maximal number of generations with the same best
 
-#define POPULATION_SIZE (20)   // Size of population
+#define POPULATION_SIZE (30)   // Size of population
 
 #define CROSSOVER_RATE  (75)   // Percentage of the childrens that will be choosen by croosover
 #define MUTATION_RATE   (5)    // Percentage of the childrens that will be mutated
@@ -39,6 +41,8 @@
 @property (nonatomic, strong) NSMutableArray *population;
 @property (nonatomic, readwrite, strong) TIndividual *bestIndividual;
 
+@property (nonatomic, readwrite, strong) NSArray *simulations;
+
 // Private methods
 - (void) populate;
 - (void) run;
@@ -57,6 +61,61 @@
 @implementation TGeneticAlgorithm
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) writeToFile
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+//    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+//    
+    NSDateFormatter *timeStamp = [[NSDateFormatter alloc] init];
+    [timeStamp setDateFormat:@"MMdd_hhmmss"];
+    
+    NSString *timeString = [timeStamp stringFromDate:[NSDate date]];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSString *plistPath = [[[[[NSBundle mainBundle] bundlePath]
+                             stringByDeletingPathExtension]
+                            stringByDeletingLastPathComponent]
+                           stringByAppendingPathComponent:@"Results.plist"];
+    
+    NSArray *sortedPopulation = [self.population sortedArrayUsingComparator:^NSComparisonResult(TIndividual *obj1, TIndividual *obj2) {
+        if ([obj1 isBetterThen:obj2]) {
+            return NSOrderedAscending;
+        } else if ([obj2 isBetterThen:obj1]) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+
+    if ([fileManager fileExistsAtPath:plistPath] == NO) {
+        NSString *resourcePath = [[NSBundle mainBundle] pathForResource:@"Results" ofType:@"plist"];
+        [fileManager copyItemAtPath:resourcePath toPath:plistPath error:&error];
+    }
+    
+    NSMutableArray *cycles = [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
+    [sortedPopulation enumerateObjectsUsingBlock:^(TIndividual* obj, NSUInteger idx, BOOL *stop) {
+        [cycles addObject:[obj dictionaryAsDescription]];
+    }];
+    
+    NSMutableDictionary *plistContent = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
+    
+    [plistContent setObject:cycles forKey:[NSString stringWithFormat:@"ALG_%lu_%@", ((TSimulation*) self.simulations[0]).universe.configuration.totalNumberOfAgents, timeString]];
+    [plistContent writeToFile:plistPath atomically:YES];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) writeBestToConfiguration
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    NSString *path = ((TSimulation*) self.simulations[0]).universe.configuration.pathName;
+    NSMutableDictionary *plistContent = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    [plistContent setObject:self.bestIndividual.cycles forKey:@"SemaphoreCycles"];
+    [plistContent writeToFile:path atomically:YES];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (instancetype) init
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -65,6 +124,15 @@
         self.population = [NSMutableArray arrayWithCapacity:POPULATION_SIZE];
     }
     return self;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
++ (instancetype) algorithmWithSimulations:(NSArray *) simulations
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    TGeneticAlgorithm *alg = [TGeneticAlgorithm new];
+    alg.simulations = simulations;
+    return alg;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +148,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     for (NSUInteger i = 0; i < POPULATION_SIZE; i++) {
-        TIndividual *newIndividual = [TIndividual new];
+        TIndividual *newIndividual = [TIndividual individualInGeneticAlgorithm:self];
         [self.population addObject:newIndividual];
     }
 }
@@ -89,13 +157,29 @@
 - (void) run
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
+    [self evaluatePopulation];
+    
+    TIndividual *lastBest      = nil;
+    NSUInteger sameBestCounter = 0;
+    
     for (self.generations = 0;
-         self.generations < MAX_GENERATIONS;
+         self.generations < MAX_GENERATIONS && sameBestCounter < MAX_SAME_BEST;
          self.generations++)
     {
-        [self evaluatePopulation];
-        [self log];
-        [self breedPopulation];
+        @autoreleasepool {
+            [self log];
+            [self breedPopulation];
+            [self evaluatePopulation];
+            
+            if (lastBest == self.bestIndividual) {
+                sameBestCounter++;
+            } else {
+                sameBestCounter = 0;
+                lastBest = self.bestIndividual;
+            }
+            
+            [self writeBestToConfiguration];
+        }
     }
     
     --self.generations;
@@ -170,6 +254,8 @@
             [newPopulation addObject:children[0]];
         }
     }
+    
+    self.population = newPopulation;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +284,7 @@
         parentB = [self selectWith:TOURNAMENT_SIZE];
     } while (parentA == parentB);
     
-    return @[parentA, parentB];
+    return @[[parentA copy], [parentB copy]];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

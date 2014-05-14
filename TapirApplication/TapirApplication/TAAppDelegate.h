@@ -13,5 +13,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet SKView *skView;
+@property (weak) IBOutlet NSScrollView *console;
+@property (unsafe_unretained) IBOutlet NSWindow *consoleWindow;
 
 @end

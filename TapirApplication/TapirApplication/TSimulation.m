@@ -180,7 +180,7 @@ static NSString * kConfigurationFileName = @"Configuration";
         }
     }
 
-    // Save usefull objects for easy
+    // Save usefull objects for easy access
     self.semaphores = [NSArray arrayWithArray:semaphores];
     self.zones      = [NSArray arrayWithArray:zones];
     
@@ -285,13 +285,37 @@ static NSString * kConfigurationFileName = @"Configuration";
     [self.semaphores enumerateObjectsUsingBlock:^(TSLSemaphore *sem, NSUInteger idx, BOOL *stop) {
         [sem setCycleFromArray:semaphoreConfig[idx]];
     }];
- }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) configurateSemaphoresFromConfiguration
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    // Reload semaphores configurations if exist
+    NSArray *tmpCycles = self.universe.configuration.sempahoreCycles;
+    if (tmpCycles) {
+        [self configurateSemaphoresWithArray:tmpCycles];
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isReady
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
     return _builded && (_carsAdded || (_carsRemoved && _finished));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) calculateCarsFitness
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    CGFloat fitness;
+    NSUInteger counter = 0;
+    for (TSLCar *car in self.cars) {
+        NSLog(@"Car #%lu finish in %.2f seconds and drive %.2f meters.", counter++, car.finishTime, car.finishDistance);
+    }
+    
+    return fitness;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +345,16 @@ static NSString * kConfigurationFileName = @"Configuration";
 {
     if ([self isReady] == NO) return;
 
-    scene.updateDelegate = self.universe;
+    [self.universe startInScene:scene];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) resetSimulation
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    [TGLSceneManager flush];
+    [self.universe resetUniverse];
+    [self.universe visualize];
 }
 
 #pragma mark - TSLUniverseDelegate

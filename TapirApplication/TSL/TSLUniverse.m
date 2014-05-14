@@ -90,16 +90,9 @@
     // Set configuration
     self.storage = [NSMutableArray array];
     
-    SKLabelNode *node = [SKLabelNode labelNodeWithFontNamed:@"Helvetica-Neue"];
-    node.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
-    node.fontSize = 16.0f;
-    node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
-    
-    [TGLSceneManager registerLayerWithNode:node andUpdate:^(CFTimeInterval deltaTime, SKNode *node, BOOL *isDead) {
-        SKLabelNode *labelNode = (SKLabelNode *) node;
-        labelNode.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
-        node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
-    }];
+    // Visualize
+    self.visualizationOn = NO;
+//    [self vizualize];
     
     // Set the Physics core
 //    self.physicsCore = [[TSLPhysicsCore alloc] initWithGridSize:self.configuration.worldSize andCount:3];
@@ -165,6 +158,15 @@
 #pragma mark - Updating
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) startInScene:(TGLScene *) scene
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    scene.updateDelegate = self;
+    self.visualizationOn = YES;
+    [self visualize];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) start
 ////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -209,11 +211,34 @@
     NSArray *tmp = [NSArray arrayWithArray:self.storage];
     for (TSLObject *obj in tmp) {
         [obj reset];
+        [obj didCreatedAtUniverse:self];
     }
     
     self.living        = YES;
     self.numberOfSteps = 0;
     self.numberOfCars  = 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) visualize
+////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    
+    NSArray *tmp = [NSArray arrayWithArray:self.storage];
+    for (TSLObject *obj in tmp) {
+        [obj visualize];
+    }
+    
+    SKLabelNode *node = [SKLabelNode labelNodeWithFontNamed:@"Helvetica-Neue"];
+    node.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
+    node.fontSize = 16.0f;
+    node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
+    
+    [TGLSceneManager registerLayerWithNode:node andUpdate:^(CFTimeInterval deltaTime, SKNode *node, BOOL *isDead) {
+        SKLabelNode *labelNode = (SKLabelNode *) node;
+        labelNode.text = [NSString stringWithFormat:@"Num of steps: %lu, Num of cars: %lu", self.numberOfSteps, self.numberOfCars];
+        node.position = CGPointMake(5 + node.frame.size.width / 2.0f, 5);
+    }];
 }
 
 #pragma mark - TGLSceneUpdateDelegate - delegation method

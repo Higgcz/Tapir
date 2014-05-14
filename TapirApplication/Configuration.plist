@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>TotalNumberOfAgents</key>
-	<integer>100</integer>
+	<integer>10</integer>
 	<key>TotalNumberOfSteps</key>
 	<integer>1000</integer>
 	<key>WorldSize</key>
@@ -29,5 +29,7 @@
 	<integer>5</integer>
 	<key>SemaphoreStateDelay</key>
 	<integer>2</integer>
+	<key>UseEvolution</key>
+	<false/>
 </dict>
 </plist>

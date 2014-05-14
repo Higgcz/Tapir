@@ -19,6 +19,11 @@
 
 @property (nonatomic, readonly, strong) TIndividual *bestIndividual;
 
+@property (nonatomic, readonly, strong) NSArray *simulations;
+
++ (instancetype) algorithmWithSimulations:(NSArray *) simulations;
 - (void) execute;
+
+- (void) writeToFile;
 
 @end
